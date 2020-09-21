@@ -1,0 +1,4 @@
+jupyter-book>=0.8.1
+matplotlib
+numpy
+scipy
