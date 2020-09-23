@@ -210,8 +210,43 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#entropy-changes">
-   Entropy changes
+  <a class="reference internal nav-link" href="#laws-of-thermodynamics">
+   Laws of Thermodynamics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#law">
+     <span class="math notranslate nohighlight">
+      \(0^2\)
+     </span>
+     Law
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zeroth-law">
+     Zeroth Law
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-law-of-thermodynamics">
+     First Law of Thermodynamics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#second-law-of-thermodynamics">
+   Second Law of Thermodynamics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#property-relations">
+   Property relations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perfect-gases">
+   Perfect gases
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -261,7 +296,7 @@
 </ul>
 <div class="section" id="equations-of-state">
 <h2>Equations of state<a class="headerlink" href="#equations-of-state" title="Permalink to this headline">¶</a></h2>
-<p>For a fluid in general, the pressure, density, and temperature are not fully independent, and we can find one property given the other two. <strong>Equations of state</strong> describe the relationship between these properties, and are frequently expressed as <span class="math notranslate nohighlight">\(p = f(T, \rho)\)</span>.</p>
+<p>For a fluid in general, the pressure, density, and temperature are not fully independent, and we can find one property given the other two. <strong>Equations of state</strong> describe the relationship between these properties, and are frequently expressed as <span class="math notranslate nohighlight">\(p = f(T, \rho)\)</span>. When dealing with liquids, we will frequently assume that they are incompressible and thus the density is constant.</p>
 <p>For gases, we can frequently use the perfect, or ideal, gas equation of state:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -300,9 +335,125 @@ R = \frac{8314 \, \text{J}/\text{(kmol K)}}{MW}
 <p><strong>point function</strong>: a property, that depends only on the state of a system.</p>
 <p><strong>path function</strong>: not just a function of the state, but of the path/journey taken. Examples include heat and work.</p>
 </div>
-<div class="section" id="entropy-changes">
-<h2>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">¶</a></h2>
-<p>By integrating the property relations, we can get explicit equations for entropy change between two points:</p>
+<div class="section" id="laws-of-thermodynamics">
+<h2>Laws of Thermodynamics<a class="headerlink" href="#laws-of-thermodynamics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="law">
+<h3><span class="math notranslate nohighlight">\(0^2\)</span> Law<a class="headerlink" href="#law" title="Permalink to this headline">¶</a></h3>
+<p>We may assume relations among properties (i.e., an equation of state) for a single component fluid,
+requiring only three independent properties to fix the state of the system. For a unit mass, we only need
+two independent properties: <span class="math notranslate nohighlight">\(p = f(\rho, T)\)</span>.</p>
+</div>
+<div class="section" id="zeroth-law">
+<h3>Zeroth Law<a class="headerlink" href="#zeroth-law" title="Permalink to this headline">¶</a></h3>
+<p>If two systems are connected by a nonadiabatic wall, their states will change until a new equilibrium state is reached.
+When they reach <strong>thermal equilibrium</strong> with each other, they have the same temperature.</p>
+<p>Given two systems A and B that are in thermal equilibrium with each other, and if system B is also in thermal
+equilibrium with a third system C, then systems A and C are in thermal equilibrium with each other and share the same temperature.</p>
+<p>(This is the law by which thermometers/thermocouples work.)</p>
+</div>
+<div class="section" id="first-law-of-thermodynamics">
+<h3>First Law of Thermodynamics<a class="headerlink" href="#first-law-of-thermodynamics" title="Permalink to this headline">¶</a></h3>
+<p>The 1st Law gives us conservation of energy. For a closed system,</p>
+<div class="math notranslate nohighlight">
+\[
+\sum Q = \sum W \;,
+\]</div>
+<p>or the heat transfer into the system equals the work transfered from (i.e., done by) the system.
+So, for a process of a closed system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Q &amp;= W + \Delta E \\
+q &amp;= w + \Delta e \;,
+\end{align}
+\end{split}\]</div>
+<p>where <em>E</em> is total energy and <em>e</em> is the total energy per unit mass, defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+e \equiv u + \frac{V^2}{2} + gz + \text{others} \\
+\end{split}\]</div>
+<p>where <em>u</em> is internal energy associated with molecular motion, <span class="math notranslate nohighlight">\(\frac{V^2}{2}\)</span> is the kinetic energy, <span class="math notranslate nohighlight">\(gz\)</span> is potential energy, and then other forms of energy may be considered.</p>
+<p>For an infinitesimal process, conservation of energy is</p>
+<div class="math notranslate nohighlight">
+\[
+\delta q = \delta q + de \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta q\)</span> and <span class="math notranslate nohighlight">\(\delta w\)</span> are path functions, <strong>not</strong> exact differentials. For a stationary system, we can write this instead as</p>
+<div class="math notranslate nohighlight">
+\[
+\delta q = \delta q + du \;,
+\]</div>
+<p>and in the case of reversible pressure work, we can represent work as <span class="math notranslate nohighlight">\(\delta w = p dv\)</span>. This leads to a useful form of conservation of energy:</p>
+<div class="math notranslate nohighlight">
+\[
+\delta q = p dv + du \;,
+\]</div>
+<p>which leads to the derived property <strong>enthalpy</strong>: <span class="math notranslate nohighlight">\(h \equiv u + p v\)</span>. Differentiating that gives us</p>
+<div class="math notranslate nohighlight">
+\[
+dh = du + d(pv) = du + p dv + v dp
+\]</div>
+<p>Internal energy and enthalpy also lead to the definitions of the specific heats:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+c_p &amp;\equiv \left( \frac{\partial h}{\partial T} \right)_p \\
+c_v &amp;\equiv \left( \frac{\partial u}{\partial T} \right)_v
+\end{align}
+\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="second-law-of-thermodynamics">
+<h2>Second Law of Thermodynamics<a class="headerlink" href="#second-law-of-thermodynamics" title="Permalink to this headline">¶</a></h2>
+<p>There are various versions/statements of the Second Law. The Kelvin—Planck version is:</p>
+<blockquote>
+<div><p>It is impossible for an engine operating in a cycle to produce net work output when exchanging heat with only one temperature source.</p>
+</div></blockquote>
+<p>tl;dr: the Second Law leads to the property of <strong>entropy</strong> and introduces the concept of degradation of energy quality through irreversible effects.
+Sources of these effects include friction, heat transfer from a <em>finite</em> temperature difference, and lack of pressure equilibrium.
+In other words, phenomena encountered in most realistic applications!</p>
+<p>Under certain conditions we can assume a process is <strong>reversible</strong>, meaning that both the system and its surroundings can be restored to their original states.
+(However, in reality all processes are somewhat irreversible.)</p>
+<p>It was observed that the integral of <span class="math notranslate nohighlight">\(\frac{\delta Q}{T}\)</span> for a reversible process involving heat transfer is <em>independent</em> of the path taken during that process.
+If the change in some system quantity is independent of path, that means that this represents a change in a system <em>property</em>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\Delta S &amp;\equiv \int \frac{\delta Q_R}{T} \\
+ds &amp;\equiv \frac{\delta q_R}{T}
+\end{align}
+\end{split}\]</div>
+<p>where the subscript <em>R</em> means that the heat transfer must be reversible, and <em>S</em> / <em>s</em> represents the property of <strong>entropy</strong>.
+We can use an exact differential with entropy (<em>ds</em>) because entropy is a system property, and changes in entropy depend only on the state of the system.</p>
+</div>
+<div class="section" id="property-relations">
+<h2>Property relations<a class="headerlink" href="#property-relations" title="Permalink to this headline">¶</a></h2>
+<p>We can combine the 1st and 2nd laws to come up with relationships between entropy and other properties.</p>
+<p>Assuming a reversible process involving pressure-volume work, we can combine:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\delta q &amp;= \delta w + du \\
+\delta w &amp;= p dv \\
+\delta q &amp;= T ds \\
+\rightarrow T ds &amp;= du + p dv
+\end{align}
+\end{split}\]</div>
+<p>Similarly, we can take the differential of enthalpy and do a similar combination:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+dh &amp;= du + p dv + v dp \\
+\rightarrow T ds &amp;= dh - v dp
+\end{align}
+\end{split}\]</div>
+<p><strong>Important</strong>: we assumed we were dealing with a reversible process (involving pressure-volume work) to get these expressions.
+However, these relations contain <em>only properties</em> — they are not path dependent! This means that they are valid for <em>any</em> end states
+of a system.</p>
+</div>
+<div class="section" id="perfect-gases">
+<h2>Perfect gases<a class="headerlink" href="#perfect-gases" title="Permalink to this headline">¶</a></h2>
+<p>By integrating the property relations, we can get explicit equations for entropy change between two points in a process involving a perfect gas:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -375,8 +526,8 @@ ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
 p v^n = \text{const} = C_1 ,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the polytropic constant that depends on the specific process. With the ideal gas equation of state, we can also get relations with temperature:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6bfd4fba-49fb-4683-ac55-96cebe49f5e0">
-<span class="eqno">(1)<a class="headerlink" href="#equation-6bfd4fba-49fb-4683-ac55-96cebe49f5e0" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a48ab2cc-40c9-441b-bf2a-47938aa23b62">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a48ab2cc-40c9-441b-bf2a-47938aa23b62" title="Permalink to this equation">¶</a></span>\[\begin{align}
 T v^{n-1} &amp; = C_2 \\
 T p^{\frac{1-n}{n}} &amp; = C_3
 \end{align}\]</div>
@@ -432,7 +583,7 @@ T p^{\frac{1-n}{n}} &amp; = C_3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/review-thermo_10_0.png" src="../_images/review-thermo_10_0.png" />
+<img alt="../_images/review-thermo_14_0.png" src="../_images/review-thermo_14_0.png" />
 </div>
 </div>
 <p>Using our relations for entropy changes, we can also visualize the <span class="math notranslate nohighlight">\(T-s\)</span> diagrams for these processes:</p>
@@ -495,7 +646,7 @@ T p^{\frac{1-n}{n}} &amp; = C_3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/review-thermo_12_0.png" src="../_images/review-thermo_12_0.png" />
+<img alt="../_images/review-thermo_16_0.png" src="../_images/review-thermo_16_0.png" />
 </div>
 </div>
 </div>
