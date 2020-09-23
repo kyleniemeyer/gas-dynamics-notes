@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Review: Thermodynamics &#8212; Gas Dynamics notes</title>
+    <title>Review of thermodynamics &#8212; Gas Dynamics notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -38,6 +38,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Control volume analysis" href="control-volume-analysis.html" />
     <link rel="prev" title="Gas Dynamics notes" href="../intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,7 +87,12 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Review: Thermodynamics
+   Review of thermodynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="control-volume-analysis.html">
+   Control volume analysis
   </a>
  </li>
 </ul>
@@ -248,6 +254,13 @@
   <a class="reference internal nav-link" href="#perfect-gases">
    Perfect gases
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-changes">
+     Entropy changes
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polytropic-processes">
@@ -264,8 +277,9 @@
         
               <div>
                 
-  <div class="section" id="review-thermodynamics">
-<h1>Review: Thermodynamics<a class="headerlink" href="#review-thermodynamics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="review-of-thermodynamics">
+<h1>Review of thermodynamics<a class="headerlink" href="#review-of-thermodynamics" title="Permalink to this headline">¶</a></h1>
+<p>This module reviews the necessary thermodynamics concepts, including definitions, the laws of thermodynamics, and useful property relationships.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -453,7 +467,45 @@ of a system.</p>
 </div>
 <div class="section" id="perfect-gases">
 <h2>Perfect gases<a class="headerlink" href="#perfect-gases" title="Permalink to this headline">¶</a></h2>
-<p>By integrating the property relations, we can get explicit equations for entropy change between two points in a process involving a perfect gas:</p>
+<p>If we are dealing with a perfect/ideal gas, we can simplify our expressions further. For an ideal gas, we know that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p = \rho R T \\
+u = u (T) \\
+c_v = \left( \frac{\partial u}{\partial T} \right)_v = \frac{du}{dT} \\
+du = c_v dT \\
+\rightarrow \Delta u = c_v \Delta T
+\end{split}\]</div>
+<p>Similarly,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h = h(T) \\
+c_p = \left( \frac{\partial h}{\partial T} \right)_p \\
+\rightarrow \Delta h = c_p \Delta T
+\end{split}\]</div>
+<p>If we assume or define as a reference state that internal energy and enthalpy are zero at absolute zero, i.e., <span class="math notranslate nohighlight">\(u(T=0) = 0\)</span> and <span class="math notranslate nohighlight">\(h(T=0) = 0\)</span>,
+then we have that <span class="math notranslate nohighlight">\(u = c_v T\)</span> and <span class="math notranslate nohighlight">\(h = c_p T\)</span>.</p>
+<p>We can also define the <strong>specific heat ratio</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\gamma \equiv \frac{c_p}{c_v} \approx 
+\begin{cases} 1.4 , \text{ diatomic gases (N$_2$, O$_2$, air)} \\
+1.7 , \text{ monotomic gases (He, Ar)}
+\end{cases}
+\end{split}\]</div>
+<p>We also have relationships between the specific heats and the gas constant:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+c_p - c_v &amp;= R \\
+c_p &amp;= \frac{\gamma}{\gamma - 1} R \\
+c_v &amp;= \frac{R}{\gamma - 1}
+\end{align}
+\end{split}\]</div>
+<div class="section" id="entropy-changes">
+<h3>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">¶</a></h3>
+<p>By integrating the property relations for perfect gases, and taking advantage of our equation of state (<span class="math notranslate nohighlight">\(p = \rho R T\)</span>),
+we can get explicit equations for entropy change between two points in a process:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -518,6 +570,7 @@ ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="polytropic-processes">
 <h2>Polytropic processes<a class="headerlink" href="#polytropic-processes" title="Permalink to this headline">¶</a></h2>
 <p>Polytropic processes follow the relation</p>
@@ -526,8 +579,8 @@ ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
 p v^n = \text{const} = C_1 ,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the polytropic constant that depends on the specific process. With the ideal gas equation of state, we can also get relations with temperature:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a48ab2cc-40c9-441b-bf2a-47938aa23b62">
-<span class="eqno">(1)<a class="headerlink" href="#equation-a48ab2cc-40c9-441b-bf2a-47938aa23b62" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d2b7dfb8-08fb-45ed-aeb9-eb00bf0970fd">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d2b7dfb8-08fb-45ed-aeb9-eb00bf0970fd" title="Permalink to this equation">¶</a></span>\[\begin{align}
 T v^{n-1} &amp; = C_2 \\
 T p^{\frac{1-n}{n}} &amp; = C_3
 \end{align}\]</div>
@@ -568,13 +621,17 @@ T p^{\frac{1-n}{n}} &amp; = C_3
 
 <span class="c1"># Now, plot everything:</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">pressure_isobaric</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_end</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pressure_isobaric</span><span class="p">)</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$n = 0$&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_end</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pressure_isobaric</span><span class="p">)</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> 
+         <span class="sa">r</span><span class="s1">&#39;$n = 0$&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">pressure_isothermal</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_end</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pressure_isothermal</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$n = 1$&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_end</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pressure_isothermal</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> 
+         <span class="sa">r</span><span class="s1">&#39;$n = 1$&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">pressure_isentropic</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_end</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pressure_isentropic</span><span class="p">)</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$n = \gamma$&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_end</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pressure_isentropic</span><span class="p">)</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> 
+         <span class="sa">r</span><span class="s1">&#39;$n = \gamma$&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">volume_isochoric</span><span class="p">,</span> <span class="n">pressure_isochoric</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_start</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">pressure_isochoric</span><span class="p">)</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$n = \infty$&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">volume_start</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">pressure_isochoric</span><span class="p">)</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> 
+         <span class="sa">r</span><span class="s1">&#39;$n = \infty$&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;volume&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">)</span>
@@ -681,6 +738,7 @@ T p^{\frac{1-n}{n}} &amp; = C_3
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Gas Dynamics notes</a>
+    <a class='right-next' id="next-link" href="control-volume-analysis.html" title="next page">Control volume analysis</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
