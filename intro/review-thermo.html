@@ -205,6 +205,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thermodynamics-definitions">
+   Thermodynamics definitions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#entropy-changes">
    Entropy changes
   </a>
@@ -270,36 +275,68 @@ R = \frac{8314 \, \text{J}/\text{(kmol K)}}{MW}
 <p>and <em>MW</em> is the molecular weight of the gas. For air, <em>R</em> = 287 J/(kg K).</p>
 <p>The ideal gas equation of state applies best for relatively low densities, or at relatively low pressures or high temperatures.</p>
 </div>
+<div class="section" id="thermodynamics-definitions">
+<h2>Thermodynamics definitions<a class="headerlink" href="#thermodynamics-definitions" title="Permalink to this headline">¶</a></h2>
+<p><strong>Properties</strong> describe the state of a system.</p>
+<ul class="simple">
+<li><p><em>intensive</em> properties depend only on the state, and not how much stuff is in the system. Examples include temperature, density, and pressure</p></li>
+<li><p><em>extensive</em> properties depend on the amount of stuff (i.e., the mass) of the system. Examples include total internal energy (<em>U</em>) and volume (<em>V</em>)</p></li>
+</ul>
+<p>We can also break down properties into type:</p>
+<ul class="simple">
+<li><p><em>observable</em> properties are directly measureable (<em>p</em>, <em>T</em>, <em>V</em>, mass)</p></li>
+<li><p><em>mathematical</em> properties come from combinations of other properties (<span class="math notranslate nohighlight">\(\rho\)</span>, <span class="math notranslate nohighlight">\(c_p\)</span>, <em>h</em>)</p></li>
+<li><p><em>derived</em> properties we arrive at from some analysis (internal energy from the First Law of thermodynamics, entropy from the Second Law)</p></li>
+</ul>
+<p><strong>Path</strong>/<strong>process</strong>: a series of consecutive states that define a unique journey from one state to another. Common features of processes that we will encounter or assume include:</p>
+<ul class="simple">
+<li><p>adiabatic: no heat transfer (<span class="math notranslate nohighlight">\(\dot{Q} = 0\)</span>)</p></li>
+<li><p>isothermal: constant temperature</p></li>
+<li><p>isobaric: constant pressure</p></li>
+<li><p>isentropic: constant entropy</p></li>
+<li><p>isochoric: constant specific volume / density</p></li>
+</ul>
+<p><strong>Cycle</strong>: a sequence of processes that returns a system to its original state.</p>
+<p><strong>point function</strong>: a property, that depends only on the state of a system.</p>
+<p><strong>path function</strong>: not just a function of the state, but of the path/journey taken. Examples include heat and work.</p>
+</div>
 <div class="section" id="entropy-changes">
 <h2>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">¶</a></h2>
 <p>By integrating the property relations, we can get explicit equations for entropy change between two points:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1b70d9e3-7796-418f-8371-67073c1280f8">
-<span class="eqno">(1)<a class="headerlink" href="#equation-1b70d9e3-7796-418f-8371-67073c1280f8" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
 T ds &amp;= du + p dv \\
 T ds &amp;= c_v dT + p dv \\
 ds &amp;= c_v \frac{dT}{T} + \frac{p dv}{T}
-\end{align}\]</div>
-<p>Then, use the ideal gas equation of state:
-$<span class="math notranslate nohighlight">\(
-p = \rho R T \rightarrow p v = R T \rightarrow \frac{p}{T} = \frac{R}{v}
-\)</span><span class="math notranslate nohighlight">\(
-\)</span>$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-232c5cd0-ada3-4b6b-ab3a-afeccf37514d">
-<span class="eqno">(2)<a class="headerlink" href="#equation-232c5cd0-ada3-4b6b-ab3a-afeccf37514d" title="Permalink to this equation">¶</a></span>\[\begin{align}
-ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
-\Delta s_{1-2} &amp;= \int_{T_1}^{T_2} c_v (T) \frac{dT}{T} + R \int_{v_1}^{v_2} \frac{dv}{v} \\
-\text{if } c_v(T) &amp;= c_v,  \\
-\therefore \Delta s_{1-2} &amp;= c_v \ln \frac{T_2}{T_1} + R \ln \frac{v_2}{v_1}
-\end{align}\]</div>
+\end{align}
+\end{split}\]</div>
+<p>Then, use the ideal gas equation of state:</p>
 <div class="math notranslate nohighlight">
-\[Similarly, we can take that expression and obtain
+\[
+p = \rho R T \rightarrow p v = R T \rightarrow \frac{p}{T} = \frac{R}{v}
 \]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-d900ffab-e996-4432-8d3b-d284967c9b64">
-<span class="eqno">(3)<a class="headerlink" href="#equation-d900ffab-e996-4432-8d3b-d284967c9b64" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
+\Delta s_{1-2} &amp;= \int_{T_1}^{T_2} c_v (T) \frac{dT}{T} + R \int_{v_1}^{v_2} \frac{dv}{v}
+\end{align}
+\end{split}\]</div>
+<p>Then, if we assume that specific heat is constant, <span class="math notranslate nohighlight">\(c_v(T) = c_v\)</span>, we can simplify further:</p>
+<div class="math notranslate nohighlight">
+\[
+\therefore \Delta s_{1-2} = c_v \ln \frac{T_2}{T_1} + R \ln \frac{v_2}{v_1}
+\]</div>
+<p>Similarly, we can take that expression and obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
 \Delta s_{1-2} &amp;= c_p \ln \frac{v_2}{v_1} + c_v \ln \frac{p_2}{p_1} \\
 \Delta s_{1-2} &amp;= c_p \ln \frac{T_2}{T_1} - R \ln \frac{p_2}{p_1}
-\end{align}\]</div>
-<p>$$</p>
+\end{align}
+\end{split}\]</div>
+<p>We can write functions to calculate the entropy change given initial and final values of temperature, volume, and pressure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use properties of air</span>
@@ -338,8 +375,8 @@ ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
 p v^n = \text{const} = C_1 ,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the polytropic constant that depends on the specific process. With the ideal gas equation of state, we can also get relations with temperature:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-705ee4b1-6541-40da-af6d-3fdc379a75ca">
-<span class="eqno">(4)<a class="headerlink" href="#equation-705ee4b1-6541-40da-af6d-3fdc379a75ca" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6bfd4fba-49fb-4683-ac55-96cebe49f5e0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-6bfd4fba-49fb-4683-ac55-96cebe49f5e0" title="Permalink to this equation">¶</a></span>\[\begin{align}
 T v^{n-1} &amp; = C_2 \\
 T p^{\frac{1-n}{n}} &amp; = C_3
 \end{align}\]</div>
@@ -395,7 +432,7 @@ T p^{\frac{1-n}{n}} &amp; = C_3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/review-thermo_9_0.png" src="../_images/review-thermo_9_0.png" />
+<img alt="../_images/review-thermo_10_0.png" src="../_images/review-thermo_10_0.png" />
 </div>
 </div>
 <p>Using our relations for entropy changes, we can also visualize the <span class="math notranslate nohighlight">\(T-s\)</span> diagrams for these processes:</p>
@@ -458,7 +495,7 @@ T p^{\frac{1-n}{n}} &amp; = C_3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/review-thermo_11_0.png" src="../_images/review-thermo_11_0.png" />
+<img alt="../_images/review-thermo_12_0.png" src="../_images/review-thermo_12_0.png" />
 </div>
 </div>
 </div>
