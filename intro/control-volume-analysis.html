@@ -203,7 +203,56 @@
             <i class="fas fa-list"></i> Contents
         </div>
         <nav id="bd-toc-nav">
-            
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#total-derivative">
+   Total derivative
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#total-derivative-control-volume">
+   Total derivative → control volume
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reynolds-transport-theorem">
+   Reynolds transport theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conservation-of-mass">
+   Conservation of mass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conservation-of-energy">
+   Conservation of energy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-pressure-volume-and-shaft-work">
+     Example: pressure-volume and shaft work
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy">
+     Entropy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pressure-energy-equation">
+     Pressure-energy equation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stagnation-state">
+   Stagnation state
+  </a>
+ </li>
+</ul>
+
         </nav>
     </div>
 </div>
@@ -216,6 +265,386 @@
 <h1>Control volume analysis<a class="headerlink" href="#control-volume-analysis" title="Permalink to this headline">¶</a></h1>
 <p>This module covers developing our governing equations (conservation of mass, momentum, and energy) by applying control volume analysis.
 It also introduces the concept of the stagnation reference state.</p>
+<p>Our analysis requires us to make a series of assumptions about the fluid flow:</p>
+<ol class="simple">
+<li><p>In general, flow is three-dimensional and unsteady, so <span class="math notranslate nohighlight">\(V = f(t, x, y, z)\)</span></p></li>
+<li><p>If we assume a flow is two-dimensional and unsteady, then <span class="math notranslate nohighlight">\(V = f(t, x, y)\)</span></p></li>
+<li><p>We can next assume the flow is unsteady and one-dimensional:  <span class="math notranslate nohighlight">\(V = f(t, x)\)</span></p></li>
+<li><p>Finally, we can assume one-dimensional steaedy flow: <span class="math notranslate nohighlight">\(V = f(x)\)</span></p></li>
+</ol>
+<p>However, one-dimensional steady flow is <strong>not</strong> the same as <em>unidirectional flow</em>,
+since the overall flow direction can change.</p>
+<div class="section" id="total-derivative">
+<h2>Total derivative<a class="headerlink" href="#total-derivative" title="Permalink to this headline">¶</a></h2>
+<p>For a control mass, the <strong>total/material/substantial derivative</strong> describes the time rate at which a property changes as we follow it around:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{D (\cdot)}{Dt} \text{ or } \frac{d(\cdot)}{dt}
+\]</div>
+<p>The total derivative = convective derivative (changes due to movement of fluid to a new location) + local/partial derivative (changes with time at a given location). For example, the total derivative for pressure is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dp}{dt} = \frac{\partial p}{\partial x} \frac{dx}{dt} + \frac{\partial p}{\partial y} \frac{dy}{dt} + \frac{\partial p}{\partial z} \frac{dz}{dt} + \frac{\partial p}{\partial t} \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span>, <span class="math notranslate nohighlight">\(\frac{dy}{dt}\)</span>, and <span class="math notranslate nohighlight">\(\frac{dz}{dt}\)</span> are the components of flow velocity.</p>
+<p>If fluid properties are independent of time, then we can assume steady flow and thus</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial (\cdot)}{\partial t} = 0
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How good is the assumption of one-dimensional flow in a duct?</p>
+<p>For <em>laminar</em> flow, the velocity forms a parabolic shape, with the peak in the center and zero at the walls. Thus, <span class="math notranslate nohighlight">\(\dot{m} = \rho A \frac{V_{\max}}{2} = \rho A V\)</span>, where <em>V</em> is the average velocity. Clearly, the velocity varies significantly at a given axial location, and so the assumption of one-dimensional flow is not good.</p>
+<p>For <em>turbulent</em> flow, the larger inertial forces lead to more mixing, and so the velocity profile is much more uniform: <span class="math notranslate nohighlight">\(V_{\max} \approx V\)</span>, so the one-dimensional assumption is reasonable.</p>
+<p>Since most applications in gas dynamics will be at high-enough Reynolds numbers for the flow to be fully turbulent, the one-dimensional assumption is pretty good!</p>
+</div>
+</div>
+<div class="section" id="total-derivative-control-volume">
+<h2>Total derivative → control volume<a class="headerlink" href="#total-derivative-control-volume" title="Permalink to this headline">¶</a></h2>
+<p>With fluids, it is much more convenient to work with control volumes, so we need a way to convert from equations governing a control mass (written with a total derivative) to those that apply to control volumes.</p>
+<p>We can work with any extensive property <em>N</em>, where</p>
+<div class="math notranslate nohighlight">
+\[
+N = \int \eta \, dm \equiv \iiint \rho \eta \, d \tilde{v} = \int_V \rho \eta \, d\tilde{v} \;,
+\]</div>
+<p>where <em>N</em> is the total amount of the property in a given mass and <span class="math notranslate nohighlight">\(\eta\)</span> is the
+amount per unit mass (the intensive version of this property).
+The overall change in the property <em>N</em> is then <span class="math notranslate nohighlight">\(\frac{dN}{dt}\)</span>.</p>
+<p>Let’s follow a given control mass of fluid from time <span class="math notranslate nohighlight">\(t\)</span> to time <span class="math notranslate nohighlight">\(t + \Delta t\)</span>,
+as it moves through space. The volume of space that the control mass occupied
+initially is our <strong>control volume</strong>, which the mass crosses as it moves.
+For a small time increment <span class="math notranslate nohighlight">\(\Delta t\)</span>, the volumes occupied by the fluid at time <span class="math notranslate nohighlight">\(t\)</span>
+and time <span class="math notranslate nohighlight">\(t + \Delta t\)</span> will overlap.</p>
+<p>We can write the overall change in <em>N</em> with time as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{dN}{dt} &amp;\equiv \lim_{\Delta t \to 0} \frac{ (\text{final value of } N)_{t+\Delta t} - (\text{initial value of } N)_t }{\Delta t} \\
+&amp;= \lim_{\Delta t \to 0} \frac{ (N_2 + N_3)_{t+\Delta t} - (N_1 + N_2)_t}{\Delta t} \;,
+\end{align}
+\end{split}\]</div>
+<p>where 1+2 represents the original volume and 2+3 represents the new region, and 2 represents the overlap between the two spaces.</p>
+<p>Let’s focus on each of the terms present in that total derivative.</p>
+<p>The quantity</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{\Delta t \to 0} \frac{N_3 (t+\Delta t)}{\Delta t}
+\]</div>
+<p>represents the amount of property <span class="math notranslate nohighlight">\(N\)</span> lost by the fluid out of the control volume.
+(After all, region 3 is <em>formed</em> by the fluid moving out.)
+We can relate this to the fluid that crosses the surface of the control volume:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{S_{\text{out}}} \eta \rho \left( \vec{V} \cdot \hat{n} \right) \, dA \, \Delta t \approx \text{amount of $N$ in region 3} \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S_{\text{out}}\)</span> is the area where fluid leaves the control volume,
+<span class="math notranslate nohighlight">\(\vec{V}\)</span> is the velocity vector of the fluid, and
+<span class="math notranslate nohighlight">\(\hat{n}\)</span> is the unit normal vector of the surface area.
+So, then</p>
+<div class="math notranslate nohighlight">
+\[
+\therefore \lim_{\Delta t \to 0} \frac{N_3 (t+\Delta t)}{\Delta t} = \int_{S_{\text{out}}} \eta \rho \left( \vec{V} \cdot \hat{n} \right) \, dA
+\]</div>
+<p>and this represents the flux of <span class="math notranslate nohighlight">\(N\)</span> out of the control volume.</p>
+<p>We can do similar work for the flux of <span class="math notranslate nohighlight">\(N\)</span> into the control volume:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{\Delta t \to 0} \frac{N_1 (t)}{\Delta t} = \int_{S_{\text{in}}} \eta \rho \left( \vec{V} \cdot \hat{n}^{\prime} \right) \, dA \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{n}^{\prime} = -\hat{n}\)</span> is the unit normal vector pointing into the region.</p>
+<p>Finally, the remaining terms are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\lim_{\Delta t \to 0} \frac{ N_2 (t+\Delta t) - N_2 (t) }{\Delta t} &amp;= \frac{\partial N_2}{\partial t} \\
+&amp;= \frac{\partial N_{cv}}{\partial t} \\
+&amp;= \frac{\partial}{\partial t} \int_{cv} \rho \eta \, d\tilde{v} \;,
+\end{align}
+\end{split}\]</div>
+<p>because <span class="math notranslate nohighlight">\(N_2 \to N_{cv}\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
+</div>
+<div class="section" id="reynolds-transport-theorem">
+<h2>Reynolds transport theorem<a class="headerlink" href="#reynolds-transport-theorem" title="Permalink to this headline">¶</a></h2>
+<p>Now, we can rewrite the total derivative with these quantities based on the control volume:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dN}{dt} = \frac{\partial}{\partial t} \int_{cv} \rho \eta \, d\tilde{v} + \int_{S_{\text{out}}} \eta \rho \left( \vec{V} \cdot \hat{n} \right) \, dA - \int_{S_{\text{in}}} \eta \rho \left( \vec{V} \cdot \hat{n}^{\prime} \right) \, dA \;,
+\]</div>
+<p>but as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>, and thus the region of overlap becomes the control volume itself,
+<span class="math notranslate nohighlight">\(\hat{n} = -\hat{n}^{\prime}\)</span>, and the areas where the fluid leave and enter the control volume
+are the <em>control surface</em> (CS), and so</p>
+<div class="math notranslate nohighlight" id="equation-eq-reynolds">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-reynolds" title="Permalink to this equation">¶</a></span>\[
+\frac{dN}{dt} = \frac{\partial}{\partial t} \int_{CV} \rho \eta \, d\tilde{v} + \int_{CS} \eta \rho \left( \vec{V} \cdot \hat{n} \right) \, dA \;,
+\]</div>
+<p>which is the <strong>Reynolds transport theorem</strong>.
+This expresses that the rate of change of an extensive property <span class="math notranslate nohighlight">\(N\)</span>
+for a given mass as it moves around is equal to the rate of change of <span class="math notranslate nohighlight">\(N\)</span>
+inside the control volume <em>plus</em> the net efflux (flow out - flow in) of <span class="math notranslate nohighlight">\(N\)</span>
+from the control volume.</p>
+</div>
+<div class="section" id="conservation-of-mass">
+<h2>Conservation of mass<a class="headerlink" href="#conservation-of-mass" title="Permalink to this headline">¶</a></h2>
+<p>Conservation of mass states that, for a control mass, <span class="math notranslate nohighlight">\(\frac{d (\text{mass})}{dt} = 0\)</span>.
+We can apply this to a control volume by recognizing that <span class="math notranslate nohighlight">\(N = \text{mass}\)</span> and <span class="math notranslate nohighlight">\(\eta = 1\)</span>.
+Then, applying this to Reynolds transport theorem <a class="reference internal" href="#equation-eq-reynolds">(2)</a> we get the continuity
+equation for a control volume:</p>
+<div class="math notranslate nohighlight">
+\[
+0 = \frac{\partial}{\partial t} \int_{CV} \rho \, d\tilde{v} + \int_{CS} \rho (\vec{V} \cdot \hat{n}) \, dA
+\]</div>
+<p>This applies to a general flow.</p>
+<p>For steady one-dimensional flow we can simplify this further.
+First, <span class="math notranslate nohighlight">\(\frac{\partial}{\partial t} = 0\)</span>, and for a given inlet/outlet we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\int \rho (\vec{V} \cdot \hat{n}) \, dA = \rho \vec{V} \cdot \hat{n} \int dA = \rho V A
+\]</div>
+<p>Thus, for a steady one-dimensional flow, conservation of mass says that</p>
+<div class="math notranslate nohighlight">
+\[
+0 = \sum \rho V A
+\]</div>
+<p>over all inlets and outlets. For flow with a single inlet and single outlet,
+this simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{m} = \rho A V = \text{constant}
+\]</div>
+<p>Alternately, we can express conservation of mass by differentiating this expression:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+d (\rho A V) = 0 = A V \, d\rho + \rho V \, dA + \rho A \, dV \\
+\frac{d \rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0 \,
+\end{gather*}
+\end{split}\]</div>
+<p>which is a useful expression for flow through a duct, channel, or streamline.
+Also, it shows us that if <span class="math notranslate nohighlight">\(dA = 0\)</span> (i.e., the area is constant), then
+increasing flow velocity means decreasing flow density, and vice versa.</p>
+</div>
+<div class="section" id="conservation-of-energy">
+<h2>Conservation of energy<a class="headerlink" href="#conservation-of-energy" title="Permalink to this headline">¶</a></h2>
+<p>For a control mass, conservation of energy (i.e., the first law of thermodynamics) says</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Q &amp;= W + \Delta E \\
+\frac{\delta Q}{dt} &amp;= \frac{\delta W}{dt} + \frac{dE}{dt}
+\end{align}
+\end{split}\]</div>
+<p>where the first two terms are the instantaneous rates of heat and work transfer
+between the system and its surroundings, and <span class="math notranslate nohighlight">\(\frac{dE}{dt}\)</span> is the total derivative
+of energy. In this case, <span class="math notranslate nohighlight">\(N = E\)</span>, and <span class="math notranslate nohighlight">\(\eta = e = u + \frac{V^2}{2} + gz\)</span>,
+so applying Reynolds transport theorem <a class="reference internal" href="#equation-eq-reynolds">(2)</a> gives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{dE}{dt} &amp;= \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA \\
+\rightarrow \frac{\delta Q}{dt} &amp;= \frac{\delta W}{dt} + \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA
+\end{align}
+\end{split}\]</div>
+<p>For one-dimensional flow, we can simplify the integral over the control surface
+to consider just the inlets and outlets separately:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA = \sum \dot{m} e \;,
+\]</div>
+<p>where contributions are positive where fluid leaves the control volume (outlet) and
+negative where fluid enters the control volume (inlet).</p>
+<div class="section" id="example-pressure-volume-and-shaft-work">
+<h3>Example: pressure-volume and shaft work<a class="headerlink" href="#example-pressure-volume-and-shaft-work" title="Permalink to this headline">¶</a></h3>
+<p>Consider a system with pressure-volume work from a piston and shaft work.
+We should choose the control surface appropriately so that there is no fluid motion
+at the boundary, except where</p>
+<ol class="simple">
+<li><p>fluid enters and leaves the control volume, and</p></li>
+<li><p>a device (e.g., shaft) crosses the boundary.</p></li>
+</ol>
+<p>There is no pressure/shear work along the sidewalls, since the fluid velocity at the wall is zero.</p>
+<p>The pressure work is then</p>
+<div class="math notranslate nohighlight">
+\[
+\delta W' = \vec{F} \cdot d\vec{x} = p A \, dx = p A V \, dt
+\]</div>
+<p>and the rate of this work is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\delta W'}{dt} = p A V = \dot{m} p v \;,
+\]</div>
+<p>which represents the work done to push the fluid out of the control volume.
+The total work is then</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\delta W}{dt} = \frac{\delta W_s}{dt} + \sum \dot{m} p v
+\]</div>
+<p>and we can rewrite conservation of energy as</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\delta Q}{dt} = \frac{\delta W_s}{dt} + \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \sum \dot{m} (e + pv)
+\]</div>
+<p>For <em>steady</em> one-dimensional flow, this simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\delta Q}{dt} = \frac{\delta W_s}{dt} + \sum \dot{m} (e + pv) \;,
+\]</div>
+<p>and for a single inlet, single outlet duct, where
+<span class="math notranslate nohighlight">\(\dot{m}_{\text{in}} = \dot{m}_{\text{out}} = \dot{m}\)</span>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[
+q = w_s + \left( e + p v \right)_{\text{out}} - \left( e + p v \right)_{\text{in}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(q = \frac{1}{\dot{m}} \frac{\delta Q}{dt}\)</span> and
+<span class="math notranslate nohighlight">\(w_s = \frac{1}{\dot{m}} \frac{\delta W_s}{dt}\)</span>.</p>
+<p>For example, for a system with one inlet, one outlet, shaft work, and heat transfer,
+conservation of energy simplifies down to the usual</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+q = w_s + \left( e_2 + p_2 v_2 \right) - \left( e_1 + p_1 v_1 \right) \\
+h_1 + \frac{V_1^2}{2} + g z_1 + q = h_2 + \frac{V_2^2}{2} + g z_2 + w_s
+\end{gather*}
+\end{split}\]</div>
+</div>
+<div class="section" id="entropy">
+<h3>Entropy<a class="headerlink" href="#entropy" title="Permalink to this headline">¶</a></h3>
+<p>We can also develop a useful expression that relates pressure, energy, and entropy.
+Recall that <span class="math notranslate nohighlight">\(\Delta S \equiv \int \frac{\delta Q_R}{T}\)</span>.</p>
+<p>We can express changes in entropy as <span class="math notranslate nohighlight">\(dS = dS_e + dS_i\)</span>,
+separating into changes caused by actual heat transfer (<span class="math notranslate nohighlight">\(dS_e\)</span>)
+and changes caused by irreversibilities (<span class="math notranslate nohighlight">\(dS_i\)</span>).
+By definition,</p>
+<div class="math notranslate nohighlight">
+\[
+dS_e = \frac{\delta Q}{T} \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(dS_e = 0\)</span> for adiabatic processes.
+Then, <span class="math notranslate nohighlight">\(dS_i \geq 0\)</span>, and this comes from irreversible effects
+(e.g., temperature or pressure gradients, friction). For a reversible process, <span class="math notranslate nohighlight">\(dS_i = 0\)</span>.</p>
+<p>Let’s consider a cyclic integral of entropy (meaning, integrate over a cycle):</p>
+<div class="math notranslate nohighlight">
+\[
+\oint dS = \oint dS_e + \oint dS_i = 0 \;,
+\]</div>
+<p>by definition, since entropy is a property and we are integrating over a cycle
+(which ends back at the original state).
+But,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\oint dS_i &amp;\geq 0 \\
+0 &amp;= \oint dS_e + (\geq 0) \\
+\therefore \oint \frac{\delta Q}{T} &amp;\leq 0 \\
+\end{align}
+\end{split}\]</div>
+<p>which is the <strong>inequality of Clausius</strong>.</p>
+</div>
+<div class="section" id="pressure-energy-equation">
+<h3>Pressure-energy equation<a class="headerlink" href="#pressure-energy-equation" title="Permalink to this headline">¶</a></h3>
+<p>We can obtain a pressure-energy equation by integrating our property relation
+into conservation of energy, taking advantage of this approach to considering entropy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+T \, ds &amp;= dh - v \, dp \\
+T \, ds_e + T \, ds_i &amp;= dh - \frac{dp}{\rho} \\
+dh &amp;= T \, ds_e + T \, ds_i + \frac{dp}{\rho}
+\end{align}
+\end{split}\]</div>
+<p>Incorporate this into the energy equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\delta q = \delta w_s + \left( T \, ds_e + T \, ds_i + \frac{dp}{\rho} \right) + \frac{dV^2}{2} + g \, dz \\
+\frac{dp}{\rho} + \frac{dV^2}{2} + g \, dz + \delta w_s + T \, ds_i = 0 \;,
+\end{gather*}
+\end{split}\]</div>
+<p>which is the <strong>pressure-energy equation</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can obtain Euler’s equation from the pressure-energy equation by applying it to a reversible process with no shaft work:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dp}{\rho} + \frac{dV^2}{2} + g \, dz = 0
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="stagnation-state">
+<h2>Stagnation state<a class="headerlink" href="#stagnation-state" title="Permalink to this headline">¶</a></h2>
+<p>Up until this point, we have exclusively referred to <strong>static properties</strong>, which are measured as though we are moving along with the fluid.</p>
+<p>A useful concept is the <strong>stagnation state</strong>, which is a reference state associated with the fluid
+being brought to rest and at zero potential, <em>isentropically</em>, and with no work done.
+This means that there is no energy exchange with surroundings (<span class="math notranslate nohighlight">\(Q = W = 0\)</span>, and <span class="math notranslate nohighlight">\(dS_e = 0\)</span>),
+there are no losses (<span class="math notranslate nohighlight">\(dS_i = 0\)</span>).</p>
+<p>We can apply the energy equation from any point in the flow <em>a</em> to the stagnation reference point <em>b</em>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+h_a + \frac{V_a^2}{2} + g z_a + q &amp;= h_b + \frac{V_b^2}{2} + g z_b + w_s \\
+\rightarrow h_b &amp;= h_a + \frac{V_a^2}{2} + g z_a
+\end{align}
+\end{split}\]</div>
+<p>and thus we can define the <strong>stagnation enthlapy</strong>, or <strong>total enthalpy</strong>, as</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = h + \frac{V^2}{2} + g z
+\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The stagnation state is a reference state, and may or may not actually exist physically in a flow system.</p>
+</div>
+<p>The one-dimensional steady energy equation can then be written as</p>
+<div class="math notranslate nohighlight">
+\[
+h_{t1} + q = h_{t2} + w_s \;,
+\]</div>
+<p>or <span class="math notranslate nohighlight">\(\delta q = \delta w_s + d h_t\)</span>.</p>
+<p>So, in an adiabatic, no-work system (<span class="math notranslate nohighlight">\(\delta q = \delta w_s = 0\)</span>),
+<strong>stagnation enthalpy remains constant</strong>.</p>
+<p>We can also consider a <strong>stagnation pressure</strong>, which is the pressure at the stagnation state.
+Applying our property relationship to the stagnation state:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+T \, ds &amp;= dh - v \, dp \\
+\rightarrow T_t \, ds_t &amp;= d h_t - v_t \, d p_t
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d s_t = ds = ds_e + ds_i\)</span>, since the stagnation process is isentropic.
+We can combine this with the (stagnation) energy equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+T_t \left( ds_e + ds_i \right) = dh_t - v_t \, dp_t \\
+\delta q = \delta w_s + d h_t \\
+\delta q = \delta w_s + T_t \left( ds_e + ds_i \right) + v_t \, dp_t \\
+\rightarrow \frac{dp_t}{\rho_t} + ds_e (T_t - T) + T_t \, ds_i + \delta w_s = 0 \;,
+\end{gather*}
+\end{split}\]</div>
+<p>which is the <strong>stagnation pressure-energy equation</strong>.
+This looks complicated, but tells us something useful.
+If we consider a process with no shaft work (<span class="math notranslate nohighlight">\(\delta w_s = 0\)</span>),
+no heat transfer (<span class="math notranslate nohighlight">\(\delta q = 0\)</span>), and no losses (<span class="math notranslate nohighlight">\(ds_i = 0\)</span>),
+then</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d p_t}{\rho_t} = 0 = d p_t \;,
+\]</div>
+<p>or stagnation pressure is constant.</p>
+<p>Losses will be present in most real systems, and so the more realistic version of this equation is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d p_t}{\rho_t} + T_t \, ds_i = 0 \,
+\]</div>
+<p>which shows us that losses cause the stagnation pressure to decrease (since <span class="math notranslate nohighlight">\(ds_i &gt; 0\)</span>).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The stagnation state, as well as stagnation enthalpy and stagnation pressure, are very important concepts that we will use throughout this course. You should always consider whether these quantities are constant or changing in a given scenario.</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
