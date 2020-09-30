@@ -3,3 +3,4 @@
   chapters:
     - file: intro/review-thermo
     - file: intro/control-volume-analysis
+    - file: intro/compressible-flow
