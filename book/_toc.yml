@@ -5,4 +5,5 @@
     - file: intro/control-volume-analysis
     - file: intro/compressible-flow
 - part: Variable-area flows
+  chapters:
     - file: variable-area/intro
