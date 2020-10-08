@@ -1,6 +1,8 @@
 - file: intro
-- part: Introduction and Review
+- part: Introduction and review
   chapters:
     - file: intro/review-thermo
     - file: intro/control-volume-analysis
     - file: intro/compressible-flow
+- part: Variable-area flows
+    - file: variable-area/intro
