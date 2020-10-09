@@ -243,9 +243,16 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-isentropic-flow">
-   Example: isentropic flow
+  <a class="reference internal nav-link" href="#equations-for-perfect-gases">
+   Equations for perfect gases
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-isentropic-flow">
+     Example: isentropic flow
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -283,8 +290,14 @@
 </div>
 </div>
 </div>
+<div class="section" id="equations-for-perfect-gases">
+<h2>Equations for perfect gases<a class="headerlink" href="#equations-for-perfect-gases" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\frac{A_2}{A_1} = \frac{M_1}{M_2} \left[ \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right]^{\frac{\gamma+1}{2(\gamma-1)}} e^{\Delta s/R}
+\]</div>
 <div class="section" id="example-isentropic-flow">
-<h2>Example: isentropic flow<a class="headerlink" href="#example-isentropic-flow" title="Permalink to this headline">¶</a></h2>
+<h3>Example: isentropic flow<a class="headerlink" href="#example-isentropic-flow" title="Permalink to this headline">¶</a></h3>
 <p><strong>Problem:</strong> Air flows isentropically through a duct (<span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>) where the area is changing from point 1 to 2,
 with no heat transfer or shaft work. The area ratio is <span class="math notranslate nohighlight">\(\frac{A_2}{A_1} = 2.5\)</span>, the flow starts at <span class="math notranslate nohighlight">\(M_1 = 0.5\)</span> and 4 bar.
 Find the Mach number and pressure at the second point in the duct.</p>
@@ -395,6 +408,7 @@ easier to just solve the equation directly in that case</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M2 = 0.1760
 </pre></div>
+</div>
 </div>
 </div>
 </div>
