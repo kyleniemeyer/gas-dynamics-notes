@@ -24,7 +24,17 @@ sphinx:
     # mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 parse:
-  myst_extended_syntax: true
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - amsmath
+    - colon_fence
+    # - deflist
+    - dollarmath
+    # - html_admonition
+    # - html_image
+    - linkify
+    # - replacements
+    - smartquotes
+    #- substitution
 
 repository:
   url: https://github.com/kyleniemeyer/gas-dynamics-notes
