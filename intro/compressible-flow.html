@@ -266,17 +266,40 @@
 <h1>Introduction to compressible flow<a class="headerlink" href="#introduction-to-compressible-flow" title="Permalink to this headline">¶</a></h1>
 <p>This module will introduce the fundamentals of compressible fluid flows, which can behave a bit differently than
 what you have learned for incompressible flows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">150</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>First, let’s consider how a disturbance passes through an elastic medium (solid, liquid, or gas).
 If we consider the medium to be composed of molecules, then a disturbance on one side will compress
 the molecules, and this information will be passed along to neighboring molecules, and so on,
 forming a <strong>traveling wave</strong> that moves at a particular <strong>wave speed</strong>.
 The stronger the traveling wave, the faster it will propagate.</p>
-<p>Shock waves
-: Large amplitude waves, that involve a large change in pressure and density of the fluid. Speed depends on strength of the wave.</p>
-<p>Sound waves
-: Small amplitude waves, where the speed only depends on the medium and its state. Moves at the <strong>sonic velocity</strong>.</p>
-<p>Sonic velocity
-: The velocity by which waves travel in an elastic medium (like a fluid) to propagate information about an object’s presence.</p>
+<dl class="simple myst">
+<dt>Shock waves</dt><dd><p>Large amplitude waves, that involve a large change in pressure and density of the fluid. Speed depends on strength of the wave.</p>
+</dd>
+<dt>Sound waves</dt><dd><p>Small amplitude waves, where the speed only depends on the medium and its state. Moves at the <strong>sonic velocity</strong>.</p>
+</dd>
+<dt>Sonic velocity</dt><dd><p>The velocity by which waves travel in an elastic medium (like a fluid) to propagate information about an object’s presence.</p>
+</dd>
+</dl>
 <div class="section" id="sound-wave-propagation">
 <h2>Sound wave propagation<a class="headerlink" href="#sound-wave-propagation" title="Permalink to this headline">¶</a></h2>
 <p>Consider a piston inside a cylinder, where everything is initially at rest. The fluid properties are
