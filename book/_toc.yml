@@ -5,7 +5,11 @@ parts:
   chapters:
   - file: intro/review-thermo
   - file: intro/control-volume-analysis
-  - file: intro/compressible-flow
-- caption: Variable-area flows
+  - file: intro/stagnation
+- caption: Compressible flows
   chapters:
-  - file: variable-area/intro
+  - file: compressible-flows/intro-compressible-flow
+  - file: compressible-flows/isentropic
+  - file: compressible-flows/normal-shocks
+  - file: compressible-flows/oblique-shocks
+  - file: compressible-flows/prandtl-meyer
