@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Variable-area flows: introduction &#8212; Gas Dynamics notes</title>
+    <title>Isentropic, variable-area flows &#8212; Gas Dynamics notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -53,7 +53,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Introduction to compressible flow" href="../intro/compressible-flow.html" />
+    <link rel="next" title="Normal shock waves" href="normal-shocks.html" />
+    <link rel="prev" title="Introduction to compressible flow" href="intro-compressible-flow.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -111,20 +112,40 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../intro/compressible-flow.html">
-   Introduction to compressible flow
+  <a class="reference internal" href="../intro/stagnation.html">
+   Stagnation properties
   </a>
  </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Variable-area flows
+  Compressible flows
  </span>
 </p>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro-compressible-flow.html">
+   Introduction to compressible flow
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Variable-area flows: introduction
+   Isentropic, variable-area flows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="normal-shocks.html">
+   Normal shock waves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="oblique-shocks.html">
+   Oblique shock waves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prandtl-meyer.html">
+   Prandtl–Meyer flows
   </a>
  </li>
 </ul>
@@ -168,7 +189,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/variable-area/intro.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/compressible-flows/isentropic.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -188,10 +209,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/kyleniemeyer/gas-dynamics-notes/issues/new?title=Issue%20on%20page%20%2Fvariable-area/intro.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/kyleniemeyer/gas-dynamics-notes/issues/new?title=Issue%20on%20page%20%2Fcompressible-flows/isentropic.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/kyleniemeyer/gas-dynamics-notes/edit/main/variable-area/intro.ipynb"><button
+        <a class="edit-button" href="https://github.com/kyleniemeyer/gas-dynamics-notes/edit/main/compressible-flows/isentropic.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -211,7 +232,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/kyleniemeyer/gas-dynamics-notes/main?urlpath=tree/variable-area/intro.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/kyleniemeyer/gas-dynamics-notes/main?urlpath=tree/compressible-flows/isentropic.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -233,6 +254,11 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#varying-area-adiabatic-flows">
+   Varying-area adiabatic flows
+  </a>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#equations-for-perfect-gases">
    Equations for perfect gases
@@ -256,8 +282,8 @@
         
               <div>
                 
-  <div class="section" id="variable-area-flows-introduction">
-<h1>Variable-area flows: introduction<a class="headerlink" href="#variable-area-flows-introduction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="isentropic-variable-area-flows">
+<h1>Isentropic, variable-area flows<a class="headerlink" href="#isentropic-variable-area-flows" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Necessary modules to solve problems</span>
@@ -280,6 +306,36 @@
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="varying-area-adiabatic-flows">
+<h2>Varying-area adiabatic flows<a class="headerlink" href="#varying-area-adiabatic-flows" title="Permalink to this headline">¶</a></h2>
+<p>Area change is one of the important factors that can adjust flow properties
+in compressible flow systems. (The others are friction and heat transfer, which
+we will cover briefly later.)</p>
+<p>For now, let’s proceed to analyze flows with the following conditions/assumptions:</p>
+<ul class="simple">
+<li><p>steady, one-dimensional flow</p></li>
+<li><p>adiabatic: <span class="math notranslate nohighlight">\( \delta q = 0 \)</span>, <span class="math notranslate nohighlight">\( d s_e = 0\)</span></p></li>
+<li><p>no shaft work: <span class="math notranslate nohighlight">\( \delta w_s = 0 \)</span></p></li>
+<li><p>no or negligible change in potential energy: <span class="math notranslate nohighlight">\( dz = 0 \)</span></p></li>
+<li><p>no losses (i.e., reversible): <span class="math notranslate nohighlight">\(d s_i = 0\)</span></p></li>
+</ul>
+<p>As a result of the flow being adiabatic and reversible, it is also isentropic: <span class="math notranslate nohighlight">\(ds = 0\)</span>.</p>
+<p>Our goal is now to see how changes in pressure, density, and velocity relate with changing area.</p>
+<p>Starting with the energy equation, apply our conditions:
+$<span class="math notranslate nohighlight">\(
+\delta q = \delta w_s + dh + \frac{dV^2}{2} + g dz \\
+dh = -V dV
+\)</span>$</p>
+<p>We also have our thermodynamic relationships derived from Gibbs’ identities:
+$<span class="math notranslate nohighlight">\(
+T ds = dh - \frac{dp}{\rho} \\
+dh = \frac{dp}{\rho}
+\)</span>$</p>
+<p>Combined together, we have
+$<span class="math notranslate nohighlight">\(
+dV = - \frac{dp}{\rho V} \;.
+\)</span>$</p>
 </div>
 <div class="section" id="equations-for-perfect-gases">
 <h2>Equations for perfect gases<a class="headerlink" href="#equations-for-perfect-gases" title="Permalink to this headline">¶</a></h2>
@@ -419,7 +475,7 @@ easier to just solve the equation directly in that case</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./variable-area"
+            path: "./compressible-flows"
         },
         predefinedOutput: true
     }
@@ -436,7 +492,7 @@ easier to just solve the equation directly in that case</p>
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="../intro/compressible-flow.html" title="previous page">
+        <a class="left-prev" href="intro-compressible-flow.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
@@ -444,6 +500,15 @@ easier to just solve the equation directly in that case</p>
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="normal-shocks.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Normal shock waves</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

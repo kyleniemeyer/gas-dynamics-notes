@@ -53,7 +53,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to compressible flow" href="compressible-flow.html" />
+    <link rel="next" title="Stagnation properties" href="stagnation.html" />
     <link rel="prev" title="Review of thermodynamics" href="review-thermo.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -112,20 +112,40 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="compressible-flow.html">
-   Introduction to compressible flow
+  <a class="reference internal" href="stagnation.html">
+   Stagnation properties
   </a>
  </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Variable-area flows
+  Compressible flows
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../variable-area/intro.html">
-   Variable-area flows: introduction
+  <a class="reference internal" href="../compressible-flows/intro-compressible-flow.html">
+   Introduction to compressible flow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../compressible-flows/isentropic.html">
+   Isentropic, variable-area flows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../compressible-flows/normal-shocks.html">
+   Normal shock waves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../compressible-flows/oblique-shocks.html">
+   Oblique shock waves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../compressible-flows/prandtl-meyer.html">
+   Prandtl–Meyer flows
   </a>
  </li>
 </ul>
@@ -275,11 +295,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stagnation-state">
-   Stagnation state
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conservation-of-momentum">
@@ -608,79 +623,6 @@ dh &amp;= T \, ds_e + T \, ds_i + \frac{dp}{\rho}
 </div>
 </div>
 </div>
-<div class="section" id="stagnation-state">
-<h2>Stagnation state<a class="headerlink" href="#stagnation-state" title="Permalink to this headline">¶</a></h2>
-<p>Up until this point, we have exclusively referred to <strong>static properties</strong>, which are measured as though we are moving along with the fluid.</p>
-<p>A useful concept is the <strong>stagnation state</strong>, which is a reference state associated with the fluid
-being brought to rest and at zero potential, <em>isentropically</em>, and with no work done.
-This means that there is no energy exchange with surroundings (<span class="math notranslate nohighlight">\(Q = W = 0\)</span>, and <span class="math notranslate nohighlight">\(dS_e = 0\)</span>),
-there are no losses (<span class="math notranslate nohighlight">\(dS_i = 0\)</span>).</p>
-<p>We can apply the energy equation from any point in the flow <em>a</em> to the stagnation reference point <em>b</em>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-h_a + \frac{V_a^2}{2} + g z_a + q &amp;= h_b + \frac{V_b^2}{2} + g z_b + w_s \\
-\rightarrow h_b &amp;= h_a + \frac{V_a^2}{2} + g z_a
-\end{align}
-\end{split}\]</div>
-<p>and thus we can define the <strong>stagnation enthlapy</strong>, or <strong>total enthalpy</strong>, as</p>
-<div class="math notranslate nohighlight">
-\[
-h_t = h + \frac{V^2}{2} + g z
-\]</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The stagnation state is a reference state, and may or may not actually exist physically in a flow system.</p>
-</div>
-<p>The one-dimensional steady energy equation can then be written as</p>
-<div class="math notranslate nohighlight">
-\[
-h_{t1} + q = h_{t2} + w_s \;,
-\]</div>
-<p>or <span class="math notranslate nohighlight">\(\delta q = \delta w_s + d h_t\)</span>.</p>
-<p>So, in an adiabatic, no-work system (<span class="math notranslate nohighlight">\(\delta q = \delta w_s = 0\)</span>),
-<strong>stagnation enthalpy remains constant</strong>.</p>
-<p>We can also consider a <strong>stagnation pressure</strong>, which is the pressure at the stagnation state.
-Applying our property relationship to the stagnation state:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-T \, ds &amp;= dh - v \, dp \\
-\rightarrow T_t \, ds_t &amp;= d h_t - v_t \, d p_t
-\end{align}
-\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d s_t = ds = ds_e + ds_i\)</span>, since the stagnation process is isentropic.
-We can combine this with the (stagnation) energy equation:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
-T_t \left( ds_e + ds_i \right) = dh_t - v_t \, dp_t \\
-\delta q = \delta w_s + d h_t \\
-\delta q = \delta w_s + T_t \left( ds_e + ds_i \right) + v_t \, dp_t \\
-\rightarrow \frac{dp_t}{\rho_t} + ds_e (T_t - T) + T_t \, ds_i + \delta w_s = 0 \;,
-\end{gather*}
-\end{split}\]</div>
-<p>which is the <strong>stagnation pressure-energy equation</strong>.
-This looks complicated, but tells us something useful.
-If we consider a process with no shaft work (<span class="math notranslate nohighlight">\(\delta w_s = 0\)</span>),
-no heat transfer (<span class="math notranslate nohighlight">\(\delta q = 0\)</span>), and no losses (<span class="math notranslate nohighlight">\(ds_i = 0\)</span>),
-then</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{d p_t}{\rho_t} = 0 = d p_t \;,
-\]</div>
-<p>or stagnation pressure is constant.</p>
-<p>Losses will be present in most real systems, and so the more realistic version of this equation is</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{d p_t}{\rho_t} + T_t \, ds_i = 0 \,
-\]</div>
-<p>which shows us that losses cause the stagnation pressure to decrease (since <span class="math notranslate nohighlight">\(ds_i &gt; 0\)</span>).</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The stagnation state, as well as stagnation enthalpy and stagnation pressure, are very important concepts that we will use throughout this course. You should always consider whether these quantities are constant or changing in a given scenario.</p>
-</div>
-</div>
 <div class="section" id="conservation-of-momentum">
 <h2>Conservation of momentum<a class="headerlink" href="#conservation-of-momentum" title="Permalink to this headline">¶</a></h2>
 <p>For a control mass, conservation of momentum comes from Newton’s second law:</p>
@@ -759,10 +701,10 @@ We can focus on the <span class="math notranslate nohighlight">\(x\)</span>-comp
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="compressible-flow.html" title="next page">
+        <a class="right-next" href="stagnation.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Introduction to compressible flow</p>
+                <p class="prevnext-title">Stagnation properties</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
