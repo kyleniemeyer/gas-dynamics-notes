@@ -301,16 +301,7 @@ what you have learned for incompressible flows.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1665</span><span class="o">/</span><span class="mf">453054827.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Pint gives us some helpful unit conversion</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">pint</span> <span class="kn">import</span> <span class="n">UnitRegistry</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">ureg</span> <span class="o">=</span> <span class="n">UnitRegistry</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">Q_</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span> <span class="c1"># We will use this to construct quantities (value + unit)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pint&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matplotlib is building the font cache; this may take a moment.
 </pre></div>
 </div>
 </div>
@@ -353,34 +344,28 @@ Then, we’ll do a control volume analysis of the one-dimensional steady flow ar
 <p>First, we can apply the continuity equation (conservation of mass), recognizing that area is constant for our control volume:</p>
 <div class="math notranslate nohighlight" id="equation-eq-continuity">
 <span class="eqno">(3)<a class="headerlink" href="#equation-eq-continuity" title="Permalink to this equation">¶</a></span>\[\begin{split}
-\begin{align}
-\dot{m} = \rho A V &amp;= \text{constant} \\
-\rho V &amp;= \text{constant} \\
-\rho a &amp;= (\rho + d\rho)(a - dV) \\
-\rho a &amp;= \rho a - \rho \, dV + a \, d\rho - d\rho \, dV \\
-\rho \, dV &amp;= a \, d\rho \\
-\therefore dV &amp;= \frac{a \, d\rho}{\rho} \;,
-\end{align}
+\dot{m} = \rho A V = \text{constant} \\
+\rho V = \text{constant} \\
+\rho a = (\rho + d\rho)(a - dV) \\
+\rho a = \rho a - \rho \, dV + a \, d\rho - d\rho \, dV \\
+\rho \, dV = a \, d\rho \\
+\therefore dV = \frac{a \, d\rho}{\rho} \;,
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d\rho \, dV = 0\)</span> because it is the product of two differential terms.</p>
 <p>Next, we can apply conservation of momentum, where we can neglect any shear stresses due to the
 control volume being infinitesimally small:</p>
 <div class="math notranslate nohighlight" id="equation-eq-momentum">
 <span class="eqno">(4)<a class="headerlink" href="#equation-eq-momentum" title="Permalink to this equation">¶</a></span>\[\begin{split}
-\begin{align}
-\sum F_x &amp;= \dot{m} \left( V_{\text{out},x} - V_{\text{in}, x} \right) \\
-p A - (p + dP) A &amp;= \rho A a \left[ (a - dV) - a \right] \\
--A \, dP &amp;= -\rho A a \, dV \\
-\therefore dV &amp;= \frac{dp}{\rho a}
-\end{align}
+\sum F_x = \dot{m} \left( V_{\text{out},x} - V_{\text{in}, x} \right) \\
+p A - (p + dP) A = \rho A a \left[ (a - dV) - a \right] \\
+-A \, dP = -\rho A a \, dV \\
+\therefore dV = \frac{dp}{\rho a} \;.
 \end{split}\]</div>
 <p>We can then combine Equations <a class="reference internal" href="#equation-eq-continuity">(3)</a> and <a class="reference internal" href="#equation-eq-momentum">(4)</a>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\frac{dp}{\rho a} &amp;= \frac{a \, d\rho}{\rho} \\
-\therefore a^2 &amp;= \frac{dp}{d\rho} \;.
-\end{align}
+\frac{dp}{\rho a} = \frac{a \, d\rho}{\rho} \\
+\therefore a^2 = \frac{dp}{d\rho} \;.
 \end{split}\]</div>
 <p>However, this result is process-dependent. Let’s consider what we can assume/approximate for the current process.
 If we assume negligible losses, by assuming the wave is relatively weak, then the process is reversible.
@@ -388,21 +373,19 @@ We can also assume there is negligible heat transfer in such a small region, so 
 With both of these assumptions, the process is isentropic:</p>
 <div class="math notranslate nohighlight" id="equation-eq-sonic-velocity-general">
 <span class="eqno">(5)<a class="headerlink" href="#equation-eq-sonic-velocity-general" title="Permalink to this equation">¶</a></span>\[
-a^2 = \left( \frac{\partial p}{\partial \rho} \right)_s
+a^2 = \left( \frac{\partial p}{\partial \rho} \right)_s \;.
 \]</div>
 <p>This result applies in general to wave propagation through any medium.</p>
 <p>We can take it further if we assume we are dealing wtih a perfect (i.e., ideal) gas.
 In that case, recall our polytropic relations for an isentropic process:</p>
 <div class="math notranslate nohighlight" id="equation-eq-sonic-velocity">
 <span class="eqno">(6)<a class="headerlink" href="#equation-eq-sonic-velocity" title="Permalink to this equation">¶</a></span>\[\begin{split}
-\begin{align}
-p v^{\gamma} = \text{constant} \rightarrow p &amp;= \rho^{\gamma} \cdot \text{constant} \\
-\left( \frac{\partial p}{\partial \rho} \right)_s &amp;= \gamma \rho^{\gamma - 1} \cdot \text{constant} \\
- &amp;= \gamma \rho^{\gamma - 1} \left( \frac{p}{\rho^{\gamma}} \right) = \gamma \frac{p}{\rho} \\
-\left( \frac{\partial p}{\partial rho} \right)_s &amp;= \gamma R T
+p v^{\gamma} = \text{constant} \rightarrow p = \rho^{\gamma} \cdot \text{constant} \\
+\left( \frac{\partial p}{\partial \rho} \right)_s = \gamma \rho^{\gamma - 1} \cdot \text{constant} \\
+ = \gamma \rho^{\gamma - 1} \left( \frac{p}{\rho^{\gamma}} \right) = \gamma \frac{p}{\rho} \\
+\left( \frac{\partial p}{\partial rho} \right)_s = \gamma R T
 \therefore a^2 = \gamma R T \\
-a &amp;= \sqrt{\gamma R T}
-\end{align}
+a = \sqrt{\gamma R T} \;.
 \end{split}\]</div>
 <p>So, we see that for a perfect (i.e., ideal) gas, the sonic velocity is a function of
 the gas and its local temperature only.</p>
@@ -411,10 +394,8 @@ the gas and its local temperature only.</p>
 <p>We can calculate the sonic velocity for air at room temperature:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-a &amp;= \sqrt{1.4 \cdot 287 \frac{\text{N m}}{\text{kg K}} \cdot 293 \, \text{K} } \\
- &amp;= 343.1 \, \text{m}/\text{s}
-\end{align}
+a = \sqrt{1.4 \cdot 287 \frac{\text{N m}}{\text{kg K}} \cdot 293 \, \text{K} } \\
+a = 343.1 \, \text{m}/\text{s} \;.
 \end{split}\]</div>
 </div>
 <div class="cell docutils container">
@@ -447,14 +428,12 @@ a &amp;= \sqrt{1.4 \cdot 287 \frac{\text{N m}}{\text{kg K}} \cdot 293 \, \text{K
 M = \frac{V}{a} \;,
 \]</div>
 <p>with different regimes:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-263a26c0-2e2d-4a62-aa4c-faea3fa3e58c">
+<span class="eqno">(7)<a class="headerlink" href="#equation-263a26c0-2e2d-4a62-aa4c-faea3fa3e58c" title="Permalink to this equation">¶</a></span>\[\begin{align}
 M &amp;&lt; 1 : \text{ subsonic} \\
 M &amp;= 1 : \text{ sonic} \\
 M &amp;&gt; 1 : \text{ supersonic}
-\end{align}
-\end{split}\]</div>
+\end{align}\]</div>
 </div>
 </div>
 <div class="section" id="equations-for-perfect-gases">
@@ -469,14 +448,12 @@ to ideal/perfect gases.</p>
 \dot{m} = p A M \sqrt{\frac{\gamma}{RT}} = \text{constant}
 \]</div>
 <p>Stagnation relationships:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5f964c41-7054-432a-9001-2e105fdb1bb0">
+<span class="eqno">(8)<a class="headerlink" href="#equation-5f964c41-7054-432a-9001-2e105fdb1bb0" title="Permalink to this equation">¶</a></span>\[\begin{align}
 h_t &amp;= h \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
 T_t &amp;= T \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
 p_t &amp;= p \left( 1 + \frac{\gamma - 1}{2} M^2 \right)^{\frac{\gamma}{\gamma - 1}} \;,
-\end{align}
-\end{split}\]</div>
+\end{align}\]</div>
 <p>where the subscript <span class="math notranslate nohighlight">\(t\)</span> indicates the stagnation or “total” property.</p>
 <p>Stagnation-pressure energy equation:</p>
 <div class="math notranslate nohighlight">

@@ -370,10 +370,8 @@ and time <span class="math notranslate nohighlight">\(t + \Delta t\)</span> will
 <p>We can write the overall change in <em>N</em> with time as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\frac{dN}{dt} &amp;\equiv \lim_{\Delta t \to 0} \frac{ (\text{final value of } N)_{t+\Delta t} - (\text{initial value of } N)_t }{\Delta t} \\
-&amp;= \lim_{\Delta t \to 0} \frac{ (N_2 + N_3)_{t+\Delta t} - (N_1 + N_2)_t}{\Delta t} \;,
-\end{align}
+\frac{dN}{dt} \equiv \lim_{\Delta t \to 0} \frac{ (\text{final value of } N)_{t+\Delta t} - (\text{initial value of } N)_t }{\Delta t} \\
+\frac{dN}{dt} = \lim_{\Delta t \to 0} \frac{ (N_2 + N_3)_{t+\Delta t} - (N_1 + N_2)_t}{\Delta t} \;,
 \end{split}\]</div>
 <p>where 1+2 represents the original volume and 2+3 represents the new region, and 2 represents the overlap between the two spaces.</p>
 <p>Let’s focus on each of the terms present in that total derivative.</p>
@@ -405,14 +403,12 @@ So, then</p>
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{n}^{\prime} = -\hat{n}\)</span> is the unit normal vector pointing into the region.</p>
 <p>Finally, the remaining terms are</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-\lim_{\Delta t \to 0} \frac{ N_2 (t+\Delta t) - N_2 (t) }{\Delta t} &amp;= \frac{\partial N_2}{\partial t} \\
-&amp;= \frac{\partial N_{cv}}{\partial t} \\
-&amp;= \frac{\partial}{\partial t} \int_{cv} \rho \eta \, d\tilde{v} \;,
-\end{align}
-\end{split}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-69a4b0a0-1a2a-40ce-ab48-4a9352df8969">
+<span class="eqno">(1)<a class="headerlink" href="#equation-69a4b0a0-1a2a-40ce-ab48-4a9352df8969" title="Permalink to this equation">¶</a></span>\[\begin{align}
+  \lim_{\Delta t \to 0} \frac{ N_2 (t+\Delta t) - N_2 (t) }{\Delta t} &amp;= \frac{\partial N_2}{\partial t}&amp; \\
+  &amp;= \frac{\partial N_{cv}}{\partial t}&amp; \\
+  &amp;= \frac{\partial}{\partial t} \int_{cv} \rho \eta \, d\tilde{v} \;,&amp;
+\end{align}\]</div>
 <p>because <span class="math notranslate nohighlight">\(N_2 \to N_{cv}\)</span> as <span class="math notranslate nohighlight">\(\Delta t \to 0\)</span>.</p>
 </div>
 <div class="section" id="reynolds-transport-theorem">
@@ -466,10 +462,8 @@ this simplifies to</p>
 <p>Alternately, we can express conservation of mass by differentiating this expression:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{gather*}
 d (\rho A V) = 0 = A V \, d\rho + \rho V \, dA + \rho A \, dV \\
 \frac{d \rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0 \,
-\end{gather*}
 \end{split}\]</div>
 <p>which is a useful expression for flow through a duct, channel, or streamline.
 Also, it shows us that if <span class="math notranslate nohighlight">\(dA = 0\)</span> (i.e., the area is constant), then
@@ -480,10 +474,8 @@ increasing flow velocity means decreasing flow density, and vice versa.</p>
 <p>For a control mass, conservation of energy (i.e., the first law of thermodynamics) says</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-Q &amp;= W + \Delta E \\
-\frac{\delta Q}{dt} &amp;= \frac{\delta W}{dt} + \frac{dE}{dt}
-\end{align}
+Q = W + \Delta E \\
+\frac{\delta Q}{dt} = \frac{\delta W}{dt} + \frac{dE}{dt}
 \end{split}\]</div>
 <p>where the first two terms are the instantaneous rates of heat and work transfer
 between the system and its surroundings, and <span class="math notranslate nohighlight">\(\frac{dE}{dt}\)</span> is the total derivative
@@ -491,10 +483,8 @@ of energy. In this case, <span class="math notranslate nohighlight">\(N = E\)</s
 so applying Reynolds transport theorem <a class="reference internal" href="#equation-eq-reynolds">(2)</a> gives:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\frac{dE}{dt} &amp;= \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA \\
-\rightarrow \frac{\delta Q}{dt} &amp;= \frac{\delta W}{dt} + \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA
-\end{align}
+\frac{dE}{dt} = \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA \\
+\rightarrow \frac{\delta Q}{dt} = \frac{\delta W}{dt} + \frac{\partial}{\partial t} \int_{CV} e \rho \, d\tilde{v} + \int_{CS} e \rho (\vec{V} \cdot \hat{n}) \, dA
 \end{split}\]</div>
 <p>For one-dimensional flow, we can simplify the integral over the control surface
 to consider just the inlets and outlets separately:</p>
@@ -553,10 +543,8 @@ q = w_s + \left( e + p v \right)_{\text{out}} - \left( e + p v \right)_{\text{in
 conservation of energy simplifies down to the usual</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{gather*}
 q = w_s + \left( e_2 + p_2 v_2 \right) - \left( e_1 + p_1 v_1 \right) \\
 h_1 + \frac{V_1^2}{2} + g z_1 + q = h_2 + \frac{V_2^2}{2} + g z_2 + w_s
-\end{gather*}
 \end{split}\]</div>
 </div>
 <div class="section" id="entropy">
@@ -584,11 +572,9 @@ Then, <span class="math notranslate nohighlight">\(dS_i \geq 0\)</span>, and thi
 But,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\oint dS_i &amp;\geq 0 \\
-0 &amp;= \oint dS_e + (\geq 0) \\
-\therefore \oint \frac{\delta Q}{T} &amp;\leq 0 \\
-\end{align}
+\oint dS_i \geq 0 \\
+0 = \oint dS_e + (\geq 0) \\
+\therefore \oint \frac{\delta Q}{T} \leq 0 \\
 \end{split}\]</div>
 <p>which is the <strong>inequality of Clausius</strong>.</p>
 </div>
@@ -598,19 +584,15 @@ But,</p>
 into conservation of energy, taking advantage of this approach to considering entropy:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-T \, ds &amp;= dh - v \, dp \\
-T \, ds_e + T \, ds_i &amp;= dh - \frac{dp}{\rho} \\
-dh &amp;= T \, ds_e + T \, ds_i + \frac{dp}{\rho}
-\end{align}
+T \, ds = dh - v \, dp \\
+T \, ds_e + T \, ds_i = dh - \frac{dp}{\rho} \\
+dh = T \, ds_e + T \, ds_i + \frac{dp}{\rho}
 \end{split}\]</div>
 <p>Incorporate this into the energy equation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{gather*}
 \delta q = \delta w_s + \left( T \, ds_e + T \, ds_i + \frac{dp}{\rho} \right) + \frac{dV^2}{2} + g \, dz \\
 \frac{dp}{\rho} + \frac{dV^2}{2} + g \, dz + \delta w_s + T \, ds_i = 0 \;,
-\end{gather*}
 \end{split}\]</div>
 <p>which is the <strong>pressure-energy equation</strong>.</p>
 <div class="admonition note">
@@ -644,20 +626,16 @@ dh &amp;= T \, ds_e + T \, ds_i + \frac{dp}{\rho}
 <p>and for steady, one-dimensional flow, we can write conservation of momentum as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\sum \vec{F} &amp;= \sum \dot{m} \vec{V} \\
-\sum \vec{F} &amp;= \dot{m} \left( \vec{V}_{\text{out}} - \vec{V}_{\text{in}} \right)
-\end{align}
+\sum \vec{F} = \sum \dot{m} \vec{V} \\
+\sum \vec{F} = \dot{m} \left( \vec{V}_{\text{out}} - \vec{V}_{\text{in}} \right) \;,
 \end{split}\]</div>
 <p>where the latter form applies if we have one inlet and one outlet.</p>
 <p>For example, consider flow through a duct, which includes friction at the wall.
 We can focus on the <span class="math notranslate nohighlight">\(x\)</span>-component of the momentum equation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\sum F_x &amp;= \dot{m} \left( V_{\text{out}, x} - V_{\text{in}, x} \right) \\
-\rightarrow p_1 A_1 - p_2 A_2 - F_f &amp;= \dot{m} (V_2 - V_1)
-\end{align}
+\sum F_x = \dot{m} \left( V_{\text{out}, x} - V_{\text{in}, x} \right) \\
+\rightarrow p_1 A_1 - p_2 A_2 - F_f = \dot{m} (V_2 - V_1) \;.
 \end{split}\]</div>
 </div>
 </div>

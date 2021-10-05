@@ -426,10 +426,8 @@ equilibrium with a third system C, then systems A and C are in thermal equilibri
 So, for a process of a closed system:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-Q &amp;= W + \Delta E \\
-q &amp;= w + \Delta e \;,
-\end{align}
+Q = W + \Delta E \\
+q = w + \Delta e \;,
 \end{split}\]</div>
 <p>where <em>E</em> is total energy and <em>e</em> is the total energy per unit mass, defined as</p>
 <div class="math notranslate nohighlight">
@@ -460,10 +458,8 @@ dh = du + d(pv) = du + p dv + v dp
 <p>Internal energy and enthalpy also lead to the definitions of the specific heats:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-c_p &amp;\equiv \left( \frac{\partial h}{\partial T} \right)_p \\
-c_v &amp;\equiv \left( \frac{\partial u}{\partial T} \right)_v
-\end{align}
+c_p \equiv \left( \frac{\partial h}{\partial T} \right)_p \\
+c_v \equiv \left( \frac{\partial u}{\partial T} \right)_v \;.
 \end{split}\]</div>
 </div>
 </div>
@@ -482,10 +478,8 @@ In other words, phenomena encountered in most realistic applications!</p>
 If the change in some system quantity is independent of path, that means that this represents a change in a system <em>property</em>. Thus,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\Delta S &amp;\equiv \int \frac{\delta Q_R}{T} \\
-ds &amp;\equiv \frac{\delta q_R}{T}
-\end{align}
+\Delta S \equiv \int \frac{\delta Q_R}{T} \\
+ds \equiv \frac{\delta q_R}{T} \;,
 \end{split}\]</div>
 <p>where the subscript <em>R</em> means that the heat transfer must be reversible, and <em>S</em> / <em>s</em> represents the property of <strong>entropy</strong>.
 We can use an exact differential with entropy (<em>ds</em>) because entropy is a system property, and changes in entropy depend only on the state of the system.</p>
@@ -496,20 +490,16 @@ We can use an exact differential with entropy (<em>ds</em>) because entropy is a
 <p>Assuming a reversible process involving pressure-volume work, we can combine:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\delta q &amp;= \delta w + du \\
-\delta w &amp;= p dv \\
-\delta q &amp;= T ds \\
-\rightarrow T ds &amp;= du + p dv
-\end{align}
+\delta q = \delta w + du \\
+\delta w = p dv \\
+\delta q = T ds \\
+\rightarrow T ds = du + p dv \;.
 \end{split}\]</div>
 <p>Similarly, we can take the differential of enthalpy and do a similar combination:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-dh &amp;= du + p dv + v dp \\
-\rightarrow T ds &amp;= dh - v dp = dh - \frac{dp}{\rho}
-\end{align}
+dh = du + p dv + v dp \\
+\rightarrow T ds = dh - v dp = dh - \frac{dp}{\rho} \;.
 \end{split}\]</div>
 <p>These thermodynamic relationships come from Gibbs identities.</p>
 <p><strong>Important</strong>: we assumed we were dealing with a reversible process (involving pressure-volume work) to get these expressions.
@@ -547,11 +537,9 @@ then we have that <span class="math notranslate nohighlight">\(u = c_v T\)</span
 <p>We also have relationships between the specific heats and the gas constant:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-c_p - c_v &amp;= R \\
-c_p &amp;= \frac{\gamma}{\gamma - 1} R \\
-c_v &amp;= \frac{R}{\gamma - 1}
-\end{align}
+c_p - c_v = R \\
+c_p = \frac{\gamma}{\gamma - 1} R \\
+c_v = \frac{R}{\gamma - 1} \;.
 \end{split}\]</div>
 <div class="section" id="entropy-changes">
 <h3>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">¶</a></h3>
@@ -559,23 +547,19 @@ c_v &amp;= \frac{R}{\gamma - 1}
 we can get explicit equations for entropy change between two points in a process:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-T ds &amp;= du + p dv \\
-T ds &amp;= c_v dT + p dv \\
-ds &amp;= c_v \frac{dT}{T} + \frac{p dv}{T}
-\end{align}
+T ds = du + p dv \\
+T ds = c_v dT + p dv \\
+ds = c_v \frac{dT}{T} + \frac{p dv}{T} \;.
 \end{split}\]</div>
 <p>Then, use the ideal gas equation of state:</p>
 <div class="math notranslate nohighlight">
 \[
-p = \rho R T \rightarrow p v = R T \rightarrow \frac{p}{T} = \frac{R}{v}
+p = \rho R T \rightarrow p v = R T \rightarrow \frac{p}{T} = \frac{R}{v} \;.
 \]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
-\Delta s_{1-2} &amp;= \int_{T_1}^{T_2} c_v (T) \frac{dT}{T} + R \int_{v_1}^{v_2} \frac{dv}{v}
-\end{align}
+ds = c_v \frac{dT}{T} + R \frac{dv}{v} \\
+\Delta s_{1-2} = \int_{T_1}^{T_2} c_v (T) \frac{dT}{T} + R \int_{v_1}^{v_2} \frac{dv}{v} \;.
 \end{split}\]</div>
 <p>Then, if we assume that specific heat is constant, <span class="math notranslate nohighlight">\(c_v(T) = c_v\)</span>, we can simplify further:</p>
 <div class="math notranslate nohighlight">
@@ -585,10 +569,8 @@ ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
 <p>Similarly, we can take that expression and obtain</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-\Delta s_{1-2} &amp;= c_p \ln \frac{v_2}{v_1} + c_v \ln \frac{p_2}{p_1} \\
-\Delta s_{1-2} &amp;= c_p \ln \frac{T_2}{T_1} - R \ln \frac{p_2}{p_1}
-\end{align}
+\Delta s_{1-2} = c_p \ln \frac{v_2}{v_1} + c_v \ln \frac{p_2}{p_1} \\
+\Delta s_{1-2} = c_p \ln \frac{T_2}{T_1} - R \ln \frac{p_2}{p_1}
 \end{split}\]</div>
 <p>We can write functions to calculate the entropy change given initial and final values of temperature, volume, and pressure:</p>
 <div class="cell docutils container">
@@ -627,14 +609,14 @@ ds &amp;= c_v \frac{dT}{T} + R \frac{dv}{v} \\
 <p>Polytropic processes follow the relation</p>
 <div class="math notranslate nohighlight">
 \[
-p v^n = \text{const} = C_1 ,
+p v^n = \text{const} = C_1 \;,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the polytropic constant that depends on the specific process. With the ideal gas equation of state, we can also get relations with temperature:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-586f5ead-1738-4984-a837-ad0a056c9abf">
-<span class="eqno">(1)<a class="headerlink" href="#equation-586f5ead-1738-4984-a837-ad0a056c9abf" title="Permalink to this equation">¶</a></span>\[\begin{align}
-T v^{n-1} &amp; = C_2 \\
-T p^{\frac{1-n}{n}} &amp; = C_3
-\end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T v^{n-1} = C_2 \\
+T p^{\frac{1-n}{n}} = C_3 \;,
+\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(C_1\)</span>, <span class="math notranslate nohighlight">\(C_2\)</span>, and <span class="math notranslate nohighlight">\(C_3\)</span> are different constants.</p>
 <p>Different values of <span class="math notranslate nohighlight">\(n\)</span> correspond to different (polytropic) processes:</p>
 <ul class="simple">

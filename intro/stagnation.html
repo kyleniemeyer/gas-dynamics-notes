@@ -287,15 +287,13 @@ there are no losses (<span class="math notranslate nohighlight">\(dS_i = 0\)</sp
 <p>We can apply the energy equation from any point in the flow <em>a</em> to the stagnation reference point <em>b</em>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-h_a + \frac{V_a^2}{2} + g z_a + q &amp;= h_b + \frac{V_b^2}{2} + g z_b + w_s \\
-\rightarrow h_b &amp;= h_a + \frac{V_a^2}{2} + g z_a
-\end{align}
+h_a + \frac{V_a^2}{2} + g z_a + q = h_b + \frac{V_b^2}{2} + g z_b + w_s \\
+\rightarrow h_b = h_a + \frac{V_a^2}{2} + g z_a
 \end{split}\]</div>
 <p>and thus we can define the <strong>stagnation enthlapy</strong>, or <strong>total enthalpy</strong>, as</p>
 <div class="math notranslate nohighlight">
 \[
-h_t = h + \frac{V^2}{2} + g z
+h_t = h + \frac{V^2}{2} + g z \;.
 \]</div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -319,24 +317,20 @@ h_{t1} + q = h_{t2} + w_s \;,
 Applying our property relationship to the stagnation state:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-T \, ds &amp;= dh - v \, dp \\
-\rightarrow T_t \, ds_t &amp;= d h_t - v_t \, d p_t
-\end{align}
+T \, ds = dh - v \, dp \\
+\rightarrow T_t \, ds_t = d h_t - v_t \, d p_t \;,
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d s_t = ds = ds_e + ds_i\)</span>, since the stagnation process is isentropic.
 We can combine this with the (stagnation) energy equation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{gather*}
 T_t \left( ds_e + ds_i \right) = dh_t - v_t \, dp_t \\
 \delta q = \delta w_s + d h_t \\
 \delta q = \delta w_s + T_t \left( ds_e + ds_i \right) + v_t \, dp_t \\
 \rightarrow \frac{dp_t}{\rho_t} + ds_e (T_t - T) + T_t \, ds_i + \delta w_s = 0 \;,
-\end{gather*}
 \end{split}\]</div>
-<p>which is the <strong>stagnation pressure-energy equation</strong>.
-This looks complicated, but tells us something useful.
+<p>which is the <strong>stagnation pressure-energy equation</strong>.</p>
+<p>This looks complicated, but tells us something useful.
 If we consider a process with no shaft work (<span class="math notranslate nohighlight">\(\delta w_s = 0\)</span>),
 no heat transfer (<span class="math notranslate nohighlight">\(\delta q = 0\)</span>), and no losses (<span class="math notranslate nohighlight">\(ds_i = 0\)</span>),
 then</p>
