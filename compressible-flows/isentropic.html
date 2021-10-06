@@ -322,26 +322,144 @@ we will cover briefly later.)</p>
 </ul>
 <p>As a result of the flow being adiabatic and reversible, it is also isentropic: <span class="math notranslate nohighlight">\(ds = 0\)</span>.</p>
 <p>Our goal is now to see how changes in pressure, density, and velocity relate with changing area.</p>
-<p>Starting with the energy equation, apply our conditions:
-$<span class="math notranslate nohighlight">\(
+<p>Starting with the energy equation, apply our conditions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \delta q = \delta w_s + dh + \frac{dV^2}{2} + g dz \\
 dh = -V dV
-\)</span>$</p>
-<p>We also have our thermodynamic relationships derived from Gibbs’ identities:
-$<span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>We also have our thermodynamic relationships derived from Gibbs’ identities:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 T ds = dh - \frac{dp}{\rho} \\
 dh = \frac{dp}{\rho}
-\)</span>$</p>
-<p>Combined together, we have
-$<span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>Combined together, we have</p>
+<div class="math notranslate nohighlight">
+\[
 dV = - \frac{dp}{\rho V} \;.
-\)</span>$</p>
+\]</div>
+<p>Substituting this, and the speed of sound (<span class="math notranslate nohighlight">\( dp = a^2 d\rho \)</span>)
+into the continuity equation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+0 &amp;= \frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dA}{A} \\
+\frac{dp}{\rho} &amp;= V^2 \left( \frac{d\rho}{\rho} + \frac{dA}{A} \right) \\
+\frac{d\rho}{\rho} &amp;= M^2 \left( \frac{d\rho}{\rho} + \frac{dA}{A} \right)
+\end{align*}\]</div>
+<p>we obtain a relationship between area change and density change:</p>
+<div class="math notranslate nohighlight" id="equation-eq-density">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-density" title="Permalink to this equation">¶</a></span>\[
+\frac{d\rho}{\rho} = \left( \frac{M^2}{1-M^2} \right) \frac{dA}{A} \;.
+\]</div>
+<p>Substituting this back into the continuity equation, we obtain a relationship between area change and velocity change:</p>
+<div class="math notranslate nohighlight" id="equation-eq-velocity">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-velocity" title="Permalink to this equation">¶</a></span>\[
+\frac{dV}{V} = -\left( \frac{1}{1-M^2} \right) \frac{dA}{A} \;.
+\]</div>
+<p>And, finally, recalling that <span class="math notranslate nohighlight">\( dV = -dp/\rho V \)</span>, we substitute that into Equation <a class="reference internal" href="#equation-eq-velocity">(10)</a> to get a relationsihp between area change and pressure change:</p>
+<div class="math notranslate nohighlight" id="equation-eq-pressure">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-pressure" title="Permalink to this equation">¶</a></span>\[
+dp = \rho V^2 \left( \frac{1}{1-M^2} \right) \frac{dA}{A} \;.
+\]</div>
+<p>If we focus on situations where the pressure is decreasing (<span class="math notranslate nohighlight">\( dp &lt; 0 \)</span>), going from a high-pressure reservoir to a low-pressure receiver, we can examine how changes in the other properties must occur.</p>
+<p>Examining Equation <a class="reference internal" href="#equation-eq-pressure">(11)</a>, we see that <span class="math notranslate nohighlight">\( dp &lt; 0 \)</span> results in either a positive or negative area change for the subsonic and supersonic regimes:</p>
+<div class="math notranslate nohighlight">
+\[
+(-) = \frac{1}{1-M^2} \frac{dA}{A} \;,
+\]</div>
+<p>so if <span class="math notranslate nohighlight">\( M &lt; 1 \)</span> then <span class="math notranslate nohighlight">\( dA &lt; 0 \)</span>, and if <span class="math notranslate nohighlight">\( M &gt; 1 \)</span> then <span class="math notranslate nohighlight">\( dA &gt; 0 \)</span>.
+Using Equations <a class="reference internal" href="#equation-eq-density">(9)</a> and <a class="reference internal" href="#equation-eq-velocity">(10)</a> we can see how changes in density and velocity occur in the different regimes as well:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+M &lt; 1: \quad \frac{d\rho}{\rho} = (+)(-) \rightarrow d\rho &lt; 0 \\
+M &gt; 1: \quad \frac{d\rho}{\rho} = (-)(+) \rightarrow d\rho &lt; 0
+\end{gather*}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+M &lt; 1: \quad \frac{dV}{V} = -(+)(-) \rightarrow dV &gt; 0 \\
+M &gt; 1: \quad \frac{dV}{V} = -(-)(+) \rightarrow dV &gt; 0
+\end{gather*}\]</div>
+<p>In summary, for decreasing pressure (<span class="math notranslate nohighlight">\( dp &lt; 0 \)</span>), we have:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>property</p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\( M &lt; 1 \)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\( M &gt; 1 \)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\( A \)</span></p></td>
+<td class="text-align:center"><p>↓</p></td>
+<td class="text-align:center"><p>↑</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><span class="math notranslate nohighlight">\( \rho \)</span></p></td>
+<td class="text-align:center"><p>↓</p></td>
+<td class="text-align:center"><p>↓</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\( V \)</span></p></td>
+<td class="text-align:center"><p>↑</p></td>
+<td class="text-align:center"><p>↑</p></td>
+</tr>
+</tbody>
+</table>
+<p>This particular example shows how properties change in a <strong>nozzle</strong>, which converts pressure/enthalpy to kinetic energy. We can see that a subsonic nozzle has a converging shape (i.e., has a decreasing area) while a supersonic nozzle is diverging (with an increasing area).</p>
+<p>In contrast, a <strong>diffuser</strong> converts kinetic energy into enthalpy/pressure, and is associated with increasing pressure (<span class="math notranslate nohighlight">\( dp &gt; 0 \)</span>). A subsonic diffuser is diverging, while a supersonic diffuser is converging.</p>
+<p>For propulsion applications, when we need to accelerate a gas from low speed to supersonic speeds, we will need a <strong>converging-diverging nozzle</strong>. This will be the focus of deeper analysis later.</p>
 </div>
 <div class="section" id="equations-for-perfect-gases">
 <h2>Equations for perfect gases<a class="headerlink" href="#equations-for-perfect-gases" title="Permalink to this headline">¶</a></h2>
+<p>Using our governing equations, we can generate working equations that apply to more-general flows of perfect/ideal gases, where losses (i.e., irreversibilities) may be present.</p>
+<p>The flow assumptions are:</p>
+<ul class="simple">
+<li><p>steady, one-dimensional flow</p></li>
+<li><p>adiabatic</p></li>
+<li><p>no shaft work</p></li>
+<li><p>perfect/ideal gas</p></li>
+<li><p>no, or negligible, potential energy changes</p></li>
+</ul>
+<p>Our goal is to find relations between properties at two points in the flow that are only a function of the gas, Mach numbers at both locations, and entropy change between the two locations: <span class="math notranslate nohighlight">\( f \left( M_1, M_2, \gamma, \delta s \right) \)</span>.</p>
+<p>Start with the continuity equation applied to a control volume, with flow entering at location 1 and leaving at location 2:</p>
+<div class="math notranslate nohighlight" id="equation-eq-continuity-area-ratio">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-continuity-area-ratio" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{gather*}
+\rho_1 A_1 V_1 = \rho_2 A_2 V_2 \\
+\frac{A_2}{A_1} = \frac{\rho_1 V_1}{\rho_2 V_2} = \frac{p_1}{p_2} \frac{M_1}{M_2} \left( \frac{T_2}{T_1} \right)^{1/2} \;,
+\end{gather*}
+\end{split}\]</div>
+<p>where we got the final relation by using the ideal gas law (<span class="math notranslate nohighlight">\( p = \rho R T \)</span>), Mach number definition (<span class="math notranslate nohighlight">\( V = M a \)</span>), and speed of sound expression in an ideal gas (<span class="math notranslate nohighlight">\( a^2 = \gamma R T \)</span>).</p>
+<p>We can simplify this expression even further by finding ways to express the pressure and temperature ratios as functions of the Mach numbers and gas properties.</p>
+<p>For the temperature ratio, we can use conservation of energy and our expression for stagnation temperature:</p>
 <div class="math notranslate nohighlight">
-\[
-\frac{A_2}{A_1} = \frac{M_1}{M_2} \left[ \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right]^{\frac{\gamma+1}{2(\gamma-1)}} e^{\Delta s/R}
+\[\begin{split}
+\begin{gather*}
+h_{t1} + q = h_{t2} + w_s \\
+\rightarrow T_{t1} = T_{t2} \\
+T_t = T \left(1 + \frac{\gamma - 1}{2} M^2 \right) \\
+\end{gather*}
+\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-temperature-ratio">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-temperature-ratio" title="Permalink to this equation">¶</a></span>\[
+\therefore \frac{T_2}{T_1} = \frac{1 + \frac{\gamma-1}{2} M_1^2}{1 + \frac{\gamma-1}{2} M_2^2}
+\]</div>
+<p>For pressure, recall our relationship for the ratio of stagnation pressures between two locations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\frac{p_{t2}}{p_{t1}} = e^{-\Delta s / R} \\
+p_t = p \left(1 + \frac{\gamma - 1}{2} M^2 \right)^{\gamma / (\gamma-1)} \\
+\frac{p_{t2}}{p_{t1}} = \frac{p_2}{p_1} \left[ \frac{1 + \frac{\gamma - 1}{2} M_2^2}{1 + \frac{\gamma - 1}{2} M_1^2} \right]^{\gamma / (\gamma-1)} = e^{-\Delta s / R}
+\end{gather*}
+\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-ratio">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-pressure-ratio" title="Permalink to this equation">¶</a></span>\[
+\therefore \frac{p_1}{p_2} = \left[ \frac{1 + \frac{\gamma - 1}{2} M_2^2}{1 + \frac{\gamma - 1}{2} M_1^2} \right]^{\gamma / (\gamma-1)} e^{\Delta s / R} \;.
+\]</div>
+<p>Putting the expressions for <span class="math notranslate nohighlight">\( \frac{p_1}{p_2} \)</span> and <span class="math notranslate nohighlight">\( \frac{T_2}{T_1} \)</span> back into Equation <a class="reference internal" href="#equation-eq-continuity-area-ratio">(12)</a>, we can obtain a final expression for the area ratio between two locations as a function of the Mach numbers at the locations, the specific heat ratio of the gas, and any entropy increase between the locations:</p>
+<div class="math notranslate nohighlight" id="equation-eq-area-ratio-loss">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-area-ratio-loss" title="Permalink to this equation">¶</a></span>\[
+\frac{A_2}{A_1} = \frac{M_1}{M_2} \left[ \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right]^{\frac{\gamma+1}{2(\gamma-1)}} e^{\Delta s/R} \;.
 \]</div>
 <div class="section" id="example-isentropic-flow">
 <h3>Example: isentropic flow<a class="headerlink" href="#example-isentropic-flow" title="Permalink to this headline">¶</a></h3>
