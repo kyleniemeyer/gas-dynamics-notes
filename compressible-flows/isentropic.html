@@ -263,11 +263,38 @@
   <a class="reference internal nav-link" href="#equations-for-perfect-gases">
    Equations for perfect gases
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sonic-reference-state">
+   Sonic reference state
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#isentropic-tables">
+   Isentropic tables
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-isentropic-flow">
      Example: isentropic flow
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-1-using-tables">
+       Option 1: using tables
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-2-solving-the-equation">
+       Option 2: solving the equation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-3-solving-the-full-equation">
+       Option 3: solving the full equation
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -461,6 +488,50 @@ p_t = p \left(1 + \frac{\gamma - 1}{2} M^2 \right)^{\gamma / (\gamma-1)} \\
 <span class="eqno">(15)<a class="headerlink" href="#equation-eq-area-ratio-loss" title="Permalink to this equation">¶</a></span>\[
 \frac{A_2}{A_1} = \frac{M_1}{M_2} \left[ \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right]^{\frac{\gamma+1}{2(\gamma-1)}} e^{\Delta s/R} \;.
 \]</div>
+<p>Combining Equation <a class="reference internal" href="#equation-eq-area-ratio-loss">(15)</a> with <a class="reference internal" href="#equation-eq-pressure-ratio">(14)</a> and <a class="reference internal" href="#equation-eq-temperature-ratio">(13)</a>, along with the stagnation relationships</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+T_{t2} = T_{t1} \\
+\frac{p_{t2}}{p_{t1}} = e^{-\Delta s / R} \;,
+\end{gather*}
+\end{split}\]</div>
+<p>we have relationships between properties at two locations in any steady, one-dimensional flow with varying area, as long as there is no heat transfer or shaft work. We could also combine Equations <a class="reference internal" href="#equation-eq-pressure-ratio">(14)</a> and <a class="reference internal" href="#equation-eq-temperature-ratio">(13)</a> with the ideal gas law to get a density ratio:</p>
+<div class="math notranslate nohighlight" id="equation-eq-density-ratio">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-density-ratio" title="Permalink to this equation">¶</a></span>\[
+\frac{\rho_2}{\rho_1} = \left[ \frac{1 + \frac{\gamma - 1}{2} M_1^2}{1 + \frac{\gamma - 1}{2} M_2^2} \right]^{1 /(\gamma-1)} e^{-\Delta s / R} \;.
+\]</div>
+</div>
+<div class="section" id="sonic-reference-state">
+<h2>Sonic reference state<a class="headerlink" href="#sonic-reference-state" title="Permalink to this headline">¶</a></h2>
+<p>If we know the Mach numbers at two locations, it is pretty easy to find the associated ratios of area, temperature, pressure, and/or density using Equations <a class="reference internal" href="#equation-eq-temperature-ratio">(13)</a> through <a class="reference internal" href="#equation-eq-density-ratio">(16)</a>.</p>
+<p>However, if we instead know the area ratio or the properties at the two locations, plus one Mach number, and want to find the unknown Mach number, these equations are a bit tougher to solve. We <em>can</em> solve them directly using numerical methods, as you will see in a bit, but we can also take advantage of a helpful concept to ease the calculations.</p>
+<p>Similar to the stagnation reference state, or the state associated with decelerating a fluid flow to rest and zero potential, isentropically, we can introduce the <strong>sonic reference state</strong>, indicated using a * superscript. This is the state associated with either decelerating or accelerating a fluid to sonic velocity (i.e., Mach = 1.0) by some process; currently, that will be through isentropic area change.</p>
+<p>This reference state may not physically exist in the system, but <em>could</em> through appropriate area change. As a result, they are legitimate locations
+in a flow system, and so we can use all of our developed equations to consider flow from a real location to this reference location.</p>
+<p>In particular, we can write Equation <a class="reference internal" href="#equation-eq-area-ratio-loss">(15)</a> between the reference locations associated with two real locations: <span class="math notranslate nohighlight">\( A_1 \)</span> and <span class="math notranslate nohighlight">\( A_1^* \)</span>,
+then <span class="math notranslate nohighlight">\( A_2 \)</span> and <span class="math notranslate nohighlight">\( A_2^* \)</span>. By definition, the Mach numbers are 1 at the two reference states. So, the area ratio equation becomes:</p>
+<div class="math notranslate nohighlight" id="equation-eq-reference-area-ratio">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-reference-area-ratio" title="Permalink to this equation">¶</a></span>\[
+\frac{A_2^*}{A_1^*} = e^{\Delta s / R} \;.
+\]</div>
+<p>This equation expresses how the area associated with reference state changes in a flow system in the presence of losses;
+for isentropic flow, the reference area <span class="math notranslate nohighlight">\( A^* \)</span> remains constant.</p>
+<p>Recall our relationship for the stagnation pressure ratio between two locations:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{p_{t2}}{p_{t1}} = e^{-\Delta s / R} \;.
+\]</div>
+<p>If we take the product of these two equations, we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-area-product">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-pressure-area-product" title="Permalink to this equation">¶</a></span>\[
+p_{t1} A_1^* = p_{t2} A_2^* \;,
+\]</div>
+<p>which gives us a quantity that is conserved in any adiabatic flow.</p>
+</div>
+<div class="section" id="isentropic-tables">
+<h2>Isentropic tables<a class="headerlink" href="#isentropic-tables" title="Permalink to this headline">¶</a></h2>
+<p>(more to come)</p>
 <div class="section" id="example-isentropic-flow">
 <h3>Example: isentropic flow<a class="headerlink" href="#example-isentropic-flow" title="Permalink to this headline">¶</a></h3>
 <p><strong>Problem:</strong> Air flows isentropically through a duct (<span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>) where the area is changing from point 1 to 2,
@@ -517,7 +588,9 @@ and <span class="math notranslate nohighlight">\(\frac{A_1^*}{A_2^*} = 1\)</span
 </div>
 <p>We can then find <span class="math notranslate nohighlight">\(M_2\)</span>, because <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2)\)</span>.
 Our options are to use the <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span> tables and interpolate, or solve the associated equation numerically.</p>
-<p><strong>Using tables:</strong> We can find in the tables that:</p>
+<div class="section" id="option-1-using-tables">
+<h4>Option 1: using tables<a class="headerlink" href="#option-1-using-tables" title="Permalink to this headline">¶</a></h4>
+<p>We can find in the tables that:</p>
 <ul class="simple">
 <li><p>at <span class="math notranslate nohighlight">\(M=0.17\)</span>, <span class="math notranslate nohighlight">\(A/A^* = 3.46351\)</span></p></li>
 <li><p>at <span class="math notranslate nohighlight">\(M = 0.18\)</span>, <span class="math notranslate nohighlight">\(A/A^* = 3.27793\)</span></p></li>
@@ -558,7 +631,10 @@ Our options are to use the <span class="math notranslate nohighlight">\(\gamma =
 <p>Note that we have to reverse the order of the values, since <code class="docutils literal notranslate"><span class="pre">interp</span></code> expects the x-values to be increasing.
 Also, we could easily generate these values ourselves for a different value of <span class="math notranslate nohighlight">\(\gamma\)</span>, but it is likely
 easier to just solve the equation directly in that case</p>
-<p><strong>Using the equation:</strong> Alternately, we can solve the equation directly using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code>:</p>
+</div>
+<div class="section" id="option-2-solving-the-equation">
+<h4>Option 2: solving the equation<a class="headerlink" href="#option-2-solving-the-equation" title="Permalink to this headline">¶</a></h4>
+<p>Alternately, we can solve the <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2, \gamma)\)</span> equation directly using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">area_function</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">area_ratio</span><span class="p">):</span>
@@ -575,6 +651,34 @@ easier to just solve the equation directly in that case</p>
 </pre></div>
 </div>
 </div>
+</div>
+</div>
+<div class="section" id="option-3-solving-the-full-equation">
+<h4>Option 3: solving the full equation<a class="headerlink" href="#option-3-solving-the-full-equation" title="Permalink to this headline">¶</a></h4>
+<p>As a third option, we could actually bypass the ratio approach and just numerically solve the full Equation <a class="reference internal" href="#equation-eq-area-ratio-loss">(15)</a> directly, using the known <span class="math notranslate nohighlight">\( A_2/A_1 \)</span>, <span class="math notranslate nohighlight">\( M_1 \)</span>, <span class="math notranslate nohighlight">\( \gamma \)</span>, and <span class="math notranslate nohighlight">\( \Delta s = 0 \)</span>!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">full_area_function</span><span class="p">(</span><span class="n">mach2</span><span class="p">,</span> <span class="n">mach1</span><span class="p">,</span> <span class="n">area_ratio</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">delta_s</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mf">287.0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Function for full area ratio equation, solving for M2&#39;&#39;&#39;</span>
+    <span class="c1"># gamma, delta_s, and R have default values</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">area_ratio</span> <span class="o">-</span> <span class="p">(</span><span class="n">mach1</span> <span class="o">/</span> <span class="n">mach2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_s</span> <span class="o">/</span> <span class="n">R</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">full_area_function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">A2_A1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M2 = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M2 = 0.1760
+</pre></div>
+</div>
+</div>
+</div>
+<p>This approach is the most direct.</p>
 </div>
 </div>
 </div>
