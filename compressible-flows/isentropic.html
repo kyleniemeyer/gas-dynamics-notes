@@ -346,7 +346,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2070</span><span class="o">/</span><span class="mf">4051135225.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1787</span><span class="o">/</span><span class="mf">4051135225.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Necessary modules to solve problems</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -795,6 +795,19 @@ Similarly, the quantities <span class="math notranslate nohighlight">\(p/p_t\)</
             </tr>
     </tbody></table></div></div>
 </div>
+<p>With tabulated data like this, we can then solve problems by constructing an appropriate property ratio based on known information and looking up the corresponding Mach number.</p>
+<p>For example, given a gas (<span class="math notranslate nohighlight">\(\gamma\)</span>), the areas at two locations (<span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span>), and the Mach number at one location (<span class="math notranslate nohighlight">\(M_1\)</span>), we can find the Mach number at the second location (<span class="math notranslate nohighlight">\(M_2\)</span>) by constructing the reference area ratio:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{A_2}{A_2^*} = \frac{A_2}{A_1} \frac{A_1}{A_1^*} \frac{A_1^*}{A_2^*} \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\frac{A_2}{A_2^*} = f(M_2)\)</span>, <span class="math notranslate nohighlight">\(\frac{A_2}{A_1}\)</span> is known, <span class="math notranslate nohighlight">\(\frac{A_1}{A_1^*} = f(M_1)\)</span>, and <span class="math notranslate nohighlight">\(\frac{A_1^*}{A_2^*} = 1.0\)</span> for isentropic flow between the two sections.
+So, we can find <span class="math notranslate nohighlight">\(M_2\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a given area ratio <span class="math notranslate nohighlight">\(\frac{A}{A^*}\)</span>, there will always be <strong>two</strong> possible Mach numbers: a subsonic solution and a supersonic solution.</p>
+</div>
+<p>To determine which Mach number is the correct solution, you need to apply other knowledge and problem context. For example, if the initial Mach number is subsonic and the two sections are only connected by a diverging or converging area duct, then the second Mach number must also be subsonic.</p>
 </div>
 <div class="section" id="example-isentropic-flow-problem">
 <h2>Example: isentropic flow problem<a class="headerlink" href="#example-isentropic-flow-problem" title="Permalink to this headline">¶</a></h2>
@@ -902,7 +915,7 @@ easier to just solve the equation directly in that case</p>
 </div>
 <div class="section" id="option-2-solving-the-equation">
 <h3>Option 2: solving the equation<a class="headerlink" href="#option-2-solving-the-equation" title="Permalink to this headline">¶</a></h3>
-<p>Alternately, we can solve the <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2, \gamma)\)</span> equation directly using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code>:</p>
+<p>Alternately, we can solve the <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2, \gamma)\)</span> equation directly using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code>. We need to give the function initial guesses <code class="docutils literal notranslate"><span class="pre">x0</span></code> and <code class="docutils literal notranslate"><span class="pre">x1</span></code> that are subsonic, to ensure we get a subsonic solution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">area_function</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">area_ratio</span><span class="p">):</span>
@@ -924,6 +937,10 @@ easier to just solve the equation directly in that case</p>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure you check the output from root-finding functions, because they can converge on the wrong solution even with an appropriate initial guess. You might need to adjust the initial guess if you get a solution that is not consistent with the physics of the problem.</p>
 </div>
 </div>
 <div class="section" id="option-3-solving-the-full-equation">
