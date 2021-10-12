@@ -270,31 +270,51 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#isentropic-tables">
-   Isentropic tables
+  <a class="reference internal nav-link" href="#isentropic-relations">
+   Isentropic relations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-isentropic-flow-problem">
+   Example: isentropic flow problem
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-isentropic-flow">
-     Example: isentropic flow
+    <a class="reference internal nav-link" href="#option-1-using-tables">
+     Option 1: using tables
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#option-1-using-tables">
-       Option 1: using tables
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#option-2-solving-the-equation">
-       Option 2: solving the equation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#option-3-solving-the-full-equation">
-       Option 3: solving the full equation
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#option-2-solving-the-equation">
+     Option 2: solving the equation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#option-3-solving-the-full-equation">
+     Option 3: solving the full equation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-isentropic-flow-using-matlab">
+   Example: isentropic flow (using Matlab)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#option-1-using-the-tables">
+     Option 1: using the tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Option 2: solving the equation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Option 3: solving the full equation
+    </a>
    </li>
   </ul>
  </li>
@@ -315,10 +335,25 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Necessary modules to solve problems</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2070</span><span class="o">/</span><span class="mf">4051135225.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Necessary modules to solve problems</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
@@ -529,11 +564,240 @@ p_{t1} A_1^* = p_{t2} A_2^* \;,
 \]</div>
 <p>which gives us a quantity that is conserved in any adiabatic flow.</p>
 </div>
-<div class="section" id="isentropic-tables">
-<h2>Isentropic tables<a class="headerlink" href="#isentropic-tables" title="Permalink to this headline">¶</a></h2>
-<p>(more to come)</p>
-<div class="section" id="example-isentropic-flow">
-<h3>Example: isentropic flow<a class="headerlink" href="#example-isentropic-flow" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="isentropic-relations">
+<h2>Isentropic relations<a class="headerlink" href="#isentropic-relations" title="Permalink to this headline">¶</a></h2>
+<p>For isentropic flows, where <span class="math notranslate nohighlight">\(\Delta s = 0\)</span>, Equation <a class="reference internal" href="#equation-eq-area-ratio-loss">(15)</a> reduces to</p>
+<div class="math notranslate nohighlight" id="equation-eq-area-ratio-isentropic">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-area-ratio-isentropic" title="Permalink to this equation">¶</a></span>\[
+\frac{A_2}{A_1} = \frac{M_1}{M_2} \left( \frac{1+\frac{\gamma-1}{2} M_2^2}{1+\frac{\gamma-1}{2} M_1^2} \right)^{\frac{\gamma+1}{2(\gamma-1)}} \;.
+\]</div>
+<p>If we have <span class="math notranslate nohighlight">\(M_1\)</span> and <span class="math notranslate nohighlight">\(M_2\)</span>, and know the ideal gas (and therefore <span class="math notranslate nohighlight">\(\gamma\)</span>) then finding the area ratio between two sections is straightforward using the equation.
+Working backwards takes slightly more effort, since the equation cannot simply be inverted.</p>
+<p>Instead, it either needs to be solved numerically using a root-finding algorithm, <em>or</em> we can take advantage of the * (sonic) reference state to provide an easy way to solve problems.</p>
+<p>Let’s apply Equation <a class="reference internal" href="#equation-eq-area-ratio-isentropic">(19)</a> between any point in the flow and its sonic reference state, such that <span class="math notranslate nohighlight">\(A_2 \rightarrow A\)</span> (so <span class="math notranslate nohighlight">\(M_2 \rightarrow M\)</span>) and <span class="math notranslate nohighlight">\(A_1 \rightarrow A^*\)</span> (and <span class="math notranslate nohighlight">\(M_1 \rightarrow 1\)</span>):</p>
+<div class="math notranslate nohighlight" id="equation-eq-ref-area-ratio">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eq-ref-area-ratio" title="Permalink to this equation">¶</a></span>\[
+\frac{A}{A^*} = \frac{1}{M} \left( \frac{1+\frac{\gamma-1}{2} M^2}{\frac{\gamma+1}{2}} \right)^{\frac{\gamma+1}{2(\gamma-1)}} \;,
+\]</div>
+<p>which shows that <span class="math notranslate nohighlight">\(\frac{A}{A^*} = f(\gamma, M)\)</span>.
+For a given value of <span class="math notranslate nohighlight">\(\gamma\)</span> (such as 1.4, used for air), it is easy to precalculate and tabulate the reference area ratio vs. values of Mach number.
+Similarly, the quantities <span class="math notranslate nohighlight">\(p/p_t\)</span>, <span class="math notranslate nohighlight">\(T/T_t\)</span>, and <span class="math notranslate nohighlight">\(pA/p_t A^*\)</span> can be tabulated as well.</p>
+<p>For example, let’s tabulate the values from <span class="math notranslate nohighlight">\(M = \)</span> 0 to 0.3:</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">machs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.31</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="c1"># hiding divide by zero warning</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+    <span class="n">area_ratios</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">machs</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">machs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="p">)</span>
+<span class="n">pressure_ratios</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">machs</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">gamma</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">temperature_ratios</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">machs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="sa">r</span><span class="s1">&#39;$M$&#39;</span><span class="p">:</span> <span class="n">machs</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$p/p_t$&#39;</span><span class="p">:</span> <span class="n">pressure_ratios</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$T/T_t$&#39;</span><span class="p">:</span> <span class="n">temperature_ratios</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s1">&#39;$A/A^*$&#39;</span><span class="p">:</span> <span class="n">area_ratios</span>
+    <span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">style</span><span class="o">.</span>\
+    <span class="n">hide_index</span><span class="p">()</span><span class="o">.</span>\
+    <span class="nb">format</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="p">{(</span><span class="sa">r</span><span class="s1">&#39;$M$&#39;</span><span class="p">):</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+</style><table id="T_bea74_" ><thead>    <tr>        <th class="col_heading level0 col0" >$M$</th>        <th class="col_heading level0 col1" >$p/p_t$</th>        <th class="col_heading level0 col2" >$T/T_t$</th>        <th class="col_heading level0 col3" >$A/A^*$</th>    </tr></thead><tbody>
+                <tr>
+                                <td id="T_bea74_row0_col0" class="data row0 col0" >0.00</td>
+                        <td id="T_bea74_row0_col1" class="data row0 col1" >1.000000</td>
+                        <td id="T_bea74_row0_col2" class="data row0 col2" >1.000000</td>
+                        <td id="T_bea74_row0_col3" class="data row0 col3" >inf</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row1_col0" class="data row1 col0" >0.01</td>
+                        <td id="T_bea74_row1_col1" class="data row1 col1" >0.999930</td>
+                        <td id="T_bea74_row1_col2" class="data row1 col2" >0.999980</td>
+                        <td id="T_bea74_row1_col3" class="data row1 col3" >57.873843</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row2_col0" class="data row2 col0" >0.02</td>
+                        <td id="T_bea74_row2_col1" class="data row2 col1" >0.999720</td>
+                        <td id="T_bea74_row2_col2" class="data row2 col2" >0.999920</td>
+                        <td id="T_bea74_row2_col3" class="data row2 col3" >28.942130</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row3_col0" class="data row3 col0" >0.03</td>
+                        <td id="T_bea74_row3_col1" class="data row3 col1" >0.999370</td>
+                        <td id="T_bea74_row3_col2" class="data row3 col2" >0.999820</td>
+                        <td id="T_bea74_row3_col3" class="data row3 col3" >19.300542</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row4_col0" class="data row4 col0" >0.04</td>
+                        <td id="T_bea74_row4_col1" class="data row4 col1" >0.998881</td>
+                        <td id="T_bea74_row4_col2" class="data row4 col2" >0.999680</td>
+                        <td id="T_bea74_row4_col3" class="data row4 col3" >14.481486</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row5_col0" class="data row5 col0" >0.05</td>
+                        <td id="T_bea74_row5_col1" class="data row5 col1" >0.998252</td>
+                        <td id="T_bea74_row5_col2" class="data row5 col2" >0.999500</td>
+                        <td id="T_bea74_row5_col3" class="data row5 col3" >11.591444</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row6_col0" class="data row6 col0" >0.06</td>
+                        <td id="T_bea74_row6_col1" class="data row6 col1" >0.997484</td>
+                        <td id="T_bea74_row6_col2" class="data row6 col2" >0.999281</td>
+                        <td id="T_bea74_row6_col3" class="data row6 col3" >9.665910</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row7_col0" class="data row7 col0" >0.07</td>
+                        <td id="T_bea74_row7_col1" class="data row7 col1" >0.996578</td>
+                        <td id="T_bea74_row7_col2" class="data row7 col2" >0.999021</td>
+                        <td id="T_bea74_row7_col3" class="data row7 col3" >8.291525</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row8_col0" class="data row8 col0" >0.08</td>
+                        <td id="T_bea74_row8_col1" class="data row8 col1" >0.995533</td>
+                        <td id="T_bea74_row8_col2" class="data row8 col2" >0.998722</td>
+                        <td id="T_bea74_row8_col3" class="data row8 col3" >7.261610</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row9_col0" class="data row9 col0" >0.09</td>
+                        <td id="T_bea74_row9_col1" class="data row9 col1" >0.994351</td>
+                        <td id="T_bea74_row9_col2" class="data row9 col2" >0.998383</td>
+                        <td id="T_bea74_row9_col3" class="data row9 col3" >6.461342</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row10_col0" class="data row10 col0" >0.10</td>
+                        <td id="T_bea74_row10_col1" class="data row10 col1" >0.993031</td>
+                        <td id="T_bea74_row10_col2" class="data row10 col2" >0.998004</td>
+                        <td id="T_bea74_row10_col3" class="data row10 col3" >5.821829</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row11_col0" class="data row11 col0" >0.11</td>
+                        <td id="T_bea74_row11_col1" class="data row11 col1" >0.991576</td>
+                        <td id="T_bea74_row11_col2" class="data row11 col2" >0.997586</td>
+                        <td id="T_bea74_row11_col3" class="data row11 col3" >5.299230</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row12_col0" class="data row12 col0" >0.12</td>
+                        <td id="T_bea74_row12_col1" class="data row12 col1" >0.989985</td>
+                        <td id="T_bea74_row12_col2" class="data row12 col2" >0.997128</td>
+                        <td id="T_bea74_row12_col3" class="data row12 col3" >4.864318</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row13_col0" class="data row13 col0" >0.13</td>
+                        <td id="T_bea74_row13_col1" class="data row13 col1" >0.988259</td>
+                        <td id="T_bea74_row13_col2" class="data row13 col2" >0.996631</td>
+                        <td id="T_bea74_row13_col3" class="data row13 col3" >4.496859</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row14_col0" class="data row14 col0" >0.14</td>
+                        <td id="T_bea74_row14_col1" class="data row14 col1" >0.986400</td>
+                        <td id="T_bea74_row14_col2" class="data row14 col2" >0.996095</td>
+                        <td id="T_bea74_row14_col3" class="data row14 col3" >4.182400</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row15_col0" class="data row15 col0" >0.15</td>
+                        <td id="T_bea74_row15_col1" class="data row15 col1" >0.984408</td>
+                        <td id="T_bea74_row15_col2" class="data row15 col2" >0.995520</td>
+                        <td id="T_bea74_row15_col3" class="data row15 col3" >3.910343</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row16_col0" class="data row16 col0" >0.16</td>
+                        <td id="T_bea74_row16_col1" class="data row16 col1" >0.982285</td>
+                        <td id="T_bea74_row16_col2" class="data row16 col2" >0.994906</td>
+                        <td id="T_bea74_row16_col3" class="data row16 col3" >3.672739</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row17_col0" class="data row17 col0" >0.17</td>
+                        <td id="T_bea74_row17_col1" class="data row17 col1" >0.980030</td>
+                        <td id="T_bea74_row17_col2" class="data row17 col2" >0.994253</td>
+                        <td id="T_bea74_row17_col3" class="data row17 col3" >3.463509</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row18_col0" class="data row18 col0" >0.18</td>
+                        <td id="T_bea74_row18_col1" class="data row18 col1" >0.977647</td>
+                        <td id="T_bea74_row18_col2" class="data row18 col2" >0.993562</td>
+                        <td id="T_bea74_row18_col3" class="data row18 col3" >3.277926</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row19_col0" class="data row19 col0" >0.19</td>
+                        <td id="T_bea74_row19_col1" class="data row19 col1" >0.975135</td>
+                        <td id="T_bea74_row19_col2" class="data row19 col2" >0.992832</td>
+                        <td id="T_bea74_row19_col3" class="data row19 col3" >3.112259</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row20_col0" class="data row20 col0" >0.20</td>
+                        <td id="T_bea74_row20_col1" class="data row20 col1" >0.972497</td>
+                        <td id="T_bea74_row20_col2" class="data row20 col2" >0.992063</td>
+                        <td id="T_bea74_row20_col3" class="data row20 col3" >2.963520</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row21_col0" class="data row21 col0" >0.21</td>
+                        <td id="T_bea74_row21_col1" class="data row21 col1" >0.969733</td>
+                        <td id="T_bea74_row21_col2" class="data row21 col2" >0.991257</td>
+                        <td id="T_bea74_row21_col3" class="data row21 col3" >2.829294</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row22_col0" class="data row22 col0" >0.22</td>
+                        <td id="T_bea74_row22_col1" class="data row22 col1" >0.966845</td>
+                        <td id="T_bea74_row22_col2" class="data row22 col2" >0.990413</td>
+                        <td id="T_bea74_row22_col3" class="data row22 col3" >2.707602</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row23_col0" class="data row23 col0" >0.23</td>
+                        <td id="T_bea74_row23_col1" class="data row23 col1" >0.963835</td>
+                        <td id="T_bea74_row23_col2" class="data row23 col2" >0.989531</td>
+                        <td id="T_bea74_row23_col3" class="data row23 col3" >2.596812</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row24_col0" class="data row24 col0" >0.24</td>
+                        <td id="T_bea74_row24_col1" class="data row24 col1" >0.960703</td>
+                        <td id="T_bea74_row24_col2" class="data row24 col2" >0.988611</td>
+                        <td id="T_bea74_row24_col3" class="data row24 col3" >2.495562</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row25_col0" class="data row25 col0" >0.25</td>
+                        <td id="T_bea74_row25_col1" class="data row25 col1" >0.957453</td>
+                        <td id="T_bea74_row25_col2" class="data row25 col2" >0.987654</td>
+                        <td id="T_bea74_row25_col3" class="data row25 col3" >2.402710</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row26_col0" class="data row26 col0" >0.26</td>
+                        <td id="T_bea74_row26_col1" class="data row26 col1" >0.954085</td>
+                        <td id="T_bea74_row26_col2" class="data row26 col2" >0.986660</td>
+                        <td id="T_bea74_row26_col3" class="data row26 col3" >2.317287</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row27_col0" class="data row27 col0" >0.27</td>
+                        <td id="T_bea74_row27_col1" class="data row27 col1" >0.950600</td>
+                        <td id="T_bea74_row27_col2" class="data row27 col2" >0.985630</td>
+                        <td id="T_bea74_row27_col3" class="data row27 col3" >2.238471</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row28_col0" class="data row28 col0" >0.28</td>
+                        <td id="T_bea74_row28_col1" class="data row28 col1" >0.947002</td>
+                        <td id="T_bea74_row28_col2" class="data row28 col2" >0.984562</td>
+                        <td id="T_bea74_row28_col3" class="data row28 col3" >2.165554</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row29_col0" class="data row29 col0" >0.29</td>
+                        <td id="T_bea74_row29_col1" class="data row29 col1" >0.943291</td>
+                        <td id="T_bea74_row29_col2" class="data row29 col2" >0.983458</td>
+                        <td id="T_bea74_row29_col3" class="data row29 col3" >2.097928</td>
+            </tr>
+            <tr>
+                                <td id="T_bea74_row30_col0" class="data row30 col0" >0.30</td>
+                        <td id="T_bea74_row30_col1" class="data row30 col1" >0.939470</td>
+                        <td id="T_bea74_row30_col2" class="data row30 col2" >0.982318</td>
+                        <td id="T_bea74_row30_col3" class="data row30 col3" >2.035065</td>
+            </tr>
+    </tbody></table></div></div>
+</div>
+</div>
+<div class="section" id="example-isentropic-flow-problem">
+<h2>Example: isentropic flow problem<a class="headerlink" href="#example-isentropic-flow-problem" title="Permalink to this headline">¶</a></h2>
 <p><strong>Problem:</strong> Air flows isentropically through a duct (<span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>) where the area is changing from point 1 to 2,
 with no heat transfer or shaft work. The area ratio is <span class="math notranslate nohighlight">\(\frac{A_2}{A_1} = 2.5\)</span>, the flow starts at <span class="math notranslate nohighlight">\(M_1 = 0.5\)</span> and 4 bar.
 Find the Mach number and pressure at the second point in the duct.</p>
@@ -562,7 +826,9 @@ and <span class="math notranslate nohighlight">\(\frac{A_1^*}{A_2^*} = 1\)</span
 <span class="n">A2_A1</span> <span class="o">=</span> <span class="mf">2.5</span>
 <span class="n">A1star_A2star</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># isentropic</span>
 
-<span class="n">A1_A1star</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach_1</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">A1_A1star</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach_1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A1/A1^* = </span><span class="si">{</span><span class="n">A1_A1star</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -589,7 +855,7 @@ and <span class="math notranslate nohighlight">\(\frac{A_1^*}{A_2^*} = 1\)</span
 <p>We can then find <span class="math notranslate nohighlight">\(M_2\)</span>, because <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2)\)</span>.
 Our options are to use the <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span> tables and interpolate, or solve the associated equation numerically.</p>
 <div class="section" id="option-1-using-tables">
-<h4>Option 1: using tables<a class="headerlink" href="#option-1-using-tables" title="Permalink to this headline">¶</a></h4>
+<h3>Option 1: using tables<a class="headerlink" href="#option-1-using-tables" title="Permalink to this headline">¶</a></h3>
 <p>We can find in the tables that:</p>
 <ul class="simple">
 <li><p>at <span class="math notranslate nohighlight">\(M=0.17\)</span>, <span class="math notranslate nohighlight">\(A/A^* = 3.46351\)</span></p></li>
@@ -600,7 +866,9 @@ Our options are to use the <span class="math notranslate nohighlight">\(\gamma =
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">machs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.17</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">])</span>
 <span class="n">areas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.46351</span><span class="p">,</span> <span class="mf">3.27793</span><span class="p">])</span>
-<span class="n">mach_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">areas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">A2_A2star</span><span class="p">)</span> <span class="o">+</span> <span class="n">machs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">A2_A2star</span> <span class="o">-</span> <span class="n">areas</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">/</span> <span class="p">(</span><span class="n">areas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">areas</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">mach_2</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">machs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">areas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">A2_A2star</span><span class="p">)</span> <span class="o">+</span> <span class="n">machs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">A2_A2star</span> <span class="o">-</span> <span class="n">areas</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">areas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">areas</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M2 = </span><span class="si">{</span><span class="n">mach_2</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -633,13 +901,18 @@ Also, we could easily generate these values ourselves for a different value of <
 easier to just solve the equation directly in that case</p>
 </div>
 <div class="section" id="option-2-solving-the-equation">
-<h4>Option 2: solving the equation<a class="headerlink" href="#option-2-solving-the-equation" title="Permalink to this headline">¶</a></h4>
+<h3>Option 2: solving the equation<a class="headerlink" href="#option-2-solving-the-equation" title="Permalink to this headline">¶</a></h3>
 <p>Alternately, we can solve the <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2, \gamma)\)</span> equation directly using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">area_function</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">area_ratio</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Function for area ratio, solving for M2&#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">area_ratio</span> <span class="o">-</span> <span class="p">((</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">))))</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">area_ratio</span> <span class="o">-</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> 
+            <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 
 <span class="n">sol</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">area_function</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">A2_A2star</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M2 = </span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -654,7 +927,7 @@ easier to just solve the equation directly in that case</p>
 </div>
 </div>
 <div class="section" id="option-3-solving-the-full-equation">
-<h4>Option 3: solving the full equation<a class="headerlink" href="#option-3-solving-the-full-equation" title="Permalink to this headline">¶</a></h4>
+<h3>Option 3: solving the full equation<a class="headerlink" href="#option-3-solving-the-full-equation" title="Permalink to this headline">¶</a></h3>
 <p>As a third option, we could actually bypass the ratio approach and just numerically solve the full Equation <a class="reference internal" href="#equation-eq-area-ratio-loss">(15)</a> directly, using the known <span class="math notranslate nohighlight">\( A_2/A_1 \)</span>, <span class="math notranslate nohighlight">\( M_1 \)</span>, <span class="math notranslate nohighlight">\( \gamma \)</span>, and <span class="math notranslate nohighlight">\( \Delta s = 0 \)</span>!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -679,6 +952,88 @@ easier to just solve the equation directly in that case</p>
 </div>
 </div>
 <p>This approach is the most direct.</p>
+</div>
+</div>
+<div class="section" id="example-isentropic-flow-using-matlab">
+<h2>Example: isentropic flow (using Matlab)<a class="headerlink" href="#example-isentropic-flow-using-matlab" title="Permalink to this headline">¶</a></h2>
+<p>If you prefer to use Matlab, we can also solve the same example using the three different strategies.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">gamma</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.4</span><span class="p">;</span><span class="w"></span>
+<span class="n">mach_1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">A2_A1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span><span class="w"></span>
+<span class="n">A1star_A2star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">A1_A1star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach_1</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span>^<span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="nb">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>^<span class="p">((</span><span class="nb">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)));</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;A1/A1^* = %.4f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">A1_A1star</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">A2_A2star</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A2_A1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A1_A1star</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A1star_A2star</span><span class="p">;</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;A2/A2star = %.4f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">A2_A2star</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>A1/A1^* = 1.3398
+A2/A2star = 3.3496
+</pre></div>
+</div>
+<div class="section" id="option-1-using-the-tables">
+<h3>Option 1: using the tables<a class="headerlink" href="#option-1-using-the-tables" title="Permalink to this headline">¶</a></h3>
+<p>We find in the tables that:</p>
+<ul class="simple">
+<li><p>at <span class="math notranslate nohighlight">\(M=0.17\)</span>, <span class="math notranslate nohighlight">\(A/A^* = 3.46351\)</span></p></li>
+<li><p>at <span class="math notranslate nohighlight">\(M = 0.18\)</span>, <span class="math notranslate nohighlight">\(A/A^* = 3.27793\)</span></p></li>
+</ul>
+<p>and linearly interpolate to find the precise <span class="math notranslate nohighlight">\(M_2\)</span>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">machs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.17</span><span class="p">,</span><span class="w"> </span><span class="mf">0.18</span><span class="p">];</span><span class="w"></span>
+<span class="n">areas</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">3.46351</span><span class="p">,</span><span class="w"> </span><span class="mf">3.27793</span><span class="p">];</span><span class="w"></span>
+<span class="n">mach_2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">machs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">areas</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">A2_A2star</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">machs</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">A2_A2star</span><span class="o">-</span><span class="n">areas</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">areas</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">areas</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;M2 = %.4f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">mach_2</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M2 = 0.1761
+</pre></div>
+</div>
+<p>We can also use Matlab’s built-in <code class="docutils literal notranslate"><span class="pre">interp1</span></code> function to interpolate with more data points:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">machs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span><span class="w"> </span><span class="mf">0.16</span><span class="p">,</span><span class="w"> </span><span class="mf">0.17</span><span class="p">,</span><span class="w"> </span><span class="mf">0.18</span><span class="p">,</span><span class="w"> </span><span class="mf">0.19</span><span class="p">];</span><span class="w"></span>
+<span class="n">areas</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">3.91034</span><span class="p">,</span><span class="w"> </span><span class="mf">3.67274</span><span class="p">,</span><span class="w"> </span><span class="mf">3.46351</span><span class="p">,</span><span class="w"> </span><span class="mf">3.27793</span><span class="p">,</span><span class="w"> </span><span class="mf">3.11226</span><span class="p">];</span><span class="w"></span>
+
+<span class="n">mach_2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">interp1</span><span class="p">(</span><span class="n">areas</span><span class="p">,</span><span class="w"> </span><span class="n">machs</span><span class="p">,</span><span class="w"> </span><span class="n">A2_A2star</span><span class="p">);</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;M2 = %.4f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">mach_2</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M2 = 0.1761
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Option 2: solving the equation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Alternately, we can solve the <span class="math notranslate nohighlight">\(\frac{A_2}{A_2*} = f(M_2, \gamma)\)</span> equation directly using the function <code class="docutils literal notranslate"><span class="pre">fzero</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">A2_A2star</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">((</span><span class="mf">1.0</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">M</span>^<span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">    </span><span class="o">/</span><span class="w"> </span><span class="p">((</span><span class="nb">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>^<span class="p">((</span><span class="nb">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))));</span><span class="w"></span>
+
+<span class="n">M2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fzero</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;M2 = %.4f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M2 = 0.1760
+</pre></div>
+</div>
+<p>Note that, in this example, the values of <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(A_2 / A_2^*\)</span> are hard-coded into the function.</p>
+</div>
+<div class="section" id="id2">
+<h3>Option 3: solving the full equation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>As a third option, we can bypass the ratio approach and just numerically solve the full Equation <a class="reference internal" href="#equation-eq-area-ratio-loss">(15)</a> directly, using the known <span class="math notranslate nohighlight">\( A_2/A_1 \)</span>, <span class="math notranslate nohighlight">\( M_1 \)</span>, <span class="math notranslate nohighlight">\( \gamma \)</span>, and <span class="math notranslate nohighlight">\( \Delta s = 0 \)</span>!</p>
+<p>To do this, we create two functions: one that depends on all the variables, and a parameterized function that only depends on <span class="math notranslate nohighlight">\(M_2\)</span>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">M1</span><span class="p">,</span><span class="w"> </span><span class="n">A2_A1</span><span class="p">,</span><span class="w"> </span><span class="nb">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">delta_s</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">A2_A1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">M1</span><span class="o">/</span><span class="n">M2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">M2</span>^<span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">M1</span>^<span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">            </span><span class="p">)</span>^<span class="p">((</span><span class="nb">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="nb">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_s</span><span class="o">/</span><span class="n">R</span><span class="p">));</span><span class="w"></span>
+
+<span class="c">% parameterized function</span><span class="w"></span>
+<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">M2</span><span class="p">)</span><span class="w"> </span><span class="n">fun</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span><span class="w"> </span><span class="n">mach_1</span><span class="p">,</span><span class="w"> </span><span class="n">A2_A1</span><span class="p">,</span><span class="w"> </span><span class="nb">gamma</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mi">287</span><span class="p">);</span><span class="w"></span>
+<span class="n">M2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fzero</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span><span class="w"></span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;M2 = %.4f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">M2</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M2 = 0.1760
+</pre></div>
 </div>
 </div>
 </div>
