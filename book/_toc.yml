@@ -10,6 +10,7 @@ parts:
   chapters:
   - file: compressible-flows/intro-compressible-flow
   - file: compressible-flows/isentropic
+  - file: compressible-flows/nozzles
   - file: compressible-flows/normal-shocks
   - file: compressible-flows/oblique-shocks
   - file: compressible-flows/prandtl-meyer
