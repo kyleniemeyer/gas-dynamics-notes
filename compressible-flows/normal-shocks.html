@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -52,7 +54,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Oblique shock waves" href="oblique-shocks.html" />
-    <link rel="prev" title="Nozzles (part I)" href="nozzles.html" />
+    <link rel="prev" title="Nozzles (part I)" href="nozzles-part1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -132,7 +134,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="nozzles.html">
+  <a class="reference internal" href="nozzles-part1.html">
    Nozzles (part I)
   </a>
  </li>
@@ -282,12 +284,28 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
 <span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
 <span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">150</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Shock waves</strong> are finite pressure disturbances that correspond to a large change in properties over a short distance, on the order of a few free molecular paths of the gas.
+In contrast, sound waves are infinitesimal disturbances.</p>
+<p>We can analyze the flow through a shock wave with a control volume, applying our existing conservation equations.</p>
+<div class="figure align-default" id="fig-shock">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/shock.png"><img alt="Control volume around shock" class="bg-primary mb-1" src="../_images/shock.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Control volume around a shock.</span><a class="headerlink" href="#fig-shock" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-shock"><span class="std std-numref">Figure 1</span></a> shows a control volume around a shock wave, in a duct with varying area. The thickness of the control volume is very small, on the order of the thickness of the shock itself (so <span class="math notranslate nohighlight">\(dx \sim 10^{-6}\)</span> m).
+We will make the following assumptions about the flow:</p>
+<ul class="simple">
+<li><p>steady, one-dimensional flow</p></li>
+<li><p>adiabatic flow process: <span class="math notranslate nohighlight">\(\delta q = 0\)</span>, and so <span class="math notranslate nohighlight">\(ds_e = 0\)</span></p></li>
+<li><p>no shaft work across the control volume: <span class="math notranslate nohighlight">\(\delta w_s = 0\)</span></p></li>
+<li><p>no potential change: <span class="math notranslate nohighlight">\(dz = 0\)</span></p></li>
+<li><p>constant area around the shock: <span class="math notranslate nohighlight">\(A_1 = A_2\)</span></p></li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">
@@ -320,7 +338,7 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="nozzles.html" title="previous page">
+        <a class="left-prev" href="nozzles-part1.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
