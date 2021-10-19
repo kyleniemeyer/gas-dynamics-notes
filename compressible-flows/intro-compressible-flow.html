@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -95,7 +95,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +117,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -287,7 +287,7 @@
         
               <div>
                 
-  <div class="section" id="introduction-to-compressible-flow">
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-to-compressible-flow">
 <h1>Introduction to compressible flow<a class="headerlink" href="#introduction-to-compressible-flow" title="Permalink to this headline">¶</a></h1>
 <p>This module will introduce the fundamentals of compressible fluid flows, which can behave a bit differently than
 what you have learned for incompressible flows.</p>
@@ -428,8 +428,8 @@ a = 343.1 \, \text{m}/\text{s} \;.
 M = \frac{V}{a} \;,
 \]</div>
 <p>with different regimes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-92b01464-e616-4ca7-93d9-94b46c489b21">
-<span class="eqno">(7)<a class="headerlink" href="#equation-92b01464-e616-4ca7-93d9-94b46c489b21" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7e50b65f-3e74-480c-a3c7-4f8ed3292f97">
+<span class="eqno">(7)<a class="headerlink" href="#equation-7e50b65f-3e74-480c-a3c7-4f8ed3292f97" title="Permalink to this equation">¶</a></span>\[\begin{align}
 M &amp;&lt; 1 : \text{ subsonic} \\
 M &amp;= 1 : \text{ sonic} \\
 M &amp;&gt; 1 : \text{ supersonic}
@@ -448,8 +448,8 @@ to ideal/perfect gases.</p>
 \dot{m} = p A M \sqrt{\frac{\gamma}{RT}} = \text{constant}
 \]</div>
 <p>Stagnation relationships:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fb5a0866-60b8-4f07-96a5-d16c4d6d9771">
-<span class="eqno">(8)<a class="headerlink" href="#equation-fb5a0866-60b8-4f07-96a5-d16c4d6d9771" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f716e421-567d-4e90-9d38-e61f55a0727c">
+<span class="eqno">(8)<a class="headerlink" href="#equation-f716e421-567d-4e90-9d38-e61f55a0727c" title="Permalink to this equation">¶</a></span>\[\begin{align}
 h_t &amp;= h \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
 T_t &amp;= T \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
 p_t &amp;= p \left( 1 + \frac{\gamma - 1}{2} M^2 \right)^{\frac{\gamma}{\gamma - 1}} \;,

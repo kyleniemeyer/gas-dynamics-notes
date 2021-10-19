@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -95,7 +95,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +117,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -254,6 +254,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perfect-gases">
+   Perfect gases
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -262,7 +275,7 @@
         
               <div>
                 
-  <div class="section" id="normal-shock-waves">
+  <div class="tex2jax_ignore mathjax_ignore section" id="normal-shock-waves">
 <h1>Normal shock waves<a class="headerlink" href="#normal-shock-waves" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -306,6 +319,81 @@ We will make the following assumptions about the flow:</p>
 <li><p>no potential change: <span class="math notranslate nohighlight">\(dz = 0\)</span></p></li>
 <li><p>constant area around the shock: <span class="math notranslate nohighlight">\(A_1 = A_2\)</span></p></li>
 </ul>
+<p>We can apply conservation of mass to this control volume:</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_1 A_1 V_1 = \rho_2 A_2 V_2
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-mass">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eq-mass" title="Permalink to this equation">¶</a></span>\[
+\rho_1 V_1 = \rho_2 V_2 \;,
+\]</div>
+<p>conservation of energy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+h_{t1} + q = h_{t2} + w_s \\
+h_{t1} = h_{t2}
+\end{gather*}
+\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-energy">
+<span class="eqno">(24)<a class="headerlink" href="#equation-eq-energy" title="Permalink to this equation">¶</a></span>\[
+h_1 + \frac{V_1^2}{2} = h_2 + \frac{V_2^2}{2} \;,
+\]</div>
+<p>and momentum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\sum{F_x} = \dot{m} \left( V_{\text{out},x} - V_{\text{in}, x} \right) = \dot{m} \left( V_{2x} - V_{1x} \right) \\
+p_1 A_1 - p_2 A_2 = ( p_1 - p_2 ) A = \dot{m} (V_2 - V_1) = \rho A V (V_2 - V_1) \\
+p_1 - p_2 = (\rho V) V_2 - (\rho V) V_1 \\
+p_1 - p_2 = \rho_2 V_2^2 - \rho_1 V_1^2
+\end{gather*}
+\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-momentum">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eq-momentum" title="Permalink to this equation">¶</a></span>\[
+p_1 + \rho_1 V_1^2 = p_2 + \rho_2 V_2^2 \;.
+\]</div>
+<p>For an arbitrary fluid, we have three equations: <a class="reference internal" href="#equation-eq-mass">(23)</a>, <a class="reference internal" href="#equation-eq-energy">(24)</a>, and <a class="reference internal" href="#equation-eq-momentum">(25)</a>.
+In a typical problem, we know the fluid and conditions before the shock, and want to find the conditions after the shock.
+Thus, our known variables are <span class="math notranslate nohighlight">\(\rho_1\)</span>, <span class="math notranslate nohighlight">\(p_1\)</span>, <span class="math notranslate nohighlight">\(h_1\)</span>, and <span class="math notranslate nohighlight">\(V_1\)</span>, while our unknown variables are <span class="math notranslate nohighlight">\(\rho_2\)</span>, <span class="math notranslate nohighlight">\(p_2\)</span>, <span class="math notranslate nohighlight">\(h_2\)</span>, and <span class="math notranslate nohighlight">\(V_2\)</span>.
+We need a fourth equation to close this system of equation: a property relation for the fluid, otherwise known as an equation of state.</p>
+<div class="section" id="perfect-gases">
+<h2>Perfect gases<a class="headerlink" href="#perfect-gases" title="Permalink to this headline">¶</a></h2>
+<p>For ideal/perfect gases, we have the ideal gas equation of state, and can assume constant values for <span class="math notranslate nohighlight">\(c_p\)</span>, <span class="math notranslate nohighlight">\(c_v\)</span>, and <span class="math notranslate nohighlight">\(\gamma\)</span>.
+We also have a convenient relationship for the speed of sound:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+p = \rho R T \\
+V = M a = M \sqrt{\gamma R T} \;.
+\end{gather*}
+\end{split}\]</div>
+<p>Incorporating these into Equation <a class="reference internal" href="#equation-eq-mass">(23)</a> we can obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-mass2">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eq-mass2" title="Permalink to this equation">¶</a></span>\[
+\frac{p_1}{M_1}{\sqrt{T_1}} = \frac{p_2 M_2}{\sqrt{T_2}} \;.
+\]</div>
+<p>With our stagnation relationship for temperature, <span class="math notranslate nohighlight">\( T_t = T \left( 1 + (\gamma-1)M^2 / 2 \right)^2 \)</span>, Equation <a class="reference internal" href="#equation-eq-energy">(24)</a> becomes</p>
+<div class="math notranslate nohighlight" id="equation-eq-energy2">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eq-energy2" title="Permalink to this equation">¶</a></span>\[
+T_1 \left( 1 + \frac{\gamma-1}{2} M_1^2 \right) = T_2 \left( 1 + \frac{\gamma-1}{2} M_2^2 \right) \;,
+\]</div>
+<p>which applies both around a normal shock and also at any point in a general flow with no work or heat transfer.
+Lastly, incorporating our relationships for perfect gases into Equation <a class="reference internal" href="#equation-eq-momentum">(25)</a> we obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-momentum2">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eq-momentum2" title="Permalink to this equation">¶</a></span>\[
+p_1 \left( 1 + \gamma M_1^2 \right) = p_2 \left( 1 + \gamma M_2^2 \right) \;.
+\]</div>
+<p>Now, we have three equations and three unknowns: <span class="math notranslate nohighlight">\(M_2\)</span>, <span class="math notranslate nohighlight">\(p_2\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span>. 😎</p>
+<p>However, it is a bit of a pain to solve this complicated system of equations every time.
+Fortunately, we can combine all three together and eliminate pressure and temperature completely!</p>
+<div class="math notranslate nohighlight">
+\[
+\left( \frac{1 + \gamma M_2^2}{1 + \gamma M_1^2} \right) \frac{M_1}{M_2} = \left( \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right)^{1/2} \;,
+\]</div>
+<p>which can actually be solved to find <span class="math notranslate nohighlight">\(M_2 = f(\gamma, M_1)\)</span>.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
