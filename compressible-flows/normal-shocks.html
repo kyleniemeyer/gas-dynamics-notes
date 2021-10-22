@@ -392,7 +392,51 @@ Fortunately, we can combine all three together and eliminate pressure and temper
 \[
 \left( \frac{1 + \gamma M_2^2}{1 + \gamma M_1^2} \right) \frac{M_1}{M_2} = \left( \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right)^{1/2} \;,
 \]</div>
-<p>which can actually be solved to find <span class="math notranslate nohighlight">\(M_2 = f(\gamma, M_1)\)</span>.</p>
+<p>which can actually be solved to find <span class="math notranslate nohighlight">\(M_2 = f(\gamma, M_1)\)</span>.
+A trivial solution to this equation is that <span class="math notranslate nohighlight">\(M_1 = M_2\)</span>, where there is no shock.
+(What does this mean? Just that the governing equations we set up apply just fine for a flow where there is no shock—good news!)</p>
+<p>For nontrivial solutions, with some painful algebra we can rearrange this equation into a recognizable form:</p>
+<div class="math notranslate nohighlight">
+\[
+A \left( M_2^2 \right)^2 + B M_2^2 + C = 0 \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A, B, C = f(\gamma, M_1)\)</span>. This looks like a quadratic equation! The only physically viable solution to this equation is</p>
+<div class="math notranslate nohighlight" id="equation-eq-normal-shock">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eq-normal-shock" title="Permalink to this equation">¶</a></span>\[
+M_2^2 = \frac{M_1^2 + \frac{2}{\gamma-1}}{\frac{2 \gamma}{\gamma-1} M_1^2 - 1} \;.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">mach1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mach2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">mach1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">mach1</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mach1</span><span class="p">,</span> <span class="n">mach2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$M_1$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$M_2$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Downstream Mach number versus upstream Mach number for normal shocks&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/normal-shocks_5_0.png" src="../_images/normal-shocks_5_0.png" />
+</div>
+</div>
+<p>A typical problem flow is that we have <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span>, use these to determine <span class="math notranslate nohighlight">\(M_2\)</span>, and then use Equations <a class="reference internal" href="#equation-eq-energy2">(27)</a> and <a class="reference internal" href="#equation-eq-momentum2">(28)</a> to obtain <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span>. More convenient versions of these equations are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\frac{T_2}{T_1} = \frac{1 + \frac{\gamma-1}{2} M_1^2}{1 + \frac{\gamma-1}{2} M_2^2} \\
+\frac{p_2}{p_1} = \frac{1 + \gamma M_1^2}{1 + \gamma M_2^2} = \frac{2 \gamma M_1^2 - \gamma + 1}{\gamma + 1} \\
+\end{gather*}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since <span class="math notranslate nohighlight">\(M_1 &gt; 1\)</span>, <span class="math notranslate nohighlight">\(M_2 &lt; 1\)</span> <strong>always</strong> for a normal shock.</p>
+</div>
 </div>
 </div>
 
