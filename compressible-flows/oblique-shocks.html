@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -152,6 +154,18 @@
   </a>
  </li>
 </ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
@@ -252,6 +266,36 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equations-of-motion">
+   Equations of motion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-equations-for-oblique-shocks">
+   Applying equations for oblique shocks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-oblique-shock-with-given-angle">
+     Example: oblique shock with given angle
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-shock-angle-given-deflection">
+   Finding shock angle given deflection
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -262,6 +306,445 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="oblique-shock-waves">
 <h1>Oblique shock waves<a class="headerlink" href="#oblique-shock-waves" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
+
+<span class="c1"># Pint gives us some helpful unit conversion</span>
+<span class="kn">from</span> <span class="nn">pint</span> <span class="kn">import</span> <span class="n">UnitRegistry</span>
+<span class="n">ureg</span> <span class="o">=</span> <span class="n">UnitRegistry</span><span class="p">()</span>
+<span class="n">Q_</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span> <span class="c1"># We will use this to construct quantities (value + unit)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>An <strong>oblique shock</strong> is a shock that the flow encounters at some angle. The shock deflects the flow away from its normal direction, and the final velocity may remain supersonic.</p>
+<div class="figure align-default" id="fig-oblique-shock">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/oblique-shock.png"><img alt="Oblique shock diagram" class="bg-primary mb-1" src="../_images/oblique-shock.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Oblique shock showing initial and final velocity components.</span><a class="headerlink" href="#fig-oblique-shock" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-oblique-shock"><span class="std std-numref">Figure 2</span></a> shows the flow velocity before and after an oblique shock. The shock slows down the normal component of velocity, such that <span class="math notranslate nohighlight">\(V_{2n} &lt; V_{1n}\)</span>, but the tangential component <span class="math notranslate nohighlight">\(V_t\)</span> is unaffected by the shock and remains constant.</p>
+<p>The shock occurs at the <strong>shock angle</strong> <span class="math notranslate nohighlight">\(\theta\)</span> with respect to the flow direction (horizontal in this case), and deflects the flow by the <strong>deflection angle</strong> <span class="math notranslate nohighlight">\(\delta\)</span>.</p>
+<div class="section" id="equations-of-motion">
+<h2>Equations of motion<a class="headerlink" href="#equations-of-motion" title="Permalink to this headline">¶</a></h2>
+<p>So, how does an oblique shock affect the flow? It acts as a normal shock, based on the normal component of the velocity—and therefore the normal Mach number determines the strength of the shock:</p>
+<div class="math notranslate nohighlight">
+\[
+M_{1n} = \frac{V_{1n}}{a_{1n}} = \frac{V_1 \sin \theta}{a_1} = M_1 \sin \theta \;,
+\]</div>
+<p>where we see that the normal component of speed of sound is the same as the overall speed of sound upstream of the shock: <span class="math notranslate nohighlight">\(a_{1n} = a_1\)</span>. (This should not be surprising,
+since speed of sound is a property of the gas state.)</p>
+<p>For an oblique shock to exist, <span class="math notranslate nohighlight">\(M_{1n} \geq 1\)</span>. We thus have two limits:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta_{\min} = \sin^{-1} \frac{1}{M_1} = \mu\)</span>, which is the Mach angle.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_{\max} = \sin^{-1} \left( \frac{M_1}{M_1} \right)\)</span> = 90°, which is a normal shock where <span class="math notranslate nohighlight">\(M_{1n} = M_1\)</span>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The oblique shock strength depends on <span class="math notranslate nohighlight">\(M_{1n}\)</span>, and is proportional to the shock angle <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+</div>
+<p>Based on the geometry in <a class="reference internal" href="#fig-oblique-shock"><span class="std std-numref">Figure 2</span></a>, we can express the overall downstream Mach number as</p>
+<div class="math notranslate nohighlight" id="equation-eq-oblique-m2">
+<span class="eqno">(30)<a class="headerlink" href="#equation-eq-oblique-m2" title="Permalink to this equation">¶</a></span>\[
+M_2 = \frac{M_{2n}}{\sin(\theta - \delta)} \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(M_{2n} = f(M_{1n})\)</span> based on our <em>normal shock relations</em> given in the <a class="reference internal" href="normal-shocks.html"><span class="doc std std-doc">Normal Shocks</span></a> module.
+This means we also know how the stagnation pressure changes through an oblique shock: <span class="math notranslate nohighlight">\(p_{t2} / p_{t1} = f(M_{1n})\)</span>, where <span class="math notranslate nohighlight">\(p_{t1} = p_1 \cdot f(M_1)\)</span>.</p>
+<p>However, we need an additional relationship between <span class="math notranslate nohighlight">\(M_1\)</span>, <span class="math notranslate nohighlight">\(\theta\)</span>, and <span class="math notranslate nohighlight">\(\delta\)</span> to be able to solve any problems. Let’s use the continuity equation applied to motion through the shock wave to obtain this, keeping in mind that only the normal component of velocity contributes to mass crossing the shock:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\rho_1 V_{1n} = \rho_2 V_{2n} \\
+\frac{\rho_2}{\rho_1} = \frac{V_{1n}}{V_{2n}} \;,
+\end{gather*}
+\end{split}\]</div>
+<p>but we can use the geometry to relate the normal and tangential components of velocity:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\tan \theta = \frac{V_{1n}}{V_{1t}} \\
+\tan (\theta - \delta) = \frac{V_{2n}}{V_{2t}} \\
+V_{1t} = V_{2t} = V_t \\
+\rightarrow \frac{\rho_2}{\rho_1} = \frac{V_t \tan \theta}{V_t \tan (\theta - \delta)} = \frac{\tan \theta}{\tan (\theta - \delta)} \;.
+\end{gather*}
+\end{split}\]</div>
+<p>But, from our normal shock relations, we know that <span class="math notranslate nohighlight">\(\rho_2 / \rho_1 = f(M_{1n})\)</span>, which we can combine with the last equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rho_2}{\rho_1} = \frac{V_t \tan \theta}{V_t \tan (\theta - \delta)} = \frac{\tan \theta}{\tan (\theta - \delta)} = \frac{(\gamma+1) M_{1n}^2}{(\gamma-1) M_{1n}^2 + 2} \;.
+\]</div>
+<p>Substituting <span class="math notranslate nohighlight">\( M_{1n} = M_1 \sin \theta \)</span> into that equation, and using some trigonometric identities, we can obtain an equation for the deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> as a function of <span class="math notranslate nohighlight">\(M_1\)</span> and the shock angle <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-oblique">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eq-oblique" title="Permalink to this equation">¶</a></span>\[
+\tan \delta = 2 \cot \theta \left[ \frac{M_1^2 \sin^2 \theta - 1}{M_1^2 \left( \gamma + \cos 2\theta \right) + 2} \right] \;.
+\]</div>
+<p>If we apply this equation at the shock angle limits of <span class="math notranslate nohighlight">\(\theta = \mu = \sin^{-1} (1/M_1)\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span> = 90°, we see that <span class="math notranslate nohighlight">\(\delta = 0\)</span> and there is no deflection at either limit.</p>
+</div>
+<div class="section" id="applying-equations-for-oblique-shocks">
+<h2>Applying equations for oblique shocks<a class="headerlink" href="#applying-equations-for-oblique-shocks" title="Permalink to this headline">¶</a></h2>
+<p>Given an upstream Mach number <span class="math notranslate nohighlight">\(M_1\)</span> and shock angle <span class="math notranslate nohighlight">\(\theta\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> to find the deflection angle <span class="math notranslate nohighlight">\(\delta.\)</span></p>
+<p>Let’s create a function to do that, and also one to calculate the Mach number following a normal shock:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">oblique_shock_delta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate oblique shock deflection from shock angle and Mach&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="mf">2.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span>
+            <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="p">)))</span>
+            <span class="p">))</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_mach_normal</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">mach1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate Mach number after a normal shock&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">mach1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">mach1</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can confirm the limits of oblique shocks, at <span class="math notranslate nohighlight">\(\theta_{\min} = \mu\)</span> and <span class="math notranslate nohighlight">\(\theta_{\max} = \)</span> 90°:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mach</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">mach</span><span class="p">)</span>
+<span class="n">delta_min</span> <span class="o">=</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Deflection at minimum shock angle: </span><span class="si">{</span><span class="n">delta_min</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">delta_max</span> <span class="o">=</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Deflection at maximum shock angle: </span><span class="si">{</span><span class="n">delta_min</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Deflection at minimum shock angle:  0.000
+Deflection at maximum shock angle:  0.000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-oblique-shock-with-given-angle">
+<h3>Example: oblique shock with given angle<a class="headerlink" href="#example-oblique-shock-with-given-angle" title="Permalink to this headline">¶</a></h3>
+<p>As another example, let’s consider an oblique shock that forms in air at an angle
+<span class="math notranslate nohighlight">\(\theta = \)</span> 45°. The conditions before the shock are 40°C, 1.2 bar, and a Mach number of 3.0. What are the Mach number and flow direction after the shock?</p>
+<p>We can find the flow direction (i.e., deflection angle) by solving Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> directly using the given information. We can find the Mach number after the shock (<span class="math notranslate nohighlight">\(M_2\)</span>) by using the normal component of <span class="math notranslate nohighlight">\(M_1\)</span>, applying our normal shock relationship (Equation <a class="reference internal" href="normal-shocks.html#equation-eq-normal-shock">(29)</a>), and then using Equation <a class="reference internal" href="#equation-eq-oblique-m2">(30)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mach1</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mi">45</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="n">delta</span> <span class="o">=</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">mach1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Deflection angle = </span><span class="si">{</span><span class="n">delta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+
+<span class="n">mach_1n</span> <span class="o">=</span> <span class="n">mach1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">mach_2n</span> <span class="o">=</span> <span class="n">get_mach_normal</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">mach_1n</span><span class="p">)</span>
+<span class="n">mach2</span> <span class="o">=</span> <span class="n">mach_2n</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Downstream Mach number = </span><span class="si">{</span><span class="n">mach2</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Deflection angle =  25.62°
+Downstream Mach number =  1.681
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a <em>weak shock</em> because the downstream flow remains supersonic.</p>
+</div>
+</div>
+<div class="section" id="finding-shock-angle-given-deflection">
+<h2>Finding shock angle given deflection<a class="headerlink" href="#finding-shock-angle-given-deflection" title="Permalink to this headline">¶</a></h2>
+<p>Now, what do we do when we need to find the shock angle <span class="math notranslate nohighlight">\(\theta\)</span> given a deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> and the upstream Mach number <span class="math notranslate nohighlight">\(M_1\)</span>? This problem is a bit trickier to solve, because we cannot solve Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> directly for <span class="math notranslate nohighlight">\(\theta\)</span>—plus, there are two potential solutions: a weak shock and strong shock.</p>
+<p>Traditionally, since it was previously so challenging to solve the equation, and most applications focus on air where we can assume <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>, people used tabulated and charted solutions to this equation. Most gas dynamics/compressible flow textbooks contain versions of these charts, which were originally published by NACA, the precursor to NASA, in the famous Report 1135 <span id="id1">[<a class="reference internal" href="../zbibliography.html#id3">AmesRStaff53</a>]</span> (Neil Armstrong had a copy!).</p>
+<p>For example, <a class="reference internal" href="#fig-oblique-chart"><span class="std std-numref">Figure 3</span></a> shows how shock angle varies with deflection angle for <span class="math notranslate nohighlight">\(\delta =\)</span> 0° to 32°, for various upstream Mach numbers.</p>
+<div class="figure align-default" id="fig-oblique-chart">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/oblique-chart.png"><img alt="Oblique shock charg" class="bg-primary mb-1" src="../_images/oblique-chart.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Chart for oblique shock showing how shock angle varies with deflection angle, for various upstream Mach numbers <span id="id2">[<a class="reference internal" href="../zbibliography.html#id3">AmesRStaff53</a>]</span>.</span><a class="headerlink" href="#fig-oblique-chart" title="Permalink to this image">¶</a></p>
+</div>
+<p>Using a chart like this is relatively fast, though not very precise, and limits you to gases where <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>.</p>
+<p>An alternative approach is to numerically solve the equation using a root finder. To do this, we need a function that rearranges Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> to equal zero, if the appropriate value of <span class="math notranslate nohighlight">\(\theta\)</span> is input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">oblique_shock_theta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">mach</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Use for theta as unknown variable&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">-</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we can use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root_scalar.html"><code class="docutils literal notranslate"><span class="pre">scipy.optimize.root_scalar()</span></code></a> to find the value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>As an example, let’s consider a case where a Mach 2.2 flow of air is deflected by 14°. What is the Mach number after the shock? Assume the weak shock solution applies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mach1</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">14</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="c1"># we need to give some initial guesses for the solution</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">oblique_shock_theta</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">mach1</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shock angle = </span><span class="si">{</span><span class="n">theta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shock angle =  40.43°
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we wanted the strong shock solution, we could try giving initial guesses at higher angles:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">oblique_shock_theta</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">70</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mi">80</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">mach1</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">theta_strong</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shock angle (strong) = </span><span class="si">{</span><span class="n">theta_strong</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shock angle (strong) =  82.03°
+</pre></div>
+</div>
+</div>
+</div>
+<p>This approach works reasonably well in most cases, but you may face situations where the root-finding algorithm fail to converge. (If you try to recreate an oblique shock chart using the code given above, you will certainly encounter this behavior!)</p>
+<p>An alternative approach is to transform Equation <code class="xref eq docutils literal notranslate"><span class="pre">oblique_shock</span></code> into a cubic equation, and then find the roots of this equation. Let’s call <span class="math notranslate nohighlight">\(x = \cot \theta\)</span>, then we can express the equation as</p>
+<div class="math notranslate nohighlight" id="equation-eq-oblique-cubic">
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-oblique-cubic" title="Permalink to this equation">¶</a></span>\[
+f(x) = x^3 + C x^2 - A x + (B - A C) = 0 \;,
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+x = \cot \theta \\
+A = M_1^2 - 1 \\
+B = \frac{\gamma + 1}{2} M_1^4 \tan \delta \\
+C = \left( 1 + \frac{\gamma + 1}{2} M_1^2 \right) \tan \delta \;.
+\end{gather*}
+\end{split}\]</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Detailed proof:</p>
+<p>Obtaining Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(32)</a> requires a bit of work. First, recognize that we can use the trigonometric identity <span class="math notranslate nohighlight">\(\sin^2 \theta = \frac{1}{1 + \cot^2 \theta}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\tan \delta = \cot \theta \frac{M_1^2 \sin^2 \theta - 1}{\frac{\gamma+1}{2} M_1^2 - (M_1^2 \sin^2 \theta - 1)} \\
+\tan \delta \left[ \frac{\gamma+1}{2} M_1^2 - \left(M_1^2 \frac{1}{1+x^2} - 1 \right) \right] = x \left( M_1^2 \frac{1}{1+x^2} - 1 \right) \\
+\tan \delta \left[ \frac{\gamma+1}{2} M_1^2 (1+x^2) - M_1^2 + 1 + x^2 \right] = x M_1^2 - x(1 + x^2) \\
+\tan \delta \frac{\gamma+1}{2} M_1^2 + \left( \tan \delta \frac{\gamma+1}{2} M_1^2 \right) x^2 + \tan \delta (1 - M_1^2) + x^2 \tan \delta = x M_1^2 - x - x^3 \\
+x^3 + x^2 \left( 1 + \frac{\gamma+1}{2} M_1^2 \right) \tan \delta - x (M_1^2 - 1) + \tan \delta \left[ \frac{\gamma+1}{2} M_1^2 + (1 - M_1^2) \right] = 0
+\end{gather*}
+\end{split}\]</div>
+<p>Now, we can recognize the coefficients of <span class="math notranslate nohighlight">\(x^2\)</span> and <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(A\)</span> from above.
+With some additional work, we can see that</p>
+<div class="math notranslate nohighlight">
+\[
+\tan \delta \left[ \frac{\gamma+1}{2} M_1^2 + (1 - M_1^2) \right] = B - A C \;.
+\]</div>
+</div>
+<p>To actually solve the cubic equation, we could use an iterative method, such as the one proposed by Collar in 1959 <span id="id3">[<a class="reference internal" href="../zbibliography.html#id4">Col59</a>]</span>, or we can use a more direct method provided by NumPy via the <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.roots.html"><code class="docutils literal notranslate"><span class="pre">numpy.roots()</span></code> function</a>.
+This gives us all three roots of the cubic polynomial.
+We can disregard the negative solution as unphysical; then, the larger solution is associated with the strong shock, and the smaller positive solution is associated with the weak shock.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mach1</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">14</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="c1"># calculate coefficients</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">mach1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mach1</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="o">-</span><span class="n">A</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">A</span><span class="o">*</span><span class="n">C</span><span class="p">)]</span>
+
+<span class="c1"># roots of a cubic equation, two positive solutions</span>
+<span class="c1"># (disregard the negative)</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roots</span><span class="p">)</span>
+<span class="n">theta_weak</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+<span class="n">theta_strong</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shock angle (weak) = </span><span class="si">{</span><span class="n">theta_weak</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shock angle (strong) = </span><span class="si">{</span><span class="n">theta_strong</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shock angle (weak) =  40.09°
+Shock angle (strong) =  82.22°
+</pre></div>
+</div>
+</div>
+</div>
+<p>This provides a robust method for finding the deflection angles given shock angle and upstream Mach number.</p>
+<p>Lastly, we may want to find the maximum deflection angle, for a given Mach number. To do this, we can take the derivative of the deflection angle equation and solve for zero.
+First, rearrange Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(32)</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\cot \delta = \tan \delta \left[ \left(\frac{\gamma+1}{2}\right) + \frac{M_1^2}{M_1^2 \sin^2 \theta - 1} - 1 \right] \\
+\frac{d(\cot \delta)}{d\theta} = \sec^2 \theta \left[ \left( \frac{\gamma+1}{2} \right) + \frac{M_1^2}{M_1^2 \sin^2 \theta - 1} - 1 \right] + \tan \theta \left( \frac{\gamma+1}{2} \right) M_1^2 \left[ \frac{-2 M_1^2 \sin \theta \cos \theta}{(M_1^2 \sin^2 \theta - 1)^2} \right] \\
+\frac{d(\cot \delta)}{d\theta} = 0 \\
+\rightarrow (\gamma M_1^4) \sin^4 \theta + \left[ 2 M_1^2 - \left( \frac{\gamma+1}{2} \right) M_1^4 \right] \sin^2 \theta - \left( 1 + \frac{\gamma+1}{2} M_1^2 \right) = 0
+\end{gather*}
+\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-delta-max">
+<span class="eqno">(33)<a class="headerlink" href="#equation-eq-delta-max" title="Permalink to this equation">¶</a></span>\[
+\sin^2 \theta_{\max} = \left( \frac{1}{\gamma M_1^2}\right) \left[ \frac{\gamma+1}{4} M_1^2 - 1 + \sqrt{ (\gamma+1) \left( \frac{\gamma+1}{16} M_1^4 + \frac{\gamma-1}{2} M_1^2 + 1 \right) } \right]
+\]</div>
+<p>Given <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-delta-max">(33)</a> for the maximum shock angle <span class="math notranslate nohighlight">\(\theta_{\max}\)</span>, and then use Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> to find the associated <span class="math notranslate nohighlight">\(\delta_{\max}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_max_shock_angle</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate shock angle for maximum deflection angle given Mach number.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="mf">16.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="p">))</span>
+
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">machs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">#max_thetas = np.zeros_like(machs)</span>
+<span class="c1">#max_deltas = np.zeros_like(machs)</span>
+
+<span class="n">max_thetas</span> <span class="o">=</span> <span class="n">get_max_shock_angle</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">machs</span><span class="p">)</span>
+<span class="n">max_deltas</span> <span class="o">=</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">max_thetas</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">machs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; M_1 theta_max delta_max&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------------------------&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mach</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">delta</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">machs</span><span class="p">,</span> <span class="n">max_thetas</span><span class="p">,</span> <span class="n">max_deltas</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">mach</span><span class="si">:</span><span class="s1"> .1f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">theta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°  </span><span class="si">{</span><span class="n">delta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> M_1 theta_max delta_max
+--------------------------
+ 1.0  90.00°   0.00°
+ 1.5  66.59°   12.11°
+ 2.0  64.67°   22.97°
+ 2.5  64.78°   29.80°
+ 3.0  65.24°   34.07°
+ 3.5  65.69°   36.87°
+ 4.0  66.06°   38.77°
+ 4.5  66.35°   40.13°
+ 5.0  66.58°   41.12°
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using these tools, we can recreate an oblique shock chart!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">machs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">10001</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">deltas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+
+<span class="c1"># solve for weak shock solution</span>
+<span class="n">thetas_weak_all</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">thetas_strong_all</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">delta</span> <span class="ow">in</span> <span class="n">deltas</span><span class="p">:</span>
+    <span class="n">thetas_weak</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">machs</span><span class="p">)</span>
+    <span class="n">thetas_strong</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">machs</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">mach</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">machs</span><span class="p">):</span>
+        <span class="n">theta_max</span> <span class="o">=</span> <span class="n">get_max_shock_angle</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">)</span>
+        <span class="n">delta_max</span> <span class="o">=</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">theta_max</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;=</span> <span class="n">delta_max</span><span class="p">:</span>
+            <span class="n">thetas_weak</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+            <span class="n">thetas_strong</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mach</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+            <span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="o">-</span><span class="n">A</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span> <span class="o">-</span> <span class="n">A</span><span class="o">*</span><span class="n">C</span><span class="p">)]</span>
+            <span class="c1"># roots of a cubic equation, two positive solutions</span>
+            <span class="c1"># (disregard the negative)</span>
+            <span class="n">roots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+            
+            <span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">roots</span><span class="p">)</span>
+            <span class="n">thetas_weak</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+            <span class="n">thetas_strong</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+    <span class="n">thetas_weak_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thetas_weak</span><span class="p">)</span>
+    <span class="n">thetas_strong_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thetas_strong</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">thetas_weak</span><span class="p">,</span> <span class="n">thetas_strong</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">thetas_weak_all</span><span class="p">,</span> <span class="n">thetas_strong_all</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">machs</span><span class="p">,</span> <span class="n">thetas_weak</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">machs</span><span class="p">,</span> <span class="n">thetas_strong</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    
+<span class="n">thetas_max</span> <span class="o">=</span> <span class="n">get_max_shock_angle</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">machs</span><span class="p">)</span>
+<span class="n">deltas_max</span> <span class="o">=</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">thetas_max</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">machs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">machs</span><span class="p">,</span> <span class="n">thetas_max</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="mf">4.15</span><span class="p">,</span> <span class="n">thetas_max</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\delta_{\max}$&#39;</span><span class="p">,</span>
+    <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+    <span class="p">)</span>
+
+<span class="c1"># put labels for degrees</span>
+<span class="k">for</span> <span class="n">thetas_weak</span><span class="p">,</span> <span class="n">delta</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">thetas_weak_all</span><span class="p">,</span> <span class="n">deltas</span><span class="p">):</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">thetas_weak</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="mf">4.1</span><span class="p">,</span> <span class="n">theta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">delta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+        <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="mf">4.12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\delta$&#39;</span><span class="p">,</span>
+    <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Oblique shock wave angle for different deflection angles&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Upstream Mach number, $M_1$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Shock angle, $\theta$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/oblique-shocks_23_0.png" src="../_images/oblique-shocks_23_0.png" />
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
