@@ -14,3 +14,6 @@ parts:
   - file: compressible-flows/normal-shocks
   - file: compressible-flows/oblique-shocks
   - file: compressible-flows/prandtl-meyer
+- caption: Reference
+  chapters:
+  - file: zbibliography

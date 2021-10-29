@@ -3,6 +3,10 @@ title: Gas Dynamics notes
 author: Kyle Niemeyer
 logo: logo.jpg
 
+# Bibliography settings
+bibtex_bibfiles:
+  - references.bib
+
 latex:
   latex_documents:
     targetname: book.tex
