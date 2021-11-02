@@ -360,7 +360,7 @@ since speed of sound is a property of the gas state.)</p>
 </div>
 <p>Based on the geometry in <a class="reference internal" href="#fig-oblique-shock"><span class="std std-numref">Figure 2</span></a>, we can express the overall downstream Mach number as</p>
 <div class="math notranslate nohighlight" id="equation-eq-oblique-m2">
-<span class="eqno">(30)<a class="headerlink" href="#equation-eq-oblique-m2" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(33)<a class="headerlink" href="#equation-eq-oblique-m2" title="Permalink to this equation">¶</a></span>\[
 M_2 = \frac{M_{2n}}{\sin(\theta - \delta)} \;,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(M_{2n} = f(M_{1n})\)</span> based on our <em>normal shock relations</em> given in the <a class="reference internal" href="normal-shocks.html"><span class="doc std std-doc">Normal Shocks</span></a> module.
@@ -390,14 +390,14 @@ V_{1t} = V_{2t} = V_t \\
 \]</div>
 <p>Substituting <span class="math notranslate nohighlight">\( M_{1n} = M_1 \sin \theta \)</span> into that equation, and using some trigonometric identities, we can obtain an equation for the deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> as a function of <span class="math notranslate nohighlight">\(M_1\)</span> and the shock angle <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-oblique">
-<span class="eqno">(31)<a class="headerlink" href="#equation-eq-oblique" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(34)<a class="headerlink" href="#equation-eq-oblique" title="Permalink to this equation">¶</a></span>\[
 \tan \delta = 2 \cot \theta \left[ \frac{M_1^2 \sin^2 \theta - 1}{M_1^2 \left( \gamma + \cos 2\theta \right) + 2} \right] \;.
 \]</div>
 <p>If we apply this equation at the shock angle limits of <span class="math notranslate nohighlight">\(\theta = \mu = \sin^{-1} (1/M_1)\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span> = 90°, we see that <span class="math notranslate nohighlight">\(\delta = 0\)</span> and there is no deflection at either limit.</p>
 </div>
 <div class="section" id="applying-equations-for-oblique-shocks">
 <h2>Applying equations for oblique shocks<a class="headerlink" href="#applying-equations-for-oblique-shocks" title="Permalink to this headline">¶</a></h2>
-<p>Given an upstream Mach number <span class="math notranslate nohighlight">\(M_1\)</span> and shock angle <span class="math notranslate nohighlight">\(\theta\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> to find the deflection angle <span class="math notranslate nohighlight">\(\delta.\)</span></p>
+<p>Given an upstream Mach number <span class="math notranslate nohighlight">\(M_1\)</span> and shock angle <span class="math notranslate nohighlight">\(\theta\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-oblique">(34)</a> to find the deflection angle <span class="math notranslate nohighlight">\(\delta.\)</span></p>
 <p>Let’s create a function to do that, and also one to calculate the Mach number following a normal shock:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -443,7 +443,7 @@ Deflection at maximum shock angle:  0.000
 <h3>Example: oblique shock with given angle<a class="headerlink" href="#example-oblique-shock-with-given-angle" title="Permalink to this headline">¶</a></h3>
 <p>As another example, let’s consider an oblique shock that forms in air at an angle
 <span class="math notranslate nohighlight">\(\theta = \)</span> 45°. The conditions before the shock are 40°C, 1.2 bar, and a Mach number of 3.0. What are the Mach number and flow direction after the shock?</p>
-<p>We can find the flow direction (i.e., deflection angle) by solving Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> directly using the given information. We can find the Mach number after the shock (<span class="math notranslate nohighlight">\(M_2\)</span>) by using the normal component of <span class="math notranslate nohighlight">\(M_1\)</span>, applying our normal shock relationship (Equation <a class="reference internal" href="normal-shocks.html#equation-eq-normal-shock">(29)</a>), and then using Equation <a class="reference internal" href="#equation-eq-oblique-m2">(30)</a>:</p>
+<p>We can find the flow direction (i.e., deflection angle) by solving Equation <a class="reference internal" href="#equation-eq-oblique">(34)</a> directly using the given information. We can find the Mach number after the shock (<span class="math notranslate nohighlight">\(M_2\)</span>) by using the normal component of <span class="math notranslate nohighlight">\(M_1\)</span>, applying our normal shock relationship (Equation <a class="reference internal" href="normal-shocks.html#equation-eq-normal-shock">(29)</a>), and then using Equation <a class="reference internal" href="#equation-eq-oblique-m2">(33)</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mach1</span> <span class="o">=</span> <span class="mf">3.0</span>
@@ -472,7 +472,7 @@ Downstream Mach number =  1.681
 </div>
 <div class="section" id="finding-shock-angle-given-deflection">
 <h2>Finding shock angle given deflection<a class="headerlink" href="#finding-shock-angle-given-deflection" title="Permalink to this headline">¶</a></h2>
-<p>Now, what do we do when we need to find the shock angle <span class="math notranslate nohighlight">\(\theta\)</span> given a deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> and the upstream Mach number <span class="math notranslate nohighlight">\(M_1\)</span>? This problem is a bit trickier to solve, because we cannot solve Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> directly for <span class="math notranslate nohighlight">\(\theta\)</span>—plus, there are two potential solutions: a weak shock and strong shock.</p>
+<p>Now, what do we do when we need to find the shock angle <span class="math notranslate nohighlight">\(\theta\)</span> given a deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> and the upstream Mach number <span class="math notranslate nohighlight">\(M_1\)</span>? This problem is a bit trickier to solve, because we cannot solve Equation <a class="reference internal" href="#equation-eq-oblique">(34)</a> directly for <span class="math notranslate nohighlight">\(\theta\)</span>—plus, there are two potential solutions: a weak shock and strong shock.</p>
 <p>Traditionally, since it was previously so challenging to solve the equation, and most applications focus on air where we can assume <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>, people used tabulated and charted solutions to this equation. Most gas dynamics/compressible flow textbooks contain versions of these charts, which were originally published by NACA, the precursor to NASA, in the famous Report 1135 <span id="id1">[<a class="reference internal" href="../zbibliography.html#id3">AmesRStaff53</a>]</span> (Neil Armstrong had a copy!).</p>
 <p>For example, <a class="reference internal" href="#fig-oblique-chart"><span class="std std-numref">Figure 3</span></a> shows how shock angle varies with deflection angle for <span class="math notranslate nohighlight">\(\delta =\)</span> 0° to 32°, for various upstream Mach numbers.</p>
 <div class="figure align-default" id="fig-oblique-chart">
@@ -480,7 +480,7 @@ Downstream Mach number =  1.681
 <p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Chart for oblique shock showing how shock angle varies with deflection angle, for various upstream Mach numbers <span id="id2">[<a class="reference internal" href="../zbibliography.html#id3">AmesRStaff53</a>]</span>.</span><a class="headerlink" href="#fig-oblique-chart" title="Permalink to this image">¶</a></p>
 </div>
 <p>Using a chart like this is relatively fast, though not very precise, and limits you to gases where <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>.</p>
-<p>An alternative approach is to numerically solve the equation using a root finder. To do this, we need a function that rearranges Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> to equal zero, if the appropriate value of <span class="math notranslate nohighlight">\(\theta\)</span> is input:</p>
+<p>An alternative approach is to numerically solve the equation using a root finder. To do this, we need a function that rearranges Equation <a class="reference internal" href="#equation-eq-oblique">(34)</a> to equal zero, if the appropriate value of <span class="math notranslate nohighlight">\(\theta\)</span> is input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">oblique_shock_theta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">mach</span><span class="p">):</span>
@@ -537,7 +537,7 @@ Downstream Mach number =  1.681
 <p>This approach works reasonably well in most cases, but you may face situations where the root-finding algorithm fail to converge. (If you try to recreate an oblique shock chart using the code given above, you will certainly encounter this behavior!)</p>
 <p>An alternative approach is to transform Equation <code class="xref eq docutils literal notranslate"><span class="pre">oblique_shock</span></code> into a cubic equation, and then find the roots of this equation. Let’s call <span class="math notranslate nohighlight">\(x = \cot \theta\)</span>, then we can express the equation as</p>
 <div class="math notranslate nohighlight" id="equation-eq-oblique-cubic">
-<span class="eqno">(32)<a class="headerlink" href="#equation-eq-oblique-cubic" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(35)<a class="headerlink" href="#equation-eq-oblique-cubic" title="Permalink to this equation">¶</a></span>\[
 f(x) = x^3 + C x^2 - A x + (B - A C) = 0 \;,
 \]</div>
 <p>where</p>
@@ -552,7 +552,7 @@ C = \left( 1 + \frac{\gamma + 1}{2} M_1^2 \right) \tan \delta \;.
 \end{split}\]</div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Detailed proof:</p>
-<p>Obtaining Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(32)</a> requires a bit of work. First, recognize that we can use the trigonometric identity <span class="math notranslate nohighlight">\(\sin^2 \theta = \frac{1}{1 + \cot^2 \theta}\)</span>.</p>
+<p>Obtaining Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(35)</a> requires a bit of work. First, recognize that we can use the trigonometric identity <span class="math notranslate nohighlight">\(\sin^2 \theta = \frac{1}{1 + \cot^2 \theta}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{gather*}
@@ -607,7 +607,7 @@ Shock angle (strong) =  82.22°
 </div>
 <p>This provides a robust method for finding the deflection angles given shock angle and upstream Mach number.</p>
 <p>Lastly, we may want to find the maximum deflection angle, for a given Mach number. To do this, we can take the derivative of the deflection angle equation and solve for zero.
-First, rearrange Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(32)</a>:</p>
+First, rearrange Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(35)</a>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{gather*}
@@ -618,10 +618,10 @@ First, rearrange Equation <a class="reference internal" href="#equation-eq-obliq
 \end{gather*}
 \end{split}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-delta-max">
-<span class="eqno">(33)<a class="headerlink" href="#equation-eq-delta-max" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(36)<a class="headerlink" href="#equation-eq-delta-max" title="Permalink to this equation">¶</a></span>\[
 \sin^2 \theta_{\max} = \left( \frac{1}{\gamma M_1^2}\right) \left[ \frac{\gamma+1}{4} M_1^2 - 1 + \sqrt{ (\gamma+1) \left( \frac{\gamma+1}{16} M_1^4 + \frac{\gamma-1}{2} M_1^2 + 1 \right) } \right]
 \]</div>
-<p>Given <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-delta-max">(33)</a> for the maximum shock angle <span class="math notranslate nohighlight">\(\theta_{\max}\)</span>, and then use Equation <a class="reference internal" href="#equation-eq-oblique">(31)</a> to find the associated <span class="math notranslate nohighlight">\(\delta_{\max}\)</span>.</p>
+<p>Given <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(M_1\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-delta-max">(36)</a> for the maximum shock angle <span class="math notranslate nohighlight">\(\theta_{\max}\)</span>, and then use Equation <a class="reference internal" href="#equation-eq-oblique">(34)</a> to find the associated <span class="math notranslate nohighlight">\(\delta_{\max}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_max_shock_angle</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">mach</span><span class="p">):</span>

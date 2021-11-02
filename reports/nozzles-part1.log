@@ -58,7 +58,7 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1700/615604042.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_2292/615604042.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      3[0m [0;34m[0m[0m
 [1;32m      4[0m [0mpressures_converging[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mzeros_like[0m[0;34m([0m[0marea_ratios_converging[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 5[0;31m [0mmachs_converging[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mzeros_like[0m[0;34m([0m[0marea_ratios[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
