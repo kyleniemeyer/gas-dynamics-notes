@@ -276,6 +276,11 @@
    Analysis of weak shocks
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#isentropic-turns">
+   Isentropic turns
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -327,6 +332,112 @@
 \end{gather*}
 \end{split}\]</div>
 <p>so therefore through a normal shock <span class="math notranslate nohighlight">\( \Delta p \propto (M_1^2 - 1) \)</span>.</p>
+<p>We can also examine the entropy change through a normal shock by using one of our thermodynamic state relationships:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\Delta s_{1-2} = c_p \log \frac{v_2}{v_1} + c_v \log \frac{p_2}{p_1} \\
+\frac{s_2 - s_1}{R} = \frac{\gamma}{\gamma-1} \log \frac{\rho_1}{\rho_2} + \frac{1}{\gamma-1} \log \frac{p_2}{p_1} \;,
+\end{gather*}
+\end{split}\]</div>
+<p>which, after considerable effort, we can express as</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{s_2 - s_1}{R} = \frac{2\gamma \left(M_1^2 - 1\right)^3}{3 (\gamma+1)^2} + \mathcal{O} \left( M_1^2 - 1 \right)^4 \;.
+\]</div>
+<p>For weak shocks, where <span class="math notranslate nohighlight">\(M_1 \rightarrow 1\)</span>, we can neglect the higher-order terms, and so <span class="math notranslate nohighlight">\( \Delta s \propto (M_1^2 - 1)^3 \)</span>.</p>
+<p>For turning flows, the above analysis applies to the normal component of the Mach number: <span class="math notranslate nohighlight">\(M_{1n} = M_1 \sin \theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Delta p}{p_1} = \frac{2\gamma}{\gamma+1} (M_1^2 \sin^2 \theta - 1)
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Delta s}{R} = \frac{2\gamma \left(M_1^2 \sin^2 \theta - 1\right)^3}{3 (\gamma+1)^2} + \mathcal{O} \left( M_1^2 \sin^2 \theta - 1 \right)^4 \;.
+\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title">Small-angle approximations</p>
+<p>We will use the small-angle approximations again. Recall that for small angles <span class="math notranslate nohighlight">\(\theta\)</span> (in radians), we can approximate a right triangle with angle <span class="math notranslate nohighlight">\(\theta\)</span>, base adjacent leg <span class="math notranslate nohighlight">\(A\)</span>, opposite leg <span class="math notranslate nohighlight">\(O\)</span>, and hypotenuse <span class="math notranslate nohighlight">\(H\)</span> as the sector of a circle with radius <span class="math notranslate nohighlight">\(A\)</span> and arc length <span class="math notranslate nohighlight">\(s\)</span>.
+Then, <span class="math notranslate nohighlight">\(H \approx A\)</span>, <span class="math notranslate nohighlight">\(O \approx s\)</span>, and <span class="math notranslate nohighlight">\(s = A \theta\)</span>.</p>
+<p>Therefore, we can approximate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\tan \theta = \frac{O}{A} \approx \frac{s}{A} = \frac{A \theta}{A} = \theta \;, \\
+\sin \theta = \frac{O}{H} \approx \frac{O}{A} = \theta \;, \\
+\cos \theta = \frac{A}{H} \approx 1 \;.
+\end{gather*}
+\end{split}\]</div>
+</div>
+<p>For <em>very</em> weak oblique shocks, we can make specific approximations:</p>
+<ol class="simple">
+<li><p>The deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> is very small (<span class="math notranslate nohighlight">\( \delta \ll 1 \)</span>), meaning we can use the <strong>small angle approximations</strong> to say <span class="math notranslate nohighlight">\( \tan \delta \approx \delta \)</span>.</p></li>
+<li><p>The shock angle <span class="math notranslate nohighlight">\(\theta\)</span> approaches the Mach angle <span class="math notranslate nohighlight">\(\mu\)</span>, where <span class="math notranslate nohighlight">\(\sin \mu = 1 / M\)</span>.</p></li>
+</ol>
+<p>Let’s apply these approximations to our oblique-shock relationship given by Equation <a class="reference internal" href="oblique-shocks.html#equation-eq-oblique">(34)</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\tan \delta = 2 \cot \theta \left[ \frac{M_1^2 \sin^2 \theta - 1}{M_1^2 (\gamma + \cos 2\theta) + 2} \right) \\
+\rightarrow \delta \approx (\text{constants}) \left( M_1^2 \sin^2 \theta - 1 \right) \\
+\delta \propto \left( M_1^2 \sin^2 \theta - 1 \right) \;,
+\end{gather*}
+\end{split}\]</div>
+<p>since <span class="math notranslate nohighlight">\(\mu\)</span> is known for a given value of <span class="math notranslate nohighlight">\(M_1\)</span>. Therefore, we can express the changes in pressure and entropy using the deflection angle:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\frac{\Delta p}{p_1} \approx \frac{2\gamma}{\gamma+1} (\text{constants}) \; \delta \\
+\frac{\Delta s}{R} \approx \frac{2\gamma}{3 (\gamma+1)^2} \left[ (\text{constants}) \; \delta \right]^3
+\end{gather*}
+\end{split}\]</div>
+<p>Now, we can say that for any weak oblique shock, for any initial conditions, that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\Delta p \propto \delta \phantom{\;.} \\
+\Delta s \propto \delta^3 \;.
+\end{gather*}
+\end{split}\]</div>
+</div>
+<div class="section" id="isentropic-turns">
+<h2>Isentropic turns<a class="headerlink" href="#isentropic-turns" title="Permalink to this headline">¶</a></h2>
+<p>So far we have been analyzing a single weak shock, which deflects the flow by an infinitesimal angle.
+Now, consider a flow undergoing a turn over a finite angle, but comprised of <span class="math notranslate nohighlight">\(n\)</span> small turns.</p>
+<div class="figure align-default" id="fig-many-turns">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/many-small-turns.png"><img alt="Diagram showing many small shock turns" class="bg-primary mb-1" src="../_images/many-small-turns.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A finite turning flow accomplished with many small turns from weak shocks.</span><a class="headerlink" href="#fig-many-turns" title="Permalink to this image">¶</a></p>
+</div>
+<p>With <span class="math notranslate nohighlight">\(n\)</span> equal segments, the overall turning angle is <span class="math notranslate nohighlight">\( \delta_T = n \delta\)</span>.
+For a given <span class="math notranslate nohighlight">\(\delta_T\)</span>, increasing the number of segments <span class="math notranslate nohighlight">\(n\)</span> will mean that each deflection <span class="math notranslate nohighlight">\(\delta\)</span> decreases.
+Each segment is a very weak oblique shock, and for each
+<span class="math notranslate nohighlight">\( \Delta p^{\prime} \propto \delta \)</span> and <span class="math notranslate nohighlight">\( \Delta s^{\prime} \propto \delta^3 \)</span>.</p>
+<p>Then, if we look at the total change in pressure and entropy over the whole turn:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\Delta p = \sum^n \Delta p^{\prime} \propto n \, \delta \\
+\Delta s = \sum^n \Delta s^{\prime} \propto n \, \delta^3 \;,
+\end{gather*}
+\end{split}\]</div>
+<p>but <span class="math notranslate nohighlight">\( \delta = \delta_T / n \)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+\Delta p \propto \lim_{n \rightarrow \infty} n \left( \frac{\delta_T}{n} \right) = \delta_T \\
+\Delta s \propto \lim_{n \rightarrow \infty} n \left( \frac{\delta_T}{n} \right)^3 = 0 \;.
+\end{gather*}
+\end{split}\]</div>
+<p>Therefore, as the number of segments increases and <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>,</p>
+<ol class="simple">
+<li><p>The wall makes a smooth turn through a finite angle <span class="math notranslate nohighlight">\(\delta_T\)</span>,</p></li>
+<li><p>The shock waves become Mach waves,</p></li>
+<li><p>The Mach number changes continuously,</p></li>
+<li><p>There is a finite pressure change continuously through the turn, and</p></li>
+<li><p>There is no change in entropy—the process is isentropic.</p></li>
+</ol>
+<p>So, we can use smooth turns to achieve isentropic compression with a concave turn, and isentropic expansion with a convex turn.</p>
 </div>
 </div>
 
