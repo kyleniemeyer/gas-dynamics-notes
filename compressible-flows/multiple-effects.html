@@ -349,7 +349,7 @@
 </div>
 </div>
 <div class="math notranslate nohighlight" id="equation-eq-friction-area">
-<span class="eqno">(37)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
 \frac{1}{2} \gamma M^2 \frac{f}{D} = \frac{1}{A} \frac{dA}{dx} + \frac{2 (1-M^2)}{M \left[ 2 + (\gamma-1) M^2 \right]} \frac{dM}{dx} 
 \]</div>
 <div class="section" id="numerical-solution-of-isentropic-flow-in-converging-nozzle">
@@ -369,7 +369,7 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = \frac{2 \frac{D_o - D_i}{L}}{D(x)} \;,
 \]</div>
 <p>where the diameter is expressed as <span class="math notranslate nohighlight">\( D(x) = D_i + (D_o - D_i) \frac{x}{L} \)</span>.</p>
-<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(37)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
+<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(39)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = - \left[ \frac{(D_o - D_i) / L}{D(x)} \right] \frac{2 + (\gamma-1)M^2}{1 - M^2} M \;,
@@ -489,7 +489,7 @@ Error:  1.206e-10 %
 <p>Next, consider air flow in a constant area duct with friction. (This is Fanno flow.)
 The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.6\)</span>, the duct length is 45 cm, the diameter is 3 cm, and the friction factor is 0.02.</p>
 <p>Find the outlet Mach number, and compare against the exact solution.</p>
-<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(37)</a> simplifies to</p>
+<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(39)</a> simplifies to</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = \frac{\gamma M^3 \left[ 2 + (\gamma-1) M^2 \right]}{4 (1-M^2)} \frac{f}{D} \;,
@@ -581,9 +581,9 @@ Error:  3.1377e-09 %
 </div>
 <div class="section" id="flows-with-area-change-and-friction">
 <h2>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h2>
-<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(37)</a>, rearranged for convenience:</p>
+<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(39)</a>, rearranged for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-eq-area-friction-func">
-<span class="eqno">(38)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(40)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = F(x,M) = \left\{ \frac{M \left[ 2 + (\gamma - 1)M^2 \right]}{2} \right\} \left\{ \frac{ -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D}}{1 - M^2} \right\}
 \]</div>
 <p>We can integrate this in theory, but if we want to analyze converging-diverging nozzles that are choked, as <span class="math notranslate nohighlight">\( M \rightarrow 1 \)</span> at some location, then <span class="math notranslate nohighlight">\( \frac{dM}{dx} \rightarrow \infty \)</span>. So, we need some special treatment to handle this singularity.</p>

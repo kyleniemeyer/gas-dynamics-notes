@@ -296,6 +296,28 @@
    Isentropic turns
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-prandtl-meyer-flows">
+   Analysis of Prandtl-Meyer flows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-turn-from-sonic-flow">
+     Example: turn from sonic flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-turn-from-general-supersonic-flow">
+     Example: turn from general supersonic flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-isentropic-compression">
+     Example: isentropic compression
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
             </nav>
@@ -309,12 +331,13 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="prandtlmeyer-flows">
 <h1>Prandtl–Meyer flows<a class="headerlink" href="#prandtlmeyer-flows" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
 
 <span class="c1"># Pint gives us some helpful unit conversion</span>
 <span class="kn">from</span> <span class="nn">pint</span> <span class="kn">import</span> <span class="n">UnitRegistry</span>
@@ -452,7 +475,211 @@ Each segment is a very weak oblique shock, and for each
 <li><p>There is a finite pressure change continuously through the turn, and</p></li>
 <li><p>There is no change in entropy—the process is isentropic.</p></li>
 </ol>
-<p>So, we can use smooth turns to achieve isentropic compression with a concave turn, and isentropic expansion with a convex turn.</p>
+<p>So, we can use smooth turns to achieve isentropic compression with a concave turn, and <strong>isentropic expansion</strong> with a convex turn—smooth or sharp.</p>
+</div>
+<div class="section" id="analysis-of-prandtl-meyer-flows">
+<h2>Analysis of Prandtl-Meyer flows<a class="headerlink" href="#analysis-of-prandtl-meyer-flows" title="Permalink to this headline">¶</a></h2>
+<p>Knowing that Prandtl-Meyer expansion/compression is isentropic, we want to know how the Mach number changes for a given turning angle: <span class="math notranslate nohighlight">\( \Delta M = f( \delta_T) \)</span>.
+To derive this relationship, we can examine a single Mach wave to see how the flow changes instantaneously in an expansion fan.</p>
+<div class="figure align-default" id="fig-prandtl-meyer">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/prandtl-meyer-analysis.png"><img alt="Diagram of flow change through a single Mach wave" class="bg-primary mb-1" src="../_images/prandtl-meyer-analysis.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Diagram of how flow changes through a single Mach wave in a Prandtl-Meyer expansion turn.</span><a class="headerlink" href="#fig-prandtl-meyer" title="Permalink to this image">¶</a></p>
+</div>
+<p>We start with a supersonic flow at Mach number <span class="math notranslate nohighlight">\(M\)</span>, encountering a expansion Mach wave at angle <span class="math notranslate nohighlight">\(\mu\)</span>. The flow turns through angle <span class="math notranslate nohighlight">\(d \nu\)</span> and accelerates to <span class="math notranslate nohighlight">\(M + dM\)</span>.
+Looking at the components of velocity, the tangential component <span class="math notranslate nohighlight">\(V_t\)</span> does not change through the expansion wave:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+V_t = V \cos \mu = (V + dV) \cos (\mu + d \nu) \\
+V \cos \mu =  (V + dV) \left( \cos \mu \cos d \nu - \sin \mu \sin d \nu \right)
+\end{gather*}
+\end{split}\]</div>
+<p>Since a single Mach wave will only turn the flow by an infinitesimal angle, we can apply the small-angle approximation: <span class="math notranslate nohighlight">\( d\nu \ll 1 \)</span>, so <span class="math notranslate nohighlight">\(\cos d \nu \approx 1\)</span> and <span class="math notranslate nohighlight">\(\sin d\nu \approx d\nu\)</span>.
+Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+V \cos \mu = (V + dV) \left( \cos \mu - d\nu \sin \mu \right) \\
+d \nu = \cot \mu \frac{dV}{V}
+\end{gather*}
+\end{split}\]</div>
+<p>But, since we have that <span class="math notranslate nohighlight">\(\sin \mu = \frac{1}{M}\)</span>, we know that <span class="math notranslate nohighlight">\(\cos \mu = \sqrt{M^2 - 1}\)</span>.
+Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+d \nu = \sqrt{M^2 - 1} \frac{dV}{V} \\
+\rightarrow d \nu = \frac{\sqrt{M^2 - 1}}{1 + \frac{\gamma-1}{2} M^2} \frac{dM}{M}
+\end{gather*}
+\end{split}\]</div>
+<p>This gives us <span class="math notranslate nohighlight">\(d\nu = f(\gamma, M)\)</span>, which we can integrate to get <span class="math notranslate nohighlight">\(\nu + \text{const} = f(\gamma, M)\)</span>. If we specify the constraint that <span class="math notranslate nohighlight">\(\nu = 0\)</span> for <span class="math notranslate nohighlight">\( M = 1\)</span>, then the integration constant becomes zero, and the closed-form expression for <span class="math notranslate nohighlight">\(\nu\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-prandtl-meyer">
+<span class="eqno">(37)<a class="headerlink" href="#equation-eq-prandtl-meyer" title="Permalink to this equation">¶</a></span>\[
+\nu = \left( \frac{\gamma+1}{\gamma-1} \right)^{1/2} \tan^{-1} \left[ \frac{\gamma-1}{\gamma+1} \left( M^2 - 1 \right) \right]^{1/2} - \tan^{-1} \left( M^2 - 1\right)^{1/2} \;.
+\]</div>
+<p>This is the <strong>Prandtl–Meyer function</strong>, the angle measured from the flow direction where <span class="math notranslate nohighlight">\(M = 1\)</span>, through which a flow turned isentropically reaches <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<p>If we know the downstream Mach number, we can solve Equation <a class="reference internal" href="#equation-eq-prandtl-meyer">(37)</a> easily to get the associated turning angle. Finding the new Mach number from the angle requires interpolation or numerical solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_prandtl_meyer</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Evaluate Prandtl-Meyer function at given Mach number.</span>
+<span class="sd">    </span>
+<span class="sd">    Defined as the angle from the flow direction where Mach = 1 through which the </span>
+<span class="sd">    flow turned isentropically reaches the specified Mach number.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">-</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_prandtl_meyer</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Solve for unknown Mach number, given Prandtl-Meyer function (in radians).&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">nu</span> <span class="o">-</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-turn-from-sonic-flow">
+<h3>Example: turn from sonic flow<a class="headerlink" href="#example-turn-from-sonic-flow" title="Permalink to this headline">¶</a></h3>
+<p>Consider a horizontal airflow moving at <span class="math notranslate nohighlight">\(M = 1\)</span>, which is turned 28° via a sharp corner.
+A centered Prandtl–Meyer expansion fan isentropically expands the flow.
+What is the final Mach number?</p>
+<p>In this case, we can apply the Prandtl–Meyer function directly: <span class="math notranslate nohighlight">\(\nu\)</span> = 28° from the flow direction where <span class="math notranslate nohighlight">\(M = 1\)</span>. We can then solve for <span class="math notranslate nohighlight">\(M_2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">turn_angle</span> <span class="o">=</span> <span class="mi">28</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="c1"># guesses for M2: 2.0 and 3.0</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">turn_angle</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M2 = </span><span class="si">{</span><span class="n">root</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M2 =  2.059
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-turn-from-general-supersonic-flow">
+<h3>Example: turn from general supersonic flow<a class="headerlink" href="#example-turn-from-general-supersonic-flow" title="Permalink to this headline">¶</a></h3>
+<p>Now, consider a horizontal airflow moving at a Mach number of 2.059, that encounters
+a sharp turn downward of 12°. What is the final Mach number?</p>
+<p>We cannot just solve Equation <a class="reference internal" href="#equation-eq-prandtl-meyer">(37)</a> because the initial Mach number is not 1.0.</p>
+<p>However, we can imagine that to obtain the true starting Mach number of 2.059, we hypothetically started with a flow at Mach = 1.0 and expanded it through a turn of 28°.
+Then, adding an additional 12° will reach the same final Mach number.</p>
+<p>In other words, modify the problem such that <span class="math notranslate nohighlight">\(M_0 = 1 \rightarrow M_1 \rightarrow M_2\)</span>,
+and <span class="math notranslate nohighlight">\(\nu_2 = \Delta \nu + \nu_1\)</span>, where <span class="math notranslate nohighlight">\(\nu_1\)</span> is the Prandtl–Meyer function evaluated at the actual starting Mach number <span class="math notranslate nohighlight">\(M_1\)</span>, <span class="math notranslate nohighlight">\(\Delta \nu\)</span> is the turning angle (12° in this case), and <span class="math notranslate nohighlight">\(\nu_2\)</span> is the Prandtl–Meyer function of the final Mach number <span class="math notranslate nohighlight">\(M_2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nu_1</span> <span class="o">=</span> <span class="mi">28</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+<span class="n">delta_nu</span> <span class="o">=</span> <span class="mi">12</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="n">nu_2</span> <span class="o">=</span> <span class="n">nu_1</span> <span class="o">+</span> <span class="n">delta_nu</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;nu_2 = </span><span class="si">{</span><span class="n">nu_2</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .1f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+
+<span class="c1"># guesses for M2: 2.0 and 3.0</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nu_2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_2 = </span><span class="si">{</span><span class="n">root</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nu_2 =  40.0°
+M_2 =  2.538
+</pre></div>
+</div>
+</div>
+</div>
+<p>Therefore, for any Prandtl–Meyer flow, we can find the final Mach number from an arbitrary initial Mach number using</p>
+<div class="math notranslate nohighlight" id="equation-eq-prandtl-meyer-turn">
+<span class="eqno">(38)<a class="headerlink" href="#equation-eq-prandtl-meyer-turn" title="Permalink to this equation">¶</a></span>\[
+\nu_2 = \nu_1 + \Delta \nu \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nu_1 = f(M_1, \gamma)\)</span>, <span class="math notranslate nohighlight">\(\Delta \nu\)</span> is the turning angle (positive for convex expanding flow, negative for concave compressing flow), and <span class="math notranslate nohighlight">\(\nu_2 = f(M_2, \gamma)\)</span>.</p>
+</div>
+<div class="section" id="example-isentropic-compression">
+<h3>Example: isentropic compression<a class="headerlink" href="#example-isentropic-compression" title="Permalink to this headline">¶</a></h3>
+<p>Consider a Prandtl–Meyer compression problem: a horizontal airflow at Mach 2.40 encounters a smooth turn upward at 20°. What is the Mach number near the wall after the turn?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="mf">2.40</span>
+
+<span class="c1"># turning angle is negative because compression</span>
+<span class="n">delta_nu</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="n">nu_1</span> <span class="o">=</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">nu_2</span> <span class="o">=</span> <span class="n">nu_1</span> <span class="o">+</span> <span class="n">delta_nu</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nu_2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_2 = </span><span class="si">{</span><span class="n">root</span><span class="o">.</span><span class="n">root</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_2 =  1.664
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, what happens away from the wall? The flow needs to turn sharply, and an <em>oblique shock</em> forms with a deflection angle <span class="math notranslate nohighlight">\(\delta\)</span> of 20°.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">oblique_shock_delta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate oblique shock deflection from shock angle and Mach&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="mf">2.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span>
+            <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="p">)))</span>
+            <span class="p">))</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_oblique_theta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Solve for oblique wave angle theta&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">delta</span> <span class="o">-</span> <span class="n">oblique_shock_delta</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_mach_normal</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">mach1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate Mach number after a normal shock&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">mach1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">mach1</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="mf">2.40</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">solve_oblique_theta</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">40</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mi">50</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Theta: </span><span class="si">{</span><span class="n">theta</span> <span class="o">*</span> <span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+
+<span class="n">M1n</span> <span class="o">=</span> <span class="n">M1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">M2n</span> <span class="o">=</span> <span class="n">get_mach_normal</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">M1n</span><span class="p">)</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">M2n</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M2: </span><span class="si">{</span><span class="n">M2</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Theta:  44.34°
+M2:  1.569
+</pre></div>
+</div>
+</div>
+</div>
+<p>Due to the oblique shock, the Mach number away from the wall is lower than it is near the wall, and the pressure will be different too! So, there will need to be another wave phenomenon occuring between the two regions.</p>
+</div>
 </div>
 </div>
 
