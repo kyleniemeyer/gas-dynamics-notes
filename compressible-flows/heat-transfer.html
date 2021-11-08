@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -279,6 +281,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rayleigh-flow-theory">
+   Rayleigh flow theory
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -289,6 +304,50 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="flows-with-heat-transfer-rayleigh">
 <h1>Flows with heat transfer (Rayleigh)<a class="headerlink" href="#flows-with-heat-transfer-rayleigh" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
+
+<span class="c1"># Pint gives us some helpful unit conversion</span>
+<span class="kn">from</span> <span class="nn">pint</span> <span class="kn">import</span> <span class="n">UnitRegistry</span>
+<span class="n">ureg</span> <span class="o">=</span> <span class="n">UnitRegistry</span><span class="p">()</span>
+<span class="n">Q_</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span> <span class="c1"># We will use this to construct quantities (value + unit)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Heat transfer is the third main factor that can affect a compressible flow, after area change and friction.</p>
+<p><strong>Rayleigh flow</strong> is the specific case of frictionless flow in a constant-area duct, with heat transfer. Rayleigh flow applies to constant-area heat exchangers and combustion chambers where the entropy changes due to heat transfer are significantly larger than those due to friction:</p>
+<div class="math notranslate nohighlight">
+\[
+d s_e \gg d s_i \;,
+\]</div>
+<p>so we can neglect frictional effects and say <span class="math notranslate nohighlight">\( ds \approx ds_e \)</span>.</p>
+<div class="section" id="rayleigh-flow-theory">
+<h2>Rayleigh flow theory<a class="headerlink" href="#rayleigh-flow-theory" title="Permalink to this headline">¶</a></h2>
+<p>For a general fluid, we can apply conservation of mass: <span class="math notranslate nohighlight">\( \dot{m} = \rho A V \)</span>, but since area is constant, we can introduce the <strong>mass velocity</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+G = \rho V = \text{constant} \;.
+\]</div>
+<p>Next, applying conservation of energy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+h_{t1} + q = h_{t2} + w_s = h_t \\
+\rightarrow h_{t1} + q = h_{t2} \;,
+\end{gather*}
+\end{split}\]</div>
+<p>and we see that stagnation enthlapy is <strong>not constant</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Up to this point, we have been able to rely on the fact that stagnation enthalpy is constant. However, this is not the case in Rayleigh flows due to heat transfer.</p>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
