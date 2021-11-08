@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flows with friction (Fanno) &#8212; Gas Dynamics notes</title>
+    <title>Flows with friction (Fanno flows) &#8212; Gas Dynamics notes</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,6 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -153,7 +155,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Flows with friction (Fanno)
+   Flows with friction (Fanno flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -279,6 +281,34 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fanno-flow-theory">
+   Fanno flow theory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fanno-flow-analysis">
+   Fanno flow analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fanno-sonic-reference-state">
+   Fanno sonic reference state
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-constant-area-duct-following-nozzle">
+   Example: constant-area duct following nozzle
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -287,8 +317,264 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="flows-with-friction-fanno">
-<h1>Flows with friction (Fanno)<a class="headerlink" href="#flows-with-friction-fanno" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="flows-with-friction-fanno-flows">
+<h1>Flows with friction (Fanno flows)<a class="headerlink" href="#flows-with-friction-fanno-flows" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
+
+<span class="c1"># Pint gives us some helpful unit conversion</span>
+<span class="kn">from</span> <span class="nn">pint</span> <span class="kn">import</span> <span class="n">UnitRegistry</span>
+<span class="n">ureg</span> <span class="o">=</span> <span class="n">UnitRegistry</span><span class="p">()</span>
+<span class="n">Q_</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span> <span class="c1"># We will use this to construct quantities (value + unit)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After area change, friction is another important factor that controls compressible flow.
+(Heat transfer is the third main factor.)
+Of course, in reality more than one of these factors can play a role at the same time—we’ll examine those cases later.</p>
+<p><strong>Fanno flow</strong> is the specific case of adiabatic flow in a constant-area duct, with effects due to friction.</p>
+<div class="section" id="fanno-flow-theory">
+<h2>Fanno flow theory<a class="headerlink" href="#fanno-flow-theory" title="Permalink to this headline">¶</a></h2>
+<p>For a general fluid, we can apply conservation of mass: <span class="math notranslate nohighlight">\( \dot{m} = \rho A V \)</span>, but since area is constant, we can introduce the <strong>mass velocity</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+G = \rho V = \text{constant} \;.
+\]</div>
+<p>Next, applying conservation of energy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+h_{t1} + q = h_{t2} + w_s = h_t \\
+\rightarrow h_t = h + \frac{V^2}{2} \\
+V^2 = \left( \frac{G}{\rho} \right)^2 \rightarrow h_t = h + \frac{G^2}{2 \rho^2} = \text{constant} \;.
+\end{gather*}
+\end{split}\]</div>
+<p>So, we have a relationship between <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> (or <span class="math notranslate nohighlight">\(v\)</span>) in a Fanno flow.</p>
+</div>
+<div class="section" id="fanno-flow-analysis">
+<h2>Fanno flow analysis<a class="headerlink" href="#fanno-flow-analysis" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight" id="equation-eq-fanno-temperature">
+<span class="eqno">(39)<a class="headerlink" href="#equation-eq-fanno-temperature" title="Permalink to this equation">¶</a></span>\[
+\frac{T_2}{T_1} = \frac{2 + (\gamma-1) M_1^2}{2 + (\gamma-1) M_2^2}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-fanno-pressure">
+<span class="eqno">(40)<a class="headerlink" href="#equation-eq-fanno-pressure" title="Permalink to this equation">¶</a></span>\[
+\frac{p_2}{p_1} = \frac{M_1}{M_2} \left( \frac{2 + (\gamma-1) M_1^2}{2 + (\gamma-1) M_2^2} \right)^{1/2}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-fanno-density">
+<span class="eqno">(41)<a class="headerlink" href="#equation-eq-fanno-density" title="Permalink to this equation">¶</a></span>\[
+\frac{\rho_2}{\rho_1} = \frac{M_1}{M_2} \left[ \frac{2 + (\gamma-1) M_2^2}{2 + (\gamma-1) M_1^2} \right]^{1/2}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-fanno-stag-pressure">
+<span class="eqno">(42)<a class="headerlink" href="#equation-eq-fanno-stag-pressure" title="Permalink to this equation">¶</a></span>\[
+\frac{p_{t2}}{p_{t1}} = \frac{M_1}{M_2} \left( \frac{2 + (\gamma-1) M_2^2}{2 + (\gamma-1) M_1^2} \right)^{\frac{\gamma+1}{2(\gamma-1)}}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-fanno-length">
+<span class="eqno">(43)<a class="headerlink" href="#equation-eq-fanno-length" title="Permalink to this equation">¶</a></span>\[
+\frac{f \Delta x}{D_e} = \frac{\gamma+1}{2\gamma} \log \left[ \frac{2 + (\gamma-1) M_2^2}{2 + (\gamma-1) M_1^2} \right] - \frac{1}{\gamma} \left( \frac{1}{M_2^2} - \frac{1}{M_1^2} \right) - \frac{\gamma+1}{2 \gamma} \log \frac{M_2^2}{M_1^2}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_fanno_distance</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Get Fanno friction distance (f Δx/D) given two Mach numbers&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">))</span> <span class="o">*</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">-</span>
+        <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">gamma</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span>
+        <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_fanno_mach</span><span class="p">(</span><span class="n">mach_2</span><span class="p">,</span> <span class="n">mach_1</span><span class="p">,</span> <span class="n">friction_factor</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Use to solve for downstream Mach in Fanno flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">friction_factor</span><span class="o">*</span><span class="n">delta_x</span><span class="o">/</span><span class="n">diameter</span> <span class="o">-</span> <span class="n">get_fanno_distance</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_fanno_temperature_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return T2/T1 for Fanno flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_fanno_pressure_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return p2/p1 for Fanno flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">mach_1</span> <span class="o">/</span> <span class="n">mach_2</span><span class="p">)</span> <span class="o">*</span> 
+        <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_fanno_stag_pressure_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return pt2/pt1 for Fanno flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">mach_1</span> <span class="o">/</span> <span class="n">mach_2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> 
+            <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fanno-sonic-reference-state">
+<h2>Fanno sonic reference state<a class="headerlink" href="#fanno-sonic-reference-state" title="Permalink to this headline">¶</a></h2>
+<p>The * reference state for a Fanno flow is the state that would exist if the flow continued until the Mach number is 1.0, through additional length of duct (with friction).
+Since this is the limiting point on a Fanno line, all states in a given Fanno flow share the same * reference state.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{f L_{\max}}{D_e} = \left( \frac{\gamma+1}{2\gamma} \right) \log \left( \frac{\gamma+1}{2 + (\gamma-1) M^2} \right) - \frac{1}{\gamma} \left( 1 - \frac{1}{M^2} \right) - \left( \frac{\gamma+1}{2\gamma} \right) \log \left(\frac{1}{M^2}\right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(L_{\max}\)</span> = <span class="math notranslate nohighlight">\(x^* - x\)</span> is the maximum length of duct allowable on the Fanno line from the given state before reaching the limiting point.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{T}{T^*} = \frac{\gamma+1}{2 + (\gamma-1) M^2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{p}{p^*} = \frac{1}{M} \left[ \frac{\gamma+1}{2 + (\gamma-1)M^2}\right]^{1/2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rho}{\rho^*} = \frac{1}{M} \left[ \frac{2 + (\gamma-1) M^2}{\gamma+1}\right]^{1/2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{p_t}{p_t^*} = \frac{1}{M} \left[ \frac{2 + (\gamma-1) M^2}{\gamma+1}\right]^{\frac{\gamma+1}{2(\gamma-1)}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_fanno_max_length</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Get maximum Fanno friction length (f L_max / D) given Mach number&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">gamma</span><span class="p">))</span> <span class="o">*</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">-</span>
+        <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">gamma</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span>
+        <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_fanno_reference_mach</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">friction_factor</span><span class="p">,</span> <span class="n">L_max</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Use to solve for downstream Mach in Fanno flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">friction_factor</span><span class="o">*</span><span class="n">L_max</span><span class="o">/</span><span class="n">diameter</span> <span class="o">-</span> <span class="n">get_fanno_max_length</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_fanno_reference_pressure</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return p/p* for Fanno flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">mach</span><span class="p">)</span> <span class="o">*</span> 
+        <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-constant-area-duct-following-nozzle">
+<h2>Example: constant-area duct following nozzle<a class="headerlink" href="#example-constant-area-duct-following-nozzle" title="Permalink to this headline">¶</a></h2>
+<p>Consider a system with an isentropic converging-diverging nozzle that flows into a 2.4 m section of constant-diameter duct (with diameter 0.14 m), exhausting into 1 bar pressure. The area ratio of the nozzle is 5.42, and the friction factor in the constant-diameter section if 0.02.</p>
+<p>Find the minimum stagnation pressure in the supply for the nozzle if the flow is all supersonic in the system, starting at the throat.</p>
+<p>First, we need to determine the supersonic flow operation of the nozzle (the third critical). For an area ratio <span class="math notranslate nohighlight">\(A_3 / A_2\)</span>, we can solve for the outlet Mach number <span class="math notranslate nohighlight">\(M_3\)</span> and pressure ratio <span class="math notranslate nohighlight">\(p_3 / p_{t3}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># isentropic relationships</span>
+<span class="k">def</span> <span class="nf">get_reference_area</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate reference area ratio&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> 
+            <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_mach_area</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">area_ratio</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Used to find Mach number for given reference area ratio and gamma&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">area_ratio</span> <span class="o">-</span> <span class="n">get_reference_area</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_stagnation_pressure_ratio</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate p/pt given Mach number&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">area_ratio</span> <span class="o">=</span> <span class="mf">5.42</span>
+<span class="n">pt1_pt3</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># isentropic nozzle</span>
+
+<span class="n">diameter</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">0.14</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">p_rec</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">length</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">2.4</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">)</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">solve_mach_area</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">area_ratio</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+<span class="n">M3</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Nozzle outlet M3 = </span><span class="si">{</span><span class="n">M3</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">p3_pt3</span> <span class="o">=</span> <span class="n">get_stagnation_pressure_ratio</span><span class="p">(</span><span class="n">M3</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p3/pt3 = </span><span class="si">{</span><span class="n">p3_pt3</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nozzle outlet M3 =  3.260
+p3/pt3 =  0.0185
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, for the length of duct with friction, the inlet and outlet share the same Fanno sonic reference state, so</p>
+<div class="math notranslate nohighlight">
+\[
+L_{3, \max} = \Delta x + L_{4, \max}
+\]</div>
+<p>and we can then find <span class="math notranslate nohighlight">\(M_4\)</span> using <span class="math notranslate nohighlight">\(\frac{f L_{4, \max}}{D}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fL3_max_D</span> <span class="o">=</span> <span class="n">get_fanno_max_length</span><span class="p">(</span><span class="n">M3</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">fL4_max_D</span> <span class="o">=</span> <span class="n">fL3_max_D</span> <span class="o">-</span> <span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">length</span> <span class="o">/</span> <span class="n">diameter</span><span class="p">)</span>
+<span class="n">L4_max</span> <span class="o">=</span> <span class="n">fL4_max_D</span> <span class="o">*</span> <span class="n">diameter</span> <span class="o">/</span> <span class="n">f</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">solve_fanno_reference_mach</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">L4_max</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">M4</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M4 = </span><span class="si">{</span><span class="n">M4</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">p3_p3star</span> <span class="o">=</span> <span class="n">get_fanno_reference_pressure</span><span class="p">(</span><span class="n">M3</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p4_p4star</span> <span class="o">=</span> <span class="n">get_fanno_reference_pressure</span><span class="p">(</span><span class="n">M4</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p3star_p4star</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># p4 = p_rec</span>
+<span class="n">pt1</span> <span class="o">=</span> <span class="n">pt1_pt3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">p3_pt3</span><span class="p">)</span> <span class="o">*</span> <span class="n">p3_p3star</span> <span class="o">*</span> <span class="n">p3star_p4star</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">p4_p4star</span><span class="p">)</span> <span class="o">*</span> <span class="n">p_rec</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Supply stagnation pressure: </span><span class="si">{</span><span class="n">pt1</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M4 = 1.722 dimensionless
+Supply stagnation pressure: 20.35 bar
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

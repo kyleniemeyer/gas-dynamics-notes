@@ -155,7 +155,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="friction.html">
-   Flows with friction (Fanno)
+   Flows with friction (Fanno flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -320,7 +320,7 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="flows-with-multiple-effects">
 <h1>Flows with multiple effects<a class="headerlink" href="#flows-with-multiple-effects" title="Permalink to this headline">¶</a></h1>
 <p>This module covers how we can analyze compressible flows with multiple effects accelerating or decelerating the flow: area change, friction, and/or heat transfer (plus shocks!).</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -348,8 +348,9 @@
 </div>
 </div>
 </div>
+<p>This differential equation describes how Mach number changes in a compressible flow due to the effects of both area change (via <span class="math notranslate nohighlight">\(dA/dx\)</span>) and friction:</p>
 <div class="math notranslate nohighlight" id="equation-eq-friction-area">
-<span class="eqno">(39)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(44)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
 \frac{1}{2} \gamma M^2 \frac{f}{D} = \frac{1}{A} \frac{dA}{dx} + \frac{2 (1-M^2)}{M \left[ 2 + (\gamma-1) M^2 \right]} \frac{dM}{dx} 
 \]</div>
 <div class="section" id="numerical-solution-of-isentropic-flow-in-converging-nozzle">
@@ -369,7 +370,7 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = \frac{2 \frac{D_o - D_i}{L}}{D(x)} \;,
 \]</div>
 <p>where the diameter is expressed as <span class="math notranslate nohighlight">\( D(x) = D_i + (D_o - D_i) \frac{x}{L} \)</span>.</p>
-<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(39)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
+<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(44)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = - \left[ \frac{(D_o - D_i) / L}{D(x)} \right] \frac{2 + (\gamma-1)M^2}{1 - M^2} M \;,
@@ -489,7 +490,7 @@ Error:  1.206e-10 %
 <p>Next, consider air flow in a constant area duct with friction. (This is Fanno flow.)
 The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.6\)</span>, the duct length is 45 cm, the diameter is 3 cm, and the friction factor is 0.02.</p>
 <p>Find the outlet Mach number, and compare against the exact solution.</p>
-<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(39)</a> simplifies to</p>
+<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(44)</a> simplifies to</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = \frac{\gamma M^3 \left[ 2 + (\gamma-1) M^2 \right]}{4 (1-M^2)} \frac{f}{D} \;,
@@ -581,12 +582,13 @@ Error:  3.1377e-09 %
 </div>
 <div class="section" id="flows-with-area-change-and-friction">
 <h2>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h2>
-<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(39)</a>, rearranged for convenience:</p>
+<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(44)</a>, rearranged for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-eq-area-friction-func">
-<span class="eqno">(40)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(45)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = F(x,M) = \left\{ \frac{M \left[ 2 + (\gamma - 1)M^2 \right]}{2} \right\} \left\{ \frac{ -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D}}{1 - M^2} \right\}
 \]</div>
 <p>We can integrate this in theory, but if we want to analyze converging-diverging nozzles that are choked, as <span class="math notranslate nohighlight">\( M \rightarrow 1 \)</span> at some location, then <span class="math notranslate nohighlight">\( \frac{dM}{dx} \rightarrow \infty \)</span>. So, we need some special treatment to handle this singularity.</p>
+<p>The method of Beans <span id="id1">[<a class="reference internal" href="../zbibliography.html#id5">Bea70</a>]</span> uses l’Hôpital’s rule to get a finite value for <span class="math notranslate nohighlight">\( \frac{dM}{dx}\)</span> as the Mach number approches one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
@@ -775,17 +777,56 @@ Error:  3.1377e-09 %
 </div>
 <div class="section" id="flows-with-heat-transfer-and-area-change">
 <h2>Flows with heat transfer and area change<a class="headerlink" href="#flows-with-heat-transfer-and-area-change" title="Permalink to this headline">¶</a></h2>
+<p>When the flow encounters both area change and heat transfer, we can use the ordinary differential equation</p>
+<div class="math notranslate nohighlight" id="equation-eq-heat-transfer-area">
+<span class="eqno">(46)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
+\frac{dM}{dx} = \frac{M}{1 - M^2} \left[ \left(1 + \frac{\gamma-1}{2} M^2 \right) \frac{1}{A} \frac{dA}{dx} + \frac{1 + \gamma M^2}{2} \left( \frac{1}{c_p T} \frac{\delta q}{dx} \right) \right]
+\]</div>
+<p>To integrate <span class="math notranslate nohighlight">\(M(x)\)</span>, we need to know how the area changes with position and the rate that heat transfer occurs with distance.</p>
+<p>As an example, consider air flow in a diverging conical nozzle of length 10 cm, where the diameter grows linearly with distance from 2 cm to 5 cm.
+The air enters the nozzle at a Mach number of 3 with a stagnation temperature of 300 K.
+Heat is added at a rate such that <span class="math notranslate nohighlight">\( \frac{dT_t}{dx} \)</span> = 30 K/m.
+Due to the pressure at the exit, there is a normal shock wave halfway down the nozzle.</p>
+<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(46)</a> for this problem:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dM}{dx} = \frac{M \left[ 2 + (\gamma-1) M^2 \right]}{2 (1-M^2)} \left[ -\frac{1}{A} \frac{dA}{dx} + \frac{1+\gamma M^2}{2} \left( \frac{1}{T_t} \frac{dT_t}{dt} \right) \right] \;.
+\]</div>
+<p>The nozzle diameter varies linearly with length:</p>
+<div class="math notranslate nohighlight">
+\[
+D(x) = D_i + (D_e - D_i) \frac{x}{L} \;,
+\]</div>
+<p>and so we can express the area and rate of change of area as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gather*}
+A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left[ D_i + (D_e - D_i) \frac{x}{L} \right]^2 \\
+\rightarrow \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = 2 \frac{\frac{D_e-D_i}{L}}{D(x)} = \frac{2 \alpha}{D(x} 
+\end{gather*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\( \alpha = (D_e - D_i) / L = 0.3 \)</span> and <span class="math notranslate nohighlight">\( D(x) = D_i + \alpha x \)</span>.
+We can write a function that evaluates this specific <span class="math notranslate nohighlight">\(dM / dx\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dMdx_heat_area</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">D_in</span><span class="p">,</span> <span class="n">Tt_in</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Returns dM/dx for nozzle with heat transfer and area change&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="mf">0.5</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
             <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="p">(</span><span class="n">D_in</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> 
             <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">/</span> <span class="p">(</span><span class="n">Tt_in</span> <span class="o">+</span> <span class="n">beta</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
             <span class="p">)</span>
         <span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">normal_shock</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also need to handle the normal shock wave at the middle of the nozzle.
+The shock is a discontinuity at <span class="math notranslate nohighlight">\(x = 0.5 L\)</span>, and so we can only integrate for <span class="math notranslate nohighlight">\(M(x)\)</span> from <span class="math notranslate nohighlight">\(x = [0, 0.5 L]\)</span> before we need to account for the shock by using our normal shock relationship. Then, using the new Mach number following the shock, we can continue the integration over <span class="math notranslate nohighlight">\( x = [0.5 L, L] \)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_shock</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Returns Mach number after normal shock wave&#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
         <span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">)</span>
@@ -795,7 +836,8 @@ Error:  3.1377e-09 %
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mach_in</span> <span class="o">=</span> <span class="mf">3.0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># problem parameters</span>
+<span class="n">mach_in</span> <span class="o">=</span> <span class="mf">3.0</span>
 <span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
 
 <span class="n">diam_in</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cm&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
@@ -812,16 +854,20 @@ Error:  3.1377e-09 %
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first solve to shock</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># first solve to shock over x = [0, 0.5 L]:</span>
 <span class="n">sol_1</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
     <span class="n">dMdx_heat_area</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">mach_in</span><span class="p">],</span>
+    <span class="n">max_step</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">diam_in</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">stag_temp_in</span><span class="p">)</span>
     <span class="p">)</span>
 
+<span class="c1"># find the Mach number after the normal shock</span>
 <span class="n">mach_post_shock</span> <span class="o">=</span> <span class="n">normal_shock</span><span class="p">(</span><span class="n">sol_1</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
 
+<span class="c1"># complete the integration over x = [0.5 L, L]:</span>
 <span class="n">sol_2</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
     <span class="n">dMdx_heat_area</span><span class="p">,</span> <span class="p">[</span><span class="n">length</span><span class="o">.</span><span class="n">magnitude</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="o">.</span><span class="n">magnitude</span><span class="p">],</span> <span class="p">[</span><span class="n">mach_post_shock</span><span class="p">],</span>
+    <span class="n">max_step</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">diam_in</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">stag_temp_in</span><span class="p">)</span>
     <span class="p">)</span>
 </pre></div>
@@ -831,9 +877,12 @@ Error:  3.1377e-09 %
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sol_1</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_2</span><span class="o">.</span><span class="n">t</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sol_1</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">sol_2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]))</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sol_1</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_2</span><span class="o">.</span><span class="n">t</span><span class="p">))</span> <span class="o">/</span> <span class="n">length</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> 
+    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sol_1</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">sol_2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]))</span>
     <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x / L$ location&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exit Mach: </span><span class="si">{</span><span class="n">sol_2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -841,8 +890,8 @@ Error:  3.1377e-09 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_30_0.png" src="../_images/multiple-effects_30_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exit Mach:  0.1942
+<img alt="../_images/multiple-effects_32_0.png" src="../_images/multiple-effects_32_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exit Mach:  0.1941
 </pre></div>
 </div>
 </div>
