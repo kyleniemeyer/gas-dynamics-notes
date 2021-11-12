@@ -308,11 +308,25 @@
   <a class="reference internal nav-link" href="#flows-with-area-change-and-friction">
    Flows with area change and friction
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sonic-location">
+     Sonic location
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#flows-with-heat-transfer-and-area-change">
    Flows with heat transfer and area change
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-heat-transfer-in-coverging-nozzle-with-shock">
+     Example: heat transfer in coverging nozzle with shock
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -352,21 +366,80 @@
 <span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">200</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cm&#39;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="flows-with-friction-and-area-change">
 <h2>Flows with friction and area change<a class="headerlink" href="#flows-with-friction-and-area-change" title="Permalink to this headline">¶</a></h2>
-<p>This differential equation describes how Mach number changes in a compressible flow due to the effects of both area change (via <span class="math notranslate nohighlight">\(dA/dx\)</span>) and friction:</p>
-<div class="math notranslate nohighlight" id="equation-eq-friction-area">
-<span class="eqno">(69)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
-\frac{1}{2} \gamma M^2 \frac{f}{D} = \frac{1}{A} \frac{dA}{dx} + \frac{2 (1-M^2)}{M \left[ 2 + (\gamma-1) M^2 \right]} \frac{dM}{dx} 
+<div class="figure align-default" id="fig-cv-friction-area">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/cv-area-friction.png"><img alt="Control volume for flow with friction and area change" class="bg-white mb-1" src="../_images/cv-area-friction.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Differential control volume for adiabatic flow in a duct with varying area and friction.</span><a class="headerlink" href="#fig-cv-friction-area" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-cv-friction-area"><span class="std std-numref">Figure 9</span></a> shows a control volume in a varying-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>. The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span>, the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>, and the wetted surface area is <span class="math notranslate nohighlight">\(A_s\)</span>. The friction force <span class="math notranslate nohighlight">\(F_f\)</span> is equivalent to the product of shear stress due to wall friction <span class="math notranslate nohighlight">\(\tau_f\)</span> and <span class="math notranslate nohighlight">\(A_s\)</span>.</p>
+<p>First, we can apply conservation of mass to the control volume:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\rho V A = (\rho + d\rho) (V + dV) (A + dA) \\
+0 = \rho A dV + \rho V dA + A V d\rho
+\end{gather*}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-continuity">
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq-continuity" title="Permalink to this equation">¶</a></span>\[
+0 = \frac{dV}{V} + \frac{dA}{A} + \frac{d\rho}{\rho}
 \]</div>
+<p>Next, conservation of momentum:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\sum F_x = \dot{m} \left( V_{\text{out}, x} - V_{\text{in}, x} \right) \\
+p A + \left( p + \frac{dp}{2} \right) dA - (p + dp) (A + dA) - \tau_f A_s = (\rho A V)(V + dV - V) \\
+-A dp - \frac{1}{2} \rho V^2 \frac{f A_s}{4} = \rho A V dV \\
+dp + \frac{1}{2} V^2 \frac{f dx}{D} + p V dV = 0 \;,
+\end{gather*}\]</div>
+<p>where <span class="math notranslate nohighlight">\( f \equiv 4 \tau_f / \left( \frac{1}{2} \rho V^2 \right) \)</span> is the Darcy friction factor, and for a circular duct <span class="math notranslate nohighlight">\( A_s = \pi D dx = 4 A dx / D \)</span>.
+We can then obtain</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d\rho}{\rho} + \frac{dT}{T} + \gamma M^2 \frac{dV}{V} + \frac{1}{2} \gamma M^2 \frac{f dx}{D} = 0 \;.
+\]</div>
+<p>We can eliminate <span class="math notranslate nohighlight">\( d\rho / \rho \)</span> using Equation <a class="reference internal" href="#equation-eq-continuity">(69)</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+- \left( \frac{dV}{V} + \frac{dA}{A} \right) + \frac{dT}{T} + \gamma M^2 \frac{dV}{V} + \frac{1}{2} \gamma M^2 \frac{f dx}{D} = 0 \;.
+\]</div>
+<p>Next, let’s introduce the definition of Mach number:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+V = M a = M \sqrt{\gamma R T} \\
+dV = dM \sqrt{\gamma R T} + \frac{M \sqrt{\gamma R}}{2 \sqrt{T}} dT \\
+\frac{dV}{V} = \frac{dM}{M} + \frac{1}{2} \frac{dT}{T} \;,
+\end{gather*}\]</div>
+<p>which we can use to eliminate <span class="math notranslate nohighlight">\( dV / V \)</span>.
+Finally, since the flow is adiabatic, we can use the fact that stagnation enthalpy remains constant:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+T_t = \text{constant} = T \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
+\frac{dT}{T} + \frac{d \left( 1 + \frac{\gamma - 1}{2} M^2 \right)}{\left( 1 + \frac{\gamma - 1}{2} M^2 \right)} = 0 \\
+\frac{dT}{T} = - \frac{ (\gamma - 1) M dM}{1 + \frac{\gamma - 1}{2} M^2} \;,
+\end{gather*}\]</div>
+<p>which gives us an expression for <span class="math notranslate nohighlight">\( dT / T \)</span>.
+Eliminating <span class="math notranslate nohighlight">\( dT / T \)</span> and <span class="math notranslate nohighlight">\( dV / V \)</span> leads to</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2} \gamma M^2 \frac{f dx}{D} = \frac{dA}{A} + \frac{2(1 - M^2)}{2 + (\gamma-1) M^2} \frac{dM}{M} \;.
+\]</div>
+<p>Finally, we can divide by <span class="math notranslate nohighlight">\(dx\)</span>, and obtain a differential equation that describes how Mach number changes in a compressible flow due to the effects of both area change (via <span class="math notranslate nohighlight">\(dA/dx\)</span>) and friction:</p>
+<div class="math notranslate nohighlight" id="equation-eq-friction-area">
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
+\frac{1}{2} \gamma M^2 \frac{f}{D} = \frac{1}{A} \frac{dA}{dx} + \frac{2 (1-M^2)}{M \left[ 2 + (\gamma-1) M^2 \right]} \frac{dM}{dx} \;.
+\]</div>
+<p>Unfortunately, this is not something we can usually integrate analytically to get an exact solution (except for the specific cases of isentropic flow and constant-area Fanno flow).
+Instead, we’ll need to use integration methods to obtain numerical solutions.</p>
+<p>First, let’s consider the cases where we <em>do</em> have exact solutions, so we can compare our numerical results, and then we will look at the general case of combined friction and varying-area effects.</p>
 </div>
 <div class="section" id="isentropic-flow-in-converging-nozzle">
 <h2>Isentropic flow in converging nozzle<a class="headerlink" href="#isentropic-flow-in-converging-nozzle" title="Permalink to this headline">¶</a></h2>
-<p>Consider air flowing isentropically (and so <span class="math notranslate nohighlight">\(f = 0\)</span>) in a conically shaped converging nozzle,
+<p>First, consider air flowing isentropically (and so <span class="math notranslate nohighlight">\(f = 0\)</span>) in a conically shaped converging nozzle,
 with length 10 cm, initial area of 50 cm<span class="math notranslate nohighlight">\(^2\)</span>,
 outlet area of 40 cm<span class="math notranslate nohighlight">\(^2\)</span>. The inflow temperature is 300 K and velocity is 100 m/s.</p>
 <p>Find the outlet Mach number and compare against the exact solution.</p>
@@ -381,7 +454,7 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = \frac{2 \frac{D_o - D_i}{L}}{D(x)} \;,
 \]</div>
 <p>where the diameter is expressed as <span class="math notranslate nohighlight">\( D(x) = D_i + (D_o - D_i) \frac{x}{L} \)</span>.</p>
-<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(69)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
+<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = - \left[ \frac{(D_o - D_i) / L}{D(x)} \right] \frac{2 + (\gamma-1)M^2}{1 - M^2} M \;,
@@ -408,12 +481,12 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 
 <span class="n">speed_sound_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">temperature_in</span><span class="p">)</span>
 <span class="n">mach_in</span> <span class="o">=</span> <span class="p">(</span><span class="n">velocity_in</span> <span class="o">/</span> <span class="n">speed_sound_in</span><span class="p">)</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_in = </span><span class="si">{</span><span class="n">mach_in</span><span class="o">.</span><span class="n">magnitude</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_in = </span><span class="si">{</span><span class="n">mach_in</span><span class="si">:</span><span class="s1"> .4f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_in =  0.2880
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_in = 0.2880
 </pre></div>
 </div>
 </div>
@@ -454,7 +527,9 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance (cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;isentropic-numerical.png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -462,6 +537,11 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 <img alt="../_images/multiple-effects_9_0.png" src="../_images/multiple-effects_9_0.png" />
 </div>
 </div>
+<div class="figure align-default" id="fig-isentropic-numerical">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/isentropic-numerical.png"><img alt="Numerical solution of isentropic flow" class="bg-white mb-1" src="../_images/isentropic-numerical.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Numerical solution of isentropic flow in varying-area duct.</span><a class="headerlink" href="#fig-isentropic-numerical" title="Permalink to this image">¶</a></p>
+</div>
+<p>Next, we can compare this against the exact solution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare against exact solution</span>
@@ -479,7 +559,8 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 
 <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
     <span class="n">isentropic_area_ratio</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mach_in</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="p">(</span><span class="n">area_out</span><span class="o">/</span><span class="n">area_in</span><span class="p">)</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mach_in</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="p">(</span><span class="n">area_out</span><span class="o">/</span><span class="n">area_in</span><span class="p">)</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="p">)</span>
 <span class="n">mach_out_exact</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_out (exact) = </span><span class="si">{</span><span class="n">mach_out_exact</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
@@ -501,7 +582,7 @@ Error:  1.206e-10 %
 <p>Next, consider air flow in a constant area duct with friction. (This is Fanno flow.)
 The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.6\)</span>, the duct length is 45 cm, the diameter is 3 cm, and the friction factor is 0.02.</p>
 <p>Find the outlet Mach number, and compare against the exact solution.</p>
-<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(69)</a> simplifies to</p>
+<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a> simplifies to</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = \frac{\gamma M^3 \left[ 2 + (\gamma-1) M^2 \right]}{4 (1-M^2)} \frac{f}{D} \;,
@@ -547,18 +628,25 @@ The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance (cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;numerical-fanno.png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_14_0.png" src="../_images/multiple-effects_14_0.png" />
+<img alt="../_images/multiple-effects_16_0.png" src="../_images/multiple-effects_16_0.png" />
 </div>
 </div>
+<div class="figure align-default" id="fig-fanno-numerical">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/numerical-fanno.png"><img alt="Numerical solution of Fanno flow" class="bg-white mb-1" src="../_images/numerical-fanno.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Numerical solution of Fanno flow in constant-area duct.</span><a class="headerlink" href="#fig-fanno-numerical" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can compare this numerical solution to the exact solution for Fanno flow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compare with exact solution</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_out (numerical): </span><span class="si">{</span><span class="n">mach_out</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_out (numerical) = </span><span class="si">{</span><span class="n">mach_out</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">fanno_distance</span><span class="p">(</span><span class="n">mach_2</span><span class="p">,</span> <span class="n">mach_1</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">friction</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Function for Fanno flow, solving for M2&#39;&#39;&#39;</span>
@@ -583,7 +671,7 @@ The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_out (numerical):  0.7093
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_out (numerical) =  0.7093
 M_out (exact) = 0.7093
 Error:  3.1377e-09 %
 </pre></div>
@@ -593,13 +681,60 @@ Error:  3.1377e-09 %
 </div>
 <div class="section" id="flows-with-area-change-and-friction">
 <h2>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h2>
-<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(69)</a>, rearranged for convenience:</p>
+<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a>, rearranged for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-eq-area-friction-func">
-<span class="eqno">(70)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = F(x,M) = \left\{ \frac{M \left[ 2 + (\gamma - 1)M^2 \right]}{2} \right\} \left\{ \frac{ -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D}}{1 - M^2} \right\}
 \]</div>
 <p>We can integrate this in theory, but if we want to analyze converging-diverging nozzles that are choked, as <span class="math notranslate nohighlight">\( M \rightarrow 1 \)</span> at some location, then <span class="math notranslate nohighlight">\( \frac{dM}{dx} \rightarrow \infty \)</span>. So, we need some special treatment to handle this singularity.</p>
-<p>The method of Beans <span id="id1">[<a class="reference internal" href="../zbibliography.html#id5">Bea70</a>]</span> uses l’Hôpital’s rule to get a finite value for <span class="math notranslate nohighlight">\( \frac{dM}{dx}\)</span> as the Mach number approches one.</p>
+<p>The method of Beans <span id="id1">[<a class="reference internal" href="../zbibliography.html#id5">Bea70</a>]</span> uses l’Hôpital’s rule to get a finite value for <span class="math notranslate nohighlight">\( \frac{dM}{dx}\)</span> as the Mach number approches one.
+To evaluate the derivative at this limit, we can take the derivative of the numerator and denominator at the limit, focusing on the term</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\lim_{M \rightarrow 1} \left[ \frac{-\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D}}{1 - M^2} \right] &amp;= \lim_{M \rightarrow 1} \left\{ \frac{\frac{d}{dx} \left( -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D} \right)}{-2 M \frac{dM}{dx}} \right\} \\
+&amp;= \frac{\frac{d}{dx} \left[ -\frac{1}{A} \left( \frac{dA}{dx} \right) \right]_{M \rightarrow 1} + \frac{1}{2} \gamma \frac{d}{dx} \left(\frac{f}{D} \right)_{M \rightarrow 1} + \gamma \left( \frac{f}{D} \right)_{M \rightarrow 1} \left( \frac{dM}{dx} \right)_{M \rightarrow 1}}{-2 \left( \frac{dM}{dx} \right)_{M \rightarrow 1}} \\
+\end{align*}\]</div>
+<p>Then, looking at the whole derivative as <span class="math notranslate nohighlight">\( M \rightarrow 1 \)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\left( \frac{dM}{dx} \right)_{M \rightarrow 1} = \left( \frac{\gamma+1}{2} \right) \left\{ \frac{\frac{d}{dx} \left[ -\frac{1}{A} \left( \frac{dA}{dx} \right) \right]_{M \rightarrow 1} + \frac{1}{2} \gamma \frac{d}{dx} \left(\frac{f}{D} \right)_{M \rightarrow 1} + \gamma \left( \frac{f}{D} \right) \left( \frac{dM}{dx} \right)_{M \rightarrow 1}}{-2 \left( \frac{dM}{dx} \right)_{M \rightarrow 1}} \right\} \;,
+\]</div>
+<p>which we can rearrange to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-quadratic-dmdx">
+<span class="eqno">(72)<a class="headerlink" href="#equation-eq-quadratic-dmdx" title="Permalink to this equation">¶</a></span>\[
+\frac{4}{\gamma+1} \left( \frac{dM}{dx} \right)_{M \rightarrow 1}^2 + \gamma \left( \frac{f}{D} \right)_{M \rightarrow 1} \left( \frac{dM}{dx} \right)_{M \rightarrow 1} - \frac{d}{dx} \left( \frac{1}{A} \frac{dA}{dx} \right)_{M \rightarrow 1} + \frac{\gamma}{2}\frac{d}{dx} \left( \frac{f}{D} \right)_{M \rightarrow 1} = 0 \;.
+\]</div>
+<p>This is a quadratic equation for the derivative <span class="math notranslate nohighlight">\( dM/dx \)</span> as the Mach number approaches one.
+It has two roots at the sonic point, one negative and one positive:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \frac{dM}{dx} &gt; 0 \)</span> for accelerating flow, where <span class="math notranslate nohighlight">\( \frac{dA}{dx} &lt; 0 \)</span> for subsonic flow and <span class="math notranslate nohighlight">\( \frac{dA}{dx} &gt; 0 \)</span> for supersonic flow; and</p></li>
+<li><p><span class="math notranslate nohighlight">\( \frac{dM}{dx} &lt; 0 \)</span> for decelerating flow, where <span class="math notranslate nohighlight">\( \frac{dA}{dx} &gt; 0 \)</span> for subsonic flow and <span class="math notranslate nohighlight">\( \frac{dA}{dx} &lt; 0 \)</span> for supersonic flow</p></li>
+</ul>
+<div class="section" id="sonic-location">
+<h3>Sonic location<a class="headerlink" href="#sonic-location" title="Permalink to this headline">¶</a></h3>
+<p>To apply the appropriate solution, we need to find the location of the sonic point,
+found with</p>
+<div class="math notranslate nohighlight" id="equation-eq-sonic-point">
+<span class="eqno">(73)<a class="headerlink" href="#equation-eq-sonic-point" title="Permalink to this equation">¶</a></span>\[
+\left( -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D} \right)_{M \rightarrow 1} \rightarrow 0 \;.
+\]</div>
+<p>To find the specific location, we need to consider a specific nozzle shape;
+let’s focus on a symmetrical nozzle with circular cross section, following the formula</p>
+<div class="math notranslate nohighlight" id="equation-eq-diameter-symmetric">
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-diameter-symmetric" title="Permalink to this equation">¶</a></span>\[
+D(x) = 2 \left[ 1 + \frac{1}{2} \cos \left( \pi \frac{x}{L} \right) \right] D_t \;,
+\]</div>
+<p>where the diameter is <span class="math notranslate nohighlight">\(3 D_t\)</span> at <span class="math notranslate nohighlight">\( x = 0 \)</span>, <span class="math notranslate nohighlight">\(D_t\)</span> at <span class="math notranslate nohighlight">\(x=L\)</span>, and <span class="math notranslate nohighlight">\(3 D_t\)</span> at <span class="math notranslate nohighlight">\(x = 2L\)</span>.
+For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A} \frac{dA}{dx} = \frac{2}{D} \frac{dD}{dx} \)</span>.</p>
+<p>Applying the specifics of this nozzle to Equation <a class="reference internal" href="#equation-eq-sonic-point">(73)</a>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\left( \frac{2}{D} \frac{dD}{dx} \right)_{M \rightarrow 1} = \left( \frac{\gamma}{2} \frac{f}{D} \right)_{M \rightarrow 1} \\
+\left[ \frac{2}{D(x)} \frac{-\pi D_t}{L} \sin \left( \frac{\pi x}{L} \right) \right]_{M \rightarrow 1} = \left( \frac{\gamma}{2} \frac{f}{D(x)} \right)_{M \rightarrow 1} \\
+\sin \left( \frac{\pi x_{\text{sp}}}{L} \right) = - \frac{\gamma f L}{4 \pi D_t} \\
+\left( \frac{x}{L} \right)_{\text{sp}} = - \frac{1}{\pi} \sin^{-1} \left( \frac{\gamma f L}{4 \pi D_t} \right)
+\end{gather*}\]</div>
+<p>For a case where <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>, <span class="math notranslate nohighlight">\(f = 0.4\)</span>, and <span class="math notranslate nohighlight">\(L = 2 D_t\)</span>, we can calculate the sonic location:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
@@ -608,16 +743,19 @@ Error:  3.1377e-09 %
 <span class="k">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 <span class="n">x_L_sp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">angle</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x/L sonic = </span><span class="si">{</span><span class="n">x_L_sp</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(x/L) @ sonic = </span><span class="si">{</span><span class="n">x_L_sp</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x/L sonic =  1.0284
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(x/L) @ sonic =  1.0284
 </pre></div>
 </div>
 </div>
 </div>
+<p>(This does require some careful calculation to get the right value.)</p>
+<p>Now, with the sonic location identified, calculating the Mach number distribution throughout the nozzle requires solving <strong>two</strong> initial value problems: from the sonic point backwards to the inlet, and from the sonic point forwards to the outlet. For points at/near the sonic point, we can use Equation <a class="reference internal" href="#equation-eq-quadratic-dmdx">(72)</a> to find <span class="math notranslate nohighlight">\(dM/dx\)</span>.</p>
+<p>Let’s continue the case from before: air flowing through a symmetrical converging-diverging nozzle with a circular cross section, with the diameter given by Equation <a class="reference internal" href="#equation-eq-diameter-symmetric">(74)</a>. The nozzle length is <span class="math notranslate nohighlight">\( L = 2 D_t \)</span> and friction factor is <span class="math notranslate nohighlight">\( f = 0.4 \)</span> (this is very large).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for solving quadratic equation at M = 1</span>
@@ -633,18 +771,6 @@ Error:  3.1377e-09 %
 <span class="n">roots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
 <span class="c1"># take the positive root for accelerating flow</span>
 <span class="n">dM_dxL_sp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dM_dxL_sp</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.10940419851572
 </pre></div>
 </div>
 </div>
@@ -700,23 +826,6 @@ Error:  3.1377e-09 %
     <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sol_sub</span><span class="o">.</span><span class="n">t</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sol_super</span><span class="o">.</span><span class="n">t</span><span class="p">)),</span> 
-    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">sol_sub</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sol_super</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]))</span>
-    <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x / L$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_23_0.png" src="../_images/multiple-effects_23_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -777,29 +886,106 @@ Error:  3.1377e-09 %
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;area-friction.png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_25_0.png" src="../_images/multiple-effects_25_0.png" />
+<img alt="../_images/multiple-effects_27_0.png" src="../_images/multiple-effects_27_0.png" />
 </div>
+</div>
+<div class="figure align-default" id="fig-friction-area">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/area-friction.png"><img alt="Numerical solution of flow with area change and friction" class="bg-white mb-1" src="../_images/area-friction.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Numerical solution of Mach number distribution in varying-area duct with friction, compared with isentropic solution.</span><a class="headerlink" href="#fig-friction-area" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can see that the presence of friction starts to significantly alter the flow in the supersonic region, decelerating the flow from the isentropic solution and even causing the Mach number to begin decreasing near the exit. This is an extreme case, due to the high friction factor.</p>
 </div>
+</div>
 <div class="section" id="flows-with-heat-transfer-and-area-change">
 <h2>Flows with heat transfer and area change<a class="headerlink" href="#flows-with-heat-transfer-and-area-change" title="Permalink to this headline">¶</a></h2>
-<p>When the flow encounters both area change and heat transfer, we can use the ordinary differential equation</p>
+<div class="figure align-default" id="fig-cv-heat-area">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/cv-area-heat.png"><img alt="Control volume for flow with heat transfer and area change" class="bg-white mb-1" src="../_images/cv-area-heat.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Differential control volume for frictionless flow in a duct with varying area and heat transfer.</span><a class="headerlink" href="#fig-cv-heat-area" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-cv-heat-area"><span class="std std-numref">Figure 13</span></a> shows a control volume in a varying-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>. The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span>, the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>, and the flow experiences heat transfer <span class="math notranslate nohighlight">\( \delta q \)</span>.</p>
+<p>Applying conservation of mass, momentum, and energy to the control volume, we get</p>
+<div class="math notranslate nohighlight" id="equation-eq-heat-area-continuity">
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-heat-area-continuity" title="Permalink to this equation">¶</a></span>\[
+\frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-heat-area-momentum">
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-heat-area-momentum" title="Permalink to this equation">¶</a></span>\[
+dp + \rho V dV = 0
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-heat-area-energy">
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-heat-area-energy" title="Permalink to this equation">¶</a></span>\[
+\delta q = c_p d T_t \;,
+\]</div>
+<p>and we also can express a differential form of the ideal gas law:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dp}{p} = \frac{d\rho}{\rho} + \frac{dT}{T}
+\]</div>
+<p>We can eliminate <span class="math notranslate nohighlight">\( \frac{dp}{p} \)</span> by taking Equation <a class="reference internal" href="#equation-eq-heat-area-momentum">(76)</a> and dividing by <span class="math notranslate nohighlight">\(p\)</span>, where we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\frac{dp}{p} + \frac{\rho}{p} V dV = 0 \\
+\rightarrow \frac{d\rho}{\rho} + \frac{dT}{T} + \frac{\rho}{p} V dV = 0 \;.
+\end{gather*}\]</div>
+<p>Next, incorporate Equation <a class="reference internal" href="#equation-eq-heat-area-continuity">(75)</a> to eliminate <span class="math notranslate nohighlight">\( \frac{d\rho}{\rho} \)</span> and use the ideal gas law expression</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\rho}{p} V dV = \frac{\rho}{p} V^2 \frac{dV}{V} = \frac{1}{RT} M^2 \gamma R T \frac{dV}{V} = \gamma M^2 \frac{dV}{V}
+\]</div>
+<p>to get</p>
+<div class="math notranslate nohighlight">
+\[
+- \left( \frac{dA}{A} + \frac{dV}{V} \right) + \frac{dT}{T} + \gamma M^2 \frac{dV}{V} = 0 \;.
+\]</div>
+<p>We can use the logarithmic derivative of the Mach number expression to eliminate <span class="math notranslate nohighlight">\( \frac{dV}{V} \)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+V = M \sqrt{ \gamma R T } \\
+dV = dM \sqrt{\gamma R T} + dT \frac{1}{2} \frac{1}{\sqrt{T}} M \sqrt{\gamma R} \\
+\frac{dV}{V} = \frac{dM}{M} + \frac{1}{2} \frac{dT}{T}
+\end{gather*}\]</div>
+<p>and get</p>
+<div class="math notranslate nohighlight">
+\[
+-\frac{dA}{A} + \frac{dM}{M} \left(\gamma M^2 - 1 \right) + \frac{dT}{T} \left( \frac{\gamma M^2 + 1}{2} \right) = 0 \;.
+\]</div>
+<p>To eliminate <span class="math notranslate nohighlight">\(\frac{dT}{T}\)</span>, we can look at the stagnation temperature relationship:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+T_t = T \left( 1 + \frac{\gamma-1}{2} M^2 \right) \\
+dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
+\frac{dT_t}{T} = \left( 1 + \frac{\gamma-1}{2} M^2 \right) \frac{dT}{T} + (\gamma-1) M^2 \frac{dM}{M} \;,
+\end{gather*}\]</div>
+<p>but we have from Equation <a class="reference internal" href="#equation-eq-heat-area-energy">(77)</a> that <span class="math notranslate nohighlight">\( dT_t = \delta q / c_p \)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dT}{T} = \left( 1 + \frac{\gamma-1}{2} M^2 \right)^{-1} \left[ \frac{\delta q}{c_p T} - M^2 (\gamma-1) \frac{dM}{M} \right] \;,
+\]</div>
+<p>which we can substitute into the above expression to get</p>
+<div class="math notranslate nohighlight">
+\[
+-\frac{dA}{A} + \frac{ \gamma M^2 + 1}{2 \left( 1 + \frac{\gamma-1}{2} M^2 \right)} \frac{\delta q}{c_p T} + \frac{M^2 - 1}{1 + \frac{\gamma-1}{2} M^2} \frac{dM}{M} = 0 \;.
+\]</div>
+<p>Rearranging and dividing by <span class="math notranslate nohighlight">\(dx\)</span>, we can get an ordinary differential equation for solving for Mach number:</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-transfer-area">
-<span class="eqno">(71)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
-\frac{dM}{dx} = \frac{M}{1 - M^2} \left[ \left(1 + \frac{\gamma-1}{2} M^2 \right) \frac{1}{A} \frac{dA}{dx} + \frac{1 + \gamma M^2}{2} \left( \frac{1}{c_p T} \frac{\delta q}{dx} \right) \right]
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
+\frac{dM}{dx} = \frac{M}{1 - M^2} \left[ -\left(1 + \frac{\gamma-1}{2} M^2 \right) \frac{1}{A} \frac{dA}{dx} + \frac{1 + \gamma M^2}{2} \left( \frac{1}{c_p T} \frac{\delta q}{dx} \right) \right]
 \]</div>
 <p>To integrate <span class="math notranslate nohighlight">\(M(x)\)</span>, we need to know how the area changes with position and the rate that heat transfer occurs with distance.</p>
+<div class="section" id="example-heat-transfer-in-coverging-nozzle-with-shock">
+<h3>Example: heat transfer in coverging nozzle with shock<a class="headerlink" href="#example-heat-transfer-in-coverging-nozzle-with-shock" title="Permalink to this headline">¶</a></h3>
 <p>As an example, consider air flow in a diverging conical nozzle of length 10 cm, where the diameter grows linearly with distance from 2 cm to 5 cm.
 The air enters the nozzle at a Mach number of 3 with a stagnation temperature of 300 K.
-Heat is added at a rate such that <span class="math notranslate nohighlight">\( \frac{dT_t}{dx} \)</span> = 30 K/m.
+Heat is added at a rate such that <span class="math notranslate nohighlight">\( \frac{dT_t}{dx} \)</span> = 100 K/m.
 Due to the pressure at the exit, there is a normal shock wave halfway down the nozzle.</p>
-<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(71)</a> for this problem:</p>
+<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(78)</a> for this problem:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = \frac{M \left[ 2 + (\gamma-1) M^2 \right]}{2 (1-M^2)} \left[ -\frac{1}{A} \frac{dA}{dx} + \frac{1+\gamma M^2}{2} \left( \frac{1}{T_t} \frac{dT_t}{dt} \right) \right] \;.
@@ -810,13 +996,11 @@ Due to the pressure at the exit, there is a normal shock wave halfway down the n
 D(x) = D_i + (D_e - D_i) \frac{x}{L} \;,
 \]</div>
 <p>and so we can express the area and rate of change of area as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left[ D_i + (D_e - D_i) \frac{x}{L} \right]^2 \\
 \rightarrow \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = 2 \frac{\frac{D_e-D_i}{L}}{D(x)} = \frac{2 \alpha}{D(x} 
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>where <span class="math notranslate nohighlight">\( \alpha = (D_e - D_i) / L = 0.3 \)</span> and <span class="math notranslate nohighlight">\( D(x) = D_i + \alpha x \)</span>.
 This leads to a specific <span class="math notranslate nohighlight">\(dM / dx\)</span> for this problem:</p>
 <div class="math notranslate nohighlight">
@@ -865,7 +1049,7 @@ The shock is a discontinuity at <span class="math notranslate nohighlight">\(x =
 
 <span class="c1"># shock location: x = 5 cm</span>
 <span class="n">stag_temp_in</span> <span class="o">=</span> <span class="mi">300</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="mi">30</span> <span class="c1"># K/m</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># K/m</span>
 </pre></div>
 </div>
 </div>
@@ -931,6 +1115,8 @@ The shock is a discontinuity at <span class="math notranslate nohighlight">\(x =
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$ location (cm)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;heat-area.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Exit Mach: </span><span class="si">{</span><span class="n">sol_2</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -939,14 +1125,19 @@ The shock is a discontinuity at <span class="math notranslate nohighlight">\(x =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_34_0.png" src="../_images/multiple-effects_34_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exit Mach:  0.1941
+<img alt="../_images/multiple-effects_38_0.png" src="../_images/multiple-effects_38_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exit Mach:  0.1966
 Exit Mach (adiabatic):  0.1931
 </pre></div>
 </div>
 </div>
 </div>
+<div class="figure align-default" id="fig-heat-area-mach">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/heat-area.png"><img alt="Variation of Mach number with position in a diverging duct with heat transfer" class="bg-white mb-1" src="../_images/heat-area.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Variation of Mach number with position in a diverging duct with heat transfer, with a normal shock located at the halfway point.</span><a class="headerlink" href="#fig-heat-area-mach" title="Permalink to this image">¶</a></p>
+</div>
 <p>We can see that in the supersonic region of the nozzle, the heat addition slightly decelerates the flow from isentropic, as we would expect in a supersonic Rayleigh flow, but the area change plays a much bigger role. Following the normal shock, the full solution tracks the adiabatic solution closely, but with a slightly higher exit Mach number.</p>
+</div>
 </div>
 </div>
 
