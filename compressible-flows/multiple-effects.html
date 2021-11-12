@@ -527,7 +527,7 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance (cm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;isentropic-numerical.png&#39;</span><span class="p">)</span>
+<span class="c1">#plt.savefig(&#39;isentropic-numerical.png&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
@@ -536,10 +536,6 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 <div class="cell_output docutils container">
 <img alt="../_images/multiple-effects_9_0.png" src="../_images/multiple-effects_9_0.png" />
 </div>
-</div>
-<div class="figure align-default" id="fig-isentropic-numerical">
-<a class="bg-white mb-1 reference internal image-reference" href="../_images/isentropic-numerical.png"><img alt="Numerical solution of isentropic flow" class="bg-white mb-1" src="../_images/isentropic-numerical.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Numerical solution of isentropic flow in varying-area duct.</span><a class="headerlink" href="#fig-isentropic-numerical" title="Permalink to this image">¶</a></p>
 </div>
 <p>Next, we can compare this against the exact solution.</p>
 <div class="cell docutils container">
@@ -628,19 +624,15 @@ The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance (cm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;numerical-fanno.png&#39;</span><span class="p">)</span>
+<span class="c1">#plt.savefig(&#39;numerical-fanno.png&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_16_0.png" src="../_images/multiple-effects_16_0.png" />
+<img alt="../_images/multiple-effects_15_0.png" src="../_images/multiple-effects_15_0.png" />
 </div>
-</div>
-<div class="figure align-default" id="fig-fanno-numerical">
-<a class="bg-white mb-1 reference internal image-reference" href="../_images/numerical-fanno.png"><img alt="Numerical solution of Fanno flow" class="bg-white mb-1" src="../_images/numerical-fanno.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Numerical solution of Fanno flow in constant-area duct.</span><a class="headerlink" href="#fig-fanno-numerical" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can compare this numerical solution to the exact solution for Fanno flow.</p>
 <div class="cell docutils container">
@@ -886,19 +878,15 @@ For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A}
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;area-friction.png&#39;</span><span class="p">)</span>
+<span class="c1">#plt.savefig(&#39;area-friction.png&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_27_0.png" src="../_images/multiple-effects_27_0.png" />
+<img alt="../_images/multiple-effects_25_0.png" src="../_images/multiple-effects_25_0.png" />
 </div>
-</div>
-<div class="figure align-default" id="fig-friction-area">
-<a class="bg-white mb-1 reference internal image-reference" href="../_images/area-friction.png"><img alt="Numerical solution of flow with area change and friction" class="bg-white mb-1" src="../_images/area-friction.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Numerical solution of Mach number distribution in varying-area duct with friction, compared with isentropic solution.</span><a class="headerlink" href="#fig-friction-area" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can see that the presence of friction starts to significantly alter the flow in the supersonic region, decelerating the flow from the isentropic solution and even causing the Mach number to begin decreasing near the exit. This is an extreme case, due to the high friction factor.</p>
 </div>
@@ -907,9 +895,9 @@ For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A}
 <h2>Flows with heat transfer and area change<a class="headerlink" href="#flows-with-heat-transfer-and-area-change" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="fig-cv-heat-area">
 <a class="bg-white mb-1 reference internal image-reference" href="../_images/cv-area-heat.png"><img alt="Control volume for flow with heat transfer and area change" class="bg-white mb-1" src="../_images/cv-area-heat.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Differential control volume for frictionless flow in a duct with varying area and heat transfer.</span><a class="headerlink" href="#fig-cv-heat-area" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Differential control volume for frictionless flow in a duct with varying area and heat transfer.</span><a class="headerlink" href="#fig-cv-heat-area" title="Permalink to this image">¶</a></p>
 </div>
-<p><a class="reference internal" href="#fig-cv-heat-area"><span class="std std-numref">Figure 13</span></a> shows a control volume in a varying-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>. The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span>, the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>, and the flow experiences heat transfer <span class="math notranslate nohighlight">\( \delta q \)</span>.</p>
+<p><a class="reference internal" href="#fig-cv-heat-area"><span class="std std-numref">Figure 10</span></a> shows a control volume in a varying-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>. The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span>, the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>, and the flow experiences heat transfer <span class="math notranslate nohighlight">\( \delta q \)</span>.</p>
 <p>Applying conservation of mass, momentum, and energy to the control volume, we get</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-continuity">
 <span class="eqno">(75)<a class="headerlink" href="#equation-eq-heat-area-continuity" title="Permalink to this equation">¶</a></span>\[
@@ -1115,7 +1103,7 @@ The shock is a discontinuity at <span class="math notranslate nohighlight">\(x =
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$ location (cm)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mach number&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;heat-area.png&#39;</span><span class="p">)</span>
+<span class="c1">#plt.savefig(&#39;heat-area.png&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -1125,16 +1113,12 @@ The shock is a discontinuity at <span class="math notranslate nohighlight">\(x =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_38_0.png" src="../_images/multiple-effects_38_0.png" />
+<img alt="../_images/multiple-effects_35_0.png" src="../_images/multiple-effects_35_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exit Mach:  0.1966
 Exit Mach (adiabatic):  0.1931
 </pre></div>
 </div>
 </div>
-</div>
-<div class="figure align-default" id="fig-heat-area-mach">
-<a class="bg-white mb-1 reference internal image-reference" href="../_images/heat-area.png"><img alt="Variation of Mach number with position in a diverging duct with heat transfer" class="bg-white mb-1" src="../_images/heat-area.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Variation of Mach number with position in a diverging duct with heat transfer, with a normal shock located at the halfway point.</span><a class="headerlink" href="#fig-heat-area-mach" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can see that in the supersonic region of the nozzle, the heat addition slightly decelerates the flow from isentropic, as we would expect in a supersonic Rayleigh flow, but the area change plays a much bigger role. Following the normal shock, the full solution tracks the adiabatic solution closely, but with a slightly higher exit Mach number.</p>
 </div>
