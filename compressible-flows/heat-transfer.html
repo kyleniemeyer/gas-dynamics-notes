@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flows with heat transfer (Rayleigh) &#8212; Gas Dynamics notes</title>
+    <title>Flows with heat transfer (Rayleigh flows) &#8212; Gas Dynamics notes</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,8 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -56,7 +56,10 @@
     <link rel="next" title="Flows with multiple effects" href="multiple-effects.html" />
     <link rel="prev" title="Flows with friction (Fanno flows)" href="friction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +120,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -160,7 +163,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Flows with heat transfer (Rayleigh)
+   Flows with heat transfer (Rayleigh flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
@@ -291,6 +294,55 @@
    Rayleigh flow theory
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-relations-for-rayleigh-flows">
+   Working relations for Rayleigh flows
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#static-properties">
+     Static properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stagnation-properties">
+     Stagnation properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#energy">
+     Energy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rayleigh-sonic-reference-state">
+   Rayleigh sonic reference state
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-find-heat-transfer-direction">
+   Example: find heat transfer direction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-flow-through-combustion-chamber">
+   Example: flow through combustion chamber
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-via-reference-state">
+     Solution via reference state
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-via-direct-relationships">
+     Solution via direct relationships
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
             </nav>
@@ -302,9 +354,9 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="flows-with-heat-transfer-rayleigh">
-<h1>Flows with heat transfer (Rayleigh)<a class="headerlink" href="#flows-with-heat-transfer-rayleigh" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
+  <div class="tex2jax_ignore mathjax_ignore section" id="flows-with-heat-transfer-rayleigh-flows">
+<h1>Flows with heat transfer (Rayleigh flows)<a class="headerlink" href="#flows-with-heat-transfer-rayleigh-flows" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
@@ -320,6 +372,18 @@
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cm&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Heat transfer is the third main factor that can affect a compressible flow, after area change and friction.</p>
 <p><strong>Rayleigh flow</strong> is the specific case of frictionless flow in a constant-area duct, with heat transfer. Rayleigh flow applies to constant-area heat exchangers and combustion chambers where the entropy changes due to heat transfer are significantly larger than those due to friction:</p>
 <div class="math notranslate nohighlight">
@@ -329,23 +393,618 @@ d s_e \gg d s_i \;,
 <p>so we can neglect frictional effects and say <span class="math notranslate nohighlight">\( ds \approx ds_e \)</span>.</p>
 <div class="section" id="rayleigh-flow-theory">
 <h2>Rayleigh flow theory<a class="headerlink" href="#rayleigh-flow-theory" title="Permalink to this headline">¶</a></h2>
-<p>For a general fluid, we can apply conservation of mass: <span class="math notranslate nohighlight">\( \dot{m} = \rho A V \)</span>, but since area is constant, we can introduce the <strong>mass velocity</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-G = \rho V = \text{constant} \;.
+<div class="figure align-default" id="fig-rayleigh-cv">
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/rayleigh-flow-control-volume.png"><img alt="Control volume for Rayleigh flow" class="bg-white mb-1" src="../_images/rayleigh-flow-control-volume.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Differential control volume for frictionless flow in a constant-area duct with heat transfer.</span><a class="headerlink" href="#fig-rayleigh-cv" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-rayleigh-cv"><span class="std std-numref">Figure 8</span></a> shows a control volume in a constant-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>.
+A small amount of heat <span class="math notranslate nohighlight">\(\delta q\)</span> is added to the flow.
+The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span> and the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>For a general fluid, we can apply conservation of mass:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\rho V = (\rho + d\rho) (V + dV)
+\rightarrow \rho V = G = \text{constant} \;.
+\end{gather*}\]</div>
+<p>Applying conservation of momentum gives</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\sum F_x = \dot{m} \left( V_{\text{out}, x} - V_{\text{in}, x} \right) \\
+pA - (p + dp) A = (\rho A V) \left[ (V + dV) - V \right] \\
+- A dp = \rho A V dV \\
+dp + \rho V dV = 0 \;,
+\end{gather*}\]</div>
+<p>which we can integrate through the flow (since <span class="math notranslate nohighlight">\(\rho V = \)</span> constant) to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-momentum">
+<span class="eqno">(51)<a class="headerlink" href="#equation-eq-rayleigh-momentum" title="Permalink to this equation">¶</a></span>\[
+p + \rho V^2 = \text{constant}
 \]</div>
 <p>Next, applying conservation of energy:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\delta q - \delta w_s = \left[ (h+dh) + \frac{(V+dV)^2}{2} \right] - \left( h + \frac{V^2}{2} \right) \\
+\delta q = dh + V dV \;.
+\end{gather*}\]</div>
+<p>For an ideal gas, where <span class="math notranslate nohighlight">\( dh = c_p dT \)</span>, we can express the above as</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
-h_{t1} + q = h_{t2} + w_s = h_t \\
-\rightarrow h_{t1} + q = h_{t2} \;,
-\end{gather*}
-\end{split}\]</div>
-<p>and we see that stagnation enthlapy is <strong>not constant</strong>.</p>
+\[
+\delta q = c_p dT + V dV \;.
+\]</div>
+<p>Recall the definitions of stagnation enthalpy and temperature:</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = c_p T_t = h + \frac{V^2}{2} = c_p T + \frac{V^2}{2} \;.
+\]</div>
+<p>If we differentiate, we get</p>
+<div class="math notranslate nohighlight">
+\[
+d h_t = c_p d T_t = c_p T + V dV
+\]</div>
+<p>and see that</p>
+<div class="math notranslate nohighlight">
+\[
+\delta q = d h_t = c_p d T_t \;.
+\]</div>
+<p>We can see that stagnation enthlapy is <strong>not constant</strong>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Up to this point, we have been able to rely on the fact that stagnation enthalpy is constant. However, this is not the case in Rayleigh flows due to heat transfer.</p>
+<p>Up to this point, we have been able to rely on the fact that stagnation enthalpy and stagnation temperature are constant. However, this is not the case in Rayleigh flows due to heat transfer.</p>
+</div>
+<p>We can use these relationships to develop a <span class="math notranslate nohighlight">\(T\)</span>–<span class="math notranslate nohighlight">\(s\)</span> or <span class="math notranslate nohighlight">\(h\)</span>–<span class="math notranslate nohighlight">\(s\)</span> diagram of a <strong>Rayleigh line</strong>, based on the property relationship</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+T ds = dh - v dp \\
+ds = c_p \frac{dT}{T} - R \frac{dp}{p} \;,
+\end{gather*}\]</div>
+<p>which we can integrate from some reference state 1 to some general state:</p>
+<div class="math notranslate nohighlight" id="equation-eq-entropy-difference-initial">
+<span class="eqno">(52)<a class="headerlink" href="#equation-eq-entropy-difference-initial" title="Permalink to this equation">¶</a></span>\[
+\frac{s-s_1}{c_p} = \log \frac{T}{T_1} - \frac{\gamma-1}{\gamma} \log \frac{p}{p_1} \;.
+\]</div>
+<p>To express the entropy difference <span class="math notranslate nohighlight">\( (s - s_1)/c_p \)</span> only in terms of relative temperature <span class="math notranslate nohighlight">\( T / T_1 \)</span> and the reference Mach number <span class="math notranslate nohighlight">\( M_1 \)</span> we need to do a bit of work, but we can obtain</p>
+<div class="math notranslate nohighlight" id="equation-eq-entropy-rayleigh">
+<span class="eqno">(53)<a class="headerlink" href="#equation-eq-entropy-rayleigh" title="Permalink to this equation">¶</a></span>\[
+\frac{s - s_1}{c_p} = \log \frac{T}{T_1} - \frac{\gamma - 1}{\gamma} \log \left[ \frac{(1 + \gamma M_1^2) \pm \sqrt{ \left(1 + \gamma M_1^2 \right)^2 - 4 \gamma M_1^2 (T/T_1)}}{2} \right] \;,
+\]</div>
+<p>where the <span class="math notranslate nohighlight">\(+\)</span> sign in the equation is used for the upper branch of the Rayleigh line to the point of maximum temperature, and the <span class="math notranslate nohighlight">\(-\)</span> sign in the equation is used for the lower part of the curve.
+Given a reference Mach number <span class="math notranslate nohighlight">\(M_1\)</span> and specific heat ratio <span class="math notranslate nohighlight">\(\gamma\)</span>, we can use Equation <a class="reference internal" href="#equation-eq-entropy-rayleigh">(53)</a> to compute a Rayleigh line on a <span class="math notranslate nohighlight">\(T\)</span>–<span class="math notranslate nohighlight">\(s\)</span> diagram, using relative temperature <span class="math notranslate nohighlight">\(T / T_1\)</span> and entropy <span class="math notranslate nohighlight">\( (s - s_1)/c_p \)</span>.</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Detailed derivation</p>
+<p>Recall from Equation <a class="reference internal" href="#equation-eq-rayleigh-momentum">(51)</a> we have that <span class="math notranslate nohighlight">\(p + \rho V^2 = \)</span> constant.
+We can express this in terms of Mach number using the speed of sound definition (<span class="math notranslate nohighlight">\( a^2 = \gamma R T \)</span>):</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+p + \rho V^2 = \text{constant} \\
+p \left(1 +  \frac{V^2}{RT} \right) = \text{constant}
+\end{gather*}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-constant">
+<span class="eqno">(54)<a class="headerlink" href="#equation-eq-pressure-constant" title="Permalink to this equation">¶</a></span>\[
+p \left(1 + \gamma M^2 \right) = \text{constant}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-mach-relationship">
+<span class="eqno">(55)<a class="headerlink" href="#equation-eq-pressure-mach-relationship" title="Permalink to this equation">¶</a></span>\[
+\therefore \frac{p}{p_1} = \frac{1 + \gamma M_1^2}{1 + \gamma M^2}
+\]</div>
+<p>We can express the Mach number at any point in the flow based on the pressure ratio by rearranging that equation:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mach-pressure-ratio">
+<span class="eqno">(56)<a class="headerlink" href="#equation-eq-mach-pressure-ratio" title="Permalink to this equation">¶</a></span>\[
+M^2 = \frac{1}{\gamma} \left[ \frac{p_1}{p} \left( 1 + \gamma M_1^2 \right) - 1 \right] \;.
+\]</div>
+<p>From the ideal gas equation of state, and conservation of mass, we can express temperature at any point in the flow with</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+T = \frac{p}{\rho R} = \frac{p A M \sqrt{\gamma R T}}{\dot{m} R} \\
+\sqrt{T} = \frac{A \sqrt{\gamma R}}{\dot{m} R} p M = (\text{constant}) p M \\
+T = (\text{constant}) p^2 M^2 \;,
+\end{gather*}\]</div>
+<p>which we can combine with Equation <a class="reference internal" href="#equation-eq-pressure-constant">(54)</a> (note that the constants are not the same but can be combined into a new constant) to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+T = (\text{constant}) \frac{M^2}{\left( 1 + \gamma M^2 \right)^2} \\
+\rightarrow T \frac{\left( 1 + \gamma M^2 \right)^2}{M^2} = (\text{constant}) \\
+T \frac{\left( 1 + \gamma M^2 \right)^2}{M^2} = T_1 \frac{\left( 1 + \gamma M_1^2 \right)^2}{M_1^2}
+\end{gather*}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-temperature-ratio-reference">
+<span class="eqno">(57)<a class="headerlink" href="#equation-eq-rayleigh-temperature-ratio-reference" title="Permalink to this equation">¶</a></span>\[
+\frac{T}{T_1} = \frac{M^2}{M_1^2} \frac{\left( 1 + \gamma M_1^2 \right)^2}{\left( 1 + \gamma M^2 \right)^2}
+\]</div>
+<p>Rearranging this, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{T}{T_1} \frac{M_1^2}{M^2} = \frac{\left( 1 + \gamma M_1^2 \right)^2}{\left( 1 + \gamma M^2 \right)^2}
+\]</div>
+<p>Combine this with Equations <a class="reference internal" href="#equation-eq-pressure-mach-relationship">(55)</a> and <a class="reference internal" href="#equation-eq-mach-pressure-ratio">(56)</a>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\frac{p}{p_1} = \frac{\left( 1 + \gamma M_1^2 \right)^2}{\left( 1 + \gamma M^2 \right)^2} = \sqrt{\frac{T}{T_1}} \frac{M_1}{M} \\
+\frac{p}{p_1} M = M_1 \sqrt{\frac{T}{T_1}} \\
+\frac{p}{p_1} \sqrt{\frac{1}{\gamma} \left[ \frac{p_1}{p} \left( 1 + \gamma M_1^2 \right) - 1 \right]} = M_1 \sqrt{\frac{T}{T_1}} \\
+\left( \frac{p}{p_1} \right)^2 \left( \frac{1}{\gamma} \right) \left[ \frac{p_1}{p} \left( 1 + \gamma M_1^2 \right) - 1 \right] = M_1^2 \frac{T}{T_1} \\
+\rightarrow \left( \frac{p}{p_1} \right)^2 - \left( 1 + \gamma M_1^2 \right) \left( \frac{p}{p_1} \right) + \gamma M_1^2 \frac{T}{T_1} \;,
+\end{gather*}\]</div>
+<p>which is a quadratic equation. We can solve for <span class="math notranslate nohighlight">\( p / p_1 \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{p}{p_1} = \frac{1 + \gamma M_1^2}{2} \pm \frac{\sqrt{(1 + \gamma M_1^2)^2 - 4 \gamma M_1^2 (T/T_1)}}{2} \;,
+\]</div>
+<p>which can be subtituted into Equation <a class="reference internal" href="#equation-eq-entropy-difference-initial">(52)</a> to obtain Equation <a class="reference internal" href="#equation-eq-entropy-rayleigh">(53)</a>. Whew!</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.3</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">Tt_T1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">max_temp_ratio</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">T_T1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_temp_ratio</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">delta_s_cp_upper</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_T1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">T_T1</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">gamma</span>
+    <span class="p">)</span>
+<span class="n">delta_s_cp_lower</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T_T1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">gamma</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">T_T1</span><span class="o">*</span><span class="n">M1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">gamma</span>
+    <span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">delta_s_cp_lower</span><span class="p">,</span> <span class="n">delta_s_cp_upper</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">T_T1</span><span class="p">,</span> <span class="n">T_T1</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Rayleigh line ($\gamma = 1.3$)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(s - s_1) / c_p$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T / T_1$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;rayleigh-line.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/heat-transfer_4_0.png" src="../_images/heat-transfer_4_0.png" />
+</div>
+</div>
+<p>As with Fanno flows, we see that there is a limiting point of maximum entropy.
+However, <em>unlike</em> with Fanno flows, we can move both to the left and right along a Rayleigh line, because heat can be added or removed. Adding heat means positive entropy and moving towards the limiting point, and removing heat means entropy decreases and moving away from the limiting point.</p>
+<p>Identifying the state associated with this limiting point follows a similar procedure as with Fanno flows.
+From conservation of mass, we have <span class="math notranslate nohighlight">\( G = \rho V = \)</span> constant. From conservation of momentum given by Equation <a class="reference internal" href="#equation-eq-rayleigh-momentum">(51)</a>, we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+p + \rho V^2 = \frac{G^2}{\rho} = \text{constant} \\
+dp + G^2 \left(- \frac{d\rho}{\rho^2} \right) = 0 \\
+\frac{dp}{d\rho} = \frac{G^2}{\rho^2} = V^2 \\
+\end{gather*}\]</div>
+<p>This relationship applies to any fluid, between two differentially separated states on a Rayleigh line.
+If we apply this at two points right around the limiting point of maximum entropy, then entropy is constant and <span class="math notranslate nohighlight">\( ds = 0 \)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+V^2 = \left( \frac{dp}{d\rho} \right)_{\text{limiting point}} = \left( \frac{\partial p}{\partial \rho} \right)_{s} \\
+\therefore V^2 = a^2
+\end{gather*}\]</div>
+<p>and the velocity is sonic at the limiting point.</p>
+<div class="tip admonition">
+<p class="admonition-title">Rayleigh flow</p>
+<p>The upper branch of a Rayleigh line corresponds to <strong>subsonic</strong> flow, and the lower branch corresponds to <strong>supersonic</strong> flow. Adding heat moves a flow towards a Mach number of one, and removing heat moves a flow away from a Mach number of one.</p>
+</div>
+</div>
+<div class="section" id="working-relations-for-rayleigh-flows">
+<h2>Working relations for Rayleigh flows<a class="headerlink" href="#working-relations-for-rayleigh-flows" title="Permalink to this headline">¶</a></h2>
+<p>Based on the analysis above, we can establish working relations for properties in a Rayleigh flow as a function of Mach number.</p>
+<div class="section" id="static-properties">
+<h3>Static properties<a class="headerlink" href="#static-properties" title="Permalink to this headline">¶</a></h3>
+<p>From conservation of mometum, we already have an expression for pressure given by Equation <a class="reference internal" href="#equation-eq-pressure-constant">(54)</a>, which we can express between two points as</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-pressure">
+<span class="eqno">(58)<a class="headerlink" href="#equation-eq-rayleigh-pressure" title="Permalink to this equation">¶</a></span>\[
+\frac{p_2}{p_1} = \frac{1 + \gamma M_1^2}{1 + \gamma M_2^2} \;.
+\]</div>
+<p>We also already developed a relationship between temperature at two points in the flow in Equation <a class="reference internal" href="#equation-eq-rayleigh-temperature-ratio-reference">(57)</a>, which we can express in general as</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-temperature">
+<span class="eqno">(59)<a class="headerlink" href="#equation-eq-rayleigh-temperature" title="Permalink to this equation">¶</a></span>\[
+\frac{T_2}{T_1} = \frac{M_2^2}{M_1^2} \left( \frac{1 + \gamma M_1^2}{1 + \gamma M_2^2} \right)^2
+\]</div>
+<p>To get a relationship for density, we can use conservation of mass and the speed of sound for an ideal gas:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\rho_1 V_1 = \rho_2 V_2 \\
+\frac{\rho_2}{\rho_1} = \frac{V_1}{V_2} = \frac{M_1 \sqrt{\gamma R T_1}}{M_2 \sqrt{\gamma R T_2}} = \frac{M_1}{M_2} \sqrt{\frac{T_1}{T_2}}
+\end{gather*}\]</div>
+<p>and then substitute Equation <a class="reference internal" href="#equation-eq-rayleigh-temperature">(59)</a> to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-density">
+<span class="eqno">(60)<a class="headerlink" href="#equation-eq-rayleigh-density" title="Permalink to this equation">¶</a></span>\[
+\frac{\rho_2}{\rho_1} = \frac{M_1^2}{M_2^2} \left( \frac{ 1 + \gamma M_2^2}{1 + \gamma M_2^2 } \right) \;.
+\]</div>
+</div>
+<div class="section" id="stagnation-properties">
+<h3>Stagnation properties<a class="headerlink" href="#stagnation-properties" title="Permalink to this headline">¶</a></h3>
+<p>We know that the stagnation temperature does not remain constant in a Rayleigh flow, so we need an expression for stagnation temperature ratio. Using the definition of stagnation temperature</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = T \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \;,
+\]</div>
+<p>we can write this for locations 1 and 2 and take the ratio to get</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{T_{t2}}{T_{t1}} = \frac{T_2}{T_1} \left( \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right) \;,
+\]</div>
+<p>which we can combine with the static temperature ratio given by Equation <a class="reference internal" href="#equation-eq-rayleigh-temperature">(59)</a> to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-stag-temperature">
+<span class="eqno">(61)<a class="headerlink" href="#equation-eq-rayleigh-stag-temperature" title="Permalink to this equation">¶</a></span>\[
+\frac{T_{t2}}{T_{t1}} = \frac{M_2^2}{M_1^2} \left( \frac{1 + \gamma M_1^2}{1 + \gamma M_2^2} \right)^2 \left( \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right) \;.
+\]</div>
+<p>Similarly, we can get the stagnation pressure ratio by taking the definition of stagnation pressure</p>
+<div class="math notranslate nohighlight">
+\[
+p_t = p \left( 1 + \frac{\gamma-1}{2} M^2 \right)^{\gamma/(\gamma-1)}
+\]</div>
+<p>and taking the ratio between two locations:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{p_{t2}}{p_{t1}} = \frac{p_2}{p_1} \left( \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right)^{\gamma / (\gamma - 1)} \;.
+\]</div>
+<p>Then, substitute the static pressure ratio in Equation <a class="reference internal" href="#equation-eq-rayleigh-pressure">(58)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-stag-pressure">
+<span class="eqno">(62)<a class="headerlink" href="#equation-eq-rayleigh-stag-pressure" title="Permalink to this equation">¶</a></span>\[
+\frac{p_{t2}}{p_{t1}} = \frac{1 + \gamma M_1^2}{1 + \gamma M_2^2} \left( \frac{1 + \frac{\gamma-1}{2} M_2^2}{1 + \frac{\gamma-1}{2} M_1^2} \right)^{\gamma / (\gamma - 1)} \;.
+\]</div>
+<p>We can write functions to evaluate these property ratios:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_rayleigh_pressure_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return p2/p1 for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_rayleigh_temperature_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return T2/T1 for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span>
+        <span class="p">(</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+            
+<span class="k">def</span> <span class="nf">get_rayleigh_density_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return rho2/rho1 for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span>
+        <span class="p">(</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+            
+<span class="k">def</span> <span class="nf">get_rayleigh_stag_temperature_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return Tt2/Tt1 for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> 
+            <span class="p">(</span><span class="n">mach_2</span> <span class="o">/</span> <span class="n">mach_1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_rayleigh_stag_pressure_ratio</span><span class="p">(</span><span class="n">mach_1</span><span class="p">,</span> <span class="n">mach_2</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return pt2/pt1 for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach_1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">gamma</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="energy">
+<h3>Energy<a class="headerlink" href="#energy" title="Permalink to this headline">¶</a></h3>
+<p>The property relationships given by Equations <a class="reference internal" href="#equation-eq-rayleigh-pressure">(58)</a>, <a class="reference internal" href="#equation-eq-rayleigh-temperature">(59)</a>, <a class="reference internal" href="#equation-eq-rayleigh-density">(60)</a>, <a class="reference internal" href="#equation-eq-rayleigh-stag-temperature">(61)</a>, and <a class="reference internal" href="#equation-eq-rayleigh-stag-pressure">(62)</a> all require knowledge of the downstream Mach number. If we do not know those conditions, we need to find them by considering conservation of energy and the heat transfer in the flow.</p>
+<p>If we apply conservation of energy between two locations in the flow, with some heat transfer <span class="math notranslate nohighlight">\(q\)</span>, recalling that <span class="math notranslate nohighlight">\( h = c_p T\)</span> and <span class="math notranslate nohighlight">\( h_t = c_p T_t \)</span>, we get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+h_{t1} + q = h_{t2} \\
+c_p T_{t1} + q = c_p T_{t2}
+\end{gather*}\]</div>
+<p>and thus</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-heat">
+<span class="eqno">(63)<a class="headerlink" href="#equation-eq-rayleigh-heat" title="Permalink to this equation">¶</a></span>\[
+q = c_p \left( T_{t2} - T_{t1} \right) \;.
+\]</div>
+<p>Given an amount of heat transfer, this relationship can be used to relate the two locations in the flow.</p>
+</div>
+</div>
+<div class="section" id="rayleigh-sonic-reference-state">
+<h2>Rayleigh sonic reference state<a class="headerlink" href="#rayleigh-sonic-reference-state" title="Permalink to this headline">¶</a></h2>
+<p>The * reference state for a Rayleigh flow is the state that would exist if the flow continued until the Mach number is 1.0, through additional heat transfer.
+Since this is the limiting point on a Rayleigh line, all states in a given Rayleigh flow share the same * reference state.
+This can be a useful concept to solve Rayleigh flow problems, because we can easily compute property ratios between the flow at a given location and the reference point.</p>
+<p>If we take our property relationships and apply them between an arbitrary point in the flow system and the Rayleigh * reference state, we can get</p>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-reference-pressure">
+<span class="eqno">(64)<a class="headerlink" href="#equation-eq-rayleigh-reference-pressure" title="Permalink to this equation">¶</a></span>\[
+\frac{p}{p^*} = f(M, \gamma) = \frac{1 + \gamma}{1 + \gamma M^2}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-reference-temperature">
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-rayleigh-reference-temperature" title="Permalink to this equation">¶</a></span>\[
+\frac{T}{T^*} = f(M, \gamma) = \frac{M^2 (1 + \gamma)^2}{(1 + \gamma M^2)^2}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-reference-density">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-rayleigh-reference-density" title="Permalink to this equation">¶</a></span>\[
+\frac{\rho}{\rho^*} = f(M, \gamma) = \frac{1 + \gamma M^2}{(1 + \gamma) M^2}
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-reference-stag-temperature">
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-rayleigh-reference-stag-temperature" title="Permalink to this equation">¶</a></span>\[
+\frac{T_t}{T_t^*} = f(M, \gamma) = \frac{2(1 + \gamma) M^2}{(1 + \gamma M^2)^2} \left( 1 + \frac{\gamma-1}{2} M^2 \right)
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-rayleigh-reference-stag-pressure">
+<span class="eqno">(68)<a class="headerlink" href="#equation-eq-rayleigh-reference-stag-pressure" title="Permalink to this equation">¶</a></span>\[
+\frac{p_t}{p_t^*} = f(M, \gamma) = \frac{1 + \gamma}{1 + \gamma M^2} \left( \frac{1 + \frac{\gamma-1}{2} M^2}{(\gamma + 1)/2} \right)^{\gamma/(\gamma-1)}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_rayleigh_reference_pressure</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return p/p* for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_rayleigh_reference_temperature</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return T/T* for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> 
+        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="p">)</span>
+            
+<span class="k">def</span> <span class="nf">get_rayleigh_reference_density</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return rho/rho* for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+            
+<span class="k">def</span> <span class="nf">get_rayleigh_reference_stag_temperature</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return Tt/Tt* for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> 
+        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_rayleigh_reference_stag_pressure</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return pt/pt* for Rayleigh flow&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">gamma</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-find-heat-transfer-direction">
+<h2>Example: find heat transfer direction<a class="headerlink" href="#example-find-heat-transfer-direction" title="Permalink to this headline">¶</a></h2>
+<p>Consider a constant-area duct with supersonic flow of air,
+where at one location <span class="math notranslate nohighlight">\( M_1 = 1.5 \)</span> and <span class="math notranslate nohighlight">\( p_1 = 10 \)</span> bar,
+and at a downstream location <span class="math notranslate nohighlight">\( M_2 = 3.0 \)</span>.
+Find the pressure at location 2 and the direction of heat transfer.</p>
+<p>We can use two different strategies to find the downstream pressure <span class="math notranslate nohighlight">\(p_2\)</span>.
+Using the reference state, which is shared between the two locations, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+p_2 = \frac{p_2}{p^*} \frac{p^*}{p_1} p_1
+\]</div>
+<p>and use the Mach numbers at each location to find the two ratios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="mf">3.0</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+
+<span class="n">p1_pstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_pressure</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p2_pstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_pressure</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p2_pstar</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">p1_pstar</span><span class="p">)</span> <span class="o">*</span> <span class="n">p1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p2 = </span><span class="si">{</span><span class="n">p2</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p2 = 3.05 bar
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively, we can use the general pressure ratio <span class="math notranslate nohighlight">\(p_2 / p_1\)</span> to directly get <span class="math notranslate nohighlight">\(p_2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p2_p1</span> <span class="o">=</span> <span class="n">get_rayleigh_pressure_ratio</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p2_p1</span> <span class="o">*</span> <span class="n">p1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p2 = </span><span class="si">{</span><span class="n">p2</span><span class="si">:</span><span class="s1"> .2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p2 = 3.05 bar
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find the direction of heat transfer, we can calculate the stagnation temperature ratio
+<span class="math notranslate nohighlight">\( \frac{T_{t2}}{T_{t1}} \)</span>. We can also do this using either approach.</p>
+<p>Using the reference state,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{T_{t2}}{T_{t1}} = \frac{T_{t2}}{T_t^*} \frac{T_t^*}{T_{t1}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tt1_Ttstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_stag_temperature</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">Tt2_Ttstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_stag_temperature</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="n">Tt2_Tt1</span> <span class="o">=</span> <span class="n">Tt2_Ttstar</span> <span class="o">/</span> <span class="n">Tt1_Ttstar</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T_t2 / T_t1 = </span><span class="si">{</span><span class="n">Tt2_Tt1</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T_t2 / T_t1 =  0.719
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, we can directly calculate it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tt2_Tt1</span> <span class="o">=</span> <span class="n">get_rayleigh_stag_temperature_ratio</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T_t2 / T_t1 = </span><span class="si">{</span><span class="n">Tt2_Tt1</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T_t2 / T_t1 =  0.719
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the stagnation pressure is decreasing, that means that the flow is <strong>cooling</strong>.</p>
+</div>
+<div class="section" id="example-flow-through-combustion-chamber">
+<h2>Example: flow through combustion chamber<a class="headerlink" href="#example-flow-through-combustion-chamber" title="Permalink to this headline">¶</a></h2>
+<p>Consider flow of air into a combustion chamber, where we represent the effects of combustion via heat addition at 120 kJ/kg. The conditions of the flow entering the chamber are 220 K, 70 kPa, and it has a velocity of 122 m/s.
+What are the exit conditions?</p>
+<p>First, we need to find the Mach number and stagnation temperature at the inlet.
+We can also identify the change in stagnation temperature using <span class="math notranslate nohighlight">\( q = c_p \Delta T_t \)</span>, since we know that for air <span class="math notranslate nohighlight">\(c_p\)</span> = 1000 J/(kg K).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_stagnation_temperature_ratio</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculates T/Tt stagnation relationship.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">287</span><span class="p">,</span> <span class="s1">&#39;J/(kg*K)&#39;</span><span class="p">)</span>
+<span class="n">cp</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;J/(kg*K)&#39;</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;kJ/kg&#39;</span><span class="p">)</span>
+
+<span class="n">T1</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s1">&#39;kPa&#39;</span><span class="p">)</span>
+<span class="n">V1</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">122</span><span class="p">,</span> <span class="s1">&#39;m/s&#39;</span><span class="p">)</span>
+
+<span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">T1</span><span class="p">)</span>
+<span class="n">M1</span> <span class="o">=</span> <span class="n">V1</span> <span class="o">/</span> <span class="n">a1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mach @ 1 = </span><span class="si">{</span><span class="n">M1</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span><span class="si">:</span><span class="s1"> .3f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">T1_Tt1</span> <span class="o">=</span> <span class="n">get_stagnation_temperature_ratio</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">Tt1</span> <span class="o">=</span> <span class="n">T1</span> <span class="o">/</span> <span class="n">T1_Tt1</span>
+
+<span class="n">delta_Tt</span> <span class="o">=</span> <span class="n">q</span> <span class="o">/</span> <span class="n">cp</span>
+<span class="n">Tt2</span> <span class="o">=</span> <span class="n">Tt1</span> <span class="o">+</span> <span class="n">delta_Tt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mach @ 1 = 0.410
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find the downstream conditions, we have two options for solution approaches.</p>
+<div class="section" id="solution-via-reference-state">
+<h3>Solution via reference state<a class="headerlink" href="#solution-via-reference-state" title="Permalink to this headline">¶</a></h3>
+<p>The two locations share the same Rayleigh sonic reference state, so we can write</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\frac{T_{t2}}{T_t^*} = \frac{T_{t2}}{T_{t1}} \frac{T_{t1}}{T_t^*} = f(M_2, \gamma) \\
+p_2 = \frac{p_2}{p^*} \frac{p^*}{p_1} \\
+T_2 = \frac{T_2}{T^*} \frac{T^*}{T_1}
+\end{gather*}\]</div>
+<p>To solve for <span class="math notranslate nohighlight">\( M_2 \)</span> given <span class="math notranslate nohighlight">\( T_{t2} / T^* \)</span>, we need to write a function to use <code class="docutils literal notranslate"><span class="pre">root_scalar()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_rayleigh_reference_stagnation_temperature</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">Tt_Ttstar</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Used to find unknown Mach number given Tt/Tt* and gamma&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">Tt_Ttstar</span> <span class="o">-</span> <span class="n">get_rayleigh_reference_stag_temperature</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tt1_Tstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_stag_temperature</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">T1_Tstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_temperature</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p1_pstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_pressure</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="n">Tt2_Tstar</span> <span class="o">=</span> <span class="p">(</span><span class="n">Tt2</span> <span class="o">/</span> <span class="n">Tt1</span><span class="p">)</span> <span class="o">*</span> <span class="n">Tt1_Tstar</span>
+
+<span class="c1"># we know the flow is subsonic</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">solve_rayleigh_reference_stagnation_temperature</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">Tt2_Tstar</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mach @ 2 = </span><span class="si">{</span><span class="n">M2</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span><span class="si">:</span><span class="s1"> .3f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">T2_Tstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_temperature</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">p2_pstar</span> <span class="o">=</span> <span class="n">get_rayleigh_reference_pressure</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="n">T2</span> <span class="o">=</span> <span class="n">T2_Tstar</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">T1_Tstar</span><span class="p">)</span> <span class="o">*</span> <span class="n">T1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T2 = </span><span class="si">{</span><span class="n">T2</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1"> .2f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p2_pstar</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">p1_pstar</span><span class="p">)</span> <span class="o">*</span> <span class="n">p1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p2 = </span><span class="si">{</span><span class="n">p2</span><span class="si">:</span><span class="s1"> .2f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mach @ 2 = 0.616
+T2 = 322.90 K
+p2 = 56.49 kPa
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="solution-via-direct-relationships">
+<h3>Solution via direct relationships<a class="headerlink" href="#solution-via-direct-relationships" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, we can solve this problem by directly solving the property relationships between two states in a Rayleigh flow. Since we know <span class="math notranslate nohighlight">\(T_{t2}\)</span> and <span class="math notranslate nohighlight">\(T_{t1}\)</span>, we can solve Equation <a class="reference internal" href="#equation-eq-rayleigh-stag-temperature">(61)</a> for <span class="math notranslate nohighlight">\(M_2\)</span>.
+Once we know both Mach numbers, we can use the property relationships for pressure and temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_rayleigh_stagnation_temperature</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">Tt2_Tt1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Used to find unknown M2 given M1, stagnation temperature ratio, and gamma.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">Tt2_Tt1</span> <span class="o">-</span> <span class="n">get_rayleigh_stag_temperature_ratio</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Tt2_Tt1</span> <span class="o">=</span> <span class="n">Tt2</span> <span class="o">/</span> <span class="n">Tt1</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">solve_rayleigh_stagnation_temperature</span><span class="p">,</span> 
+    <span class="n">x0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">Tt2_Tt1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mach @ 2 = </span><span class="si">{</span><span class="n">M2</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span><span class="si">:</span><span class="s1"> .3f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">*</span> <span class="n">get_rayleigh_pressure_ratio</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">T2</span> <span class="o">=</span> <span class="n">T1</span> <span class="o">*</span> <span class="n">get_rayleigh_temperature_ratio</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T2 = </span><span class="si">{</span><span class="n">T2</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1"> .2f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p2 = </span><span class="si">{</span><span class="n">p2</span><span class="si">:</span><span class="s1"> .2f~P</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mach @ 2 = 0.616
+T2 = 322.90 K
+p2 = 56.49 kPa
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both solution approaches lead to the same answers, as expected.</p>
 </div>
 </div>
 </div>
@@ -373,31 +1032,22 @@ h_{t1} + q = h_{t2} + w_s = h_t \\
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="friction.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Flows with friction (Fanno flows)</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="friction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Flows with friction (Fanno flows)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="multiple-effects.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Flows with multiple effects</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="multiple-effects.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Flows with multiple effects</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -421,8 +1071,7 @@ h_{t1} + q = h_{t2} + w_s = h_t \\
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

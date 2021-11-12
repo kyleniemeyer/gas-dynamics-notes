@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction to compressible flow &#8212; Gas Dynamics notes</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,8 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -56,7 +56,10 @@
     <link rel="next" title="Isentropic, variable-area flows" href="isentropic.html" />
     <link rel="prev" title="Stagnation properties" href="../intro/stagnation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +120,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -160,7 +163,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heat-transfer.html">
-   Flows with heat transfer (Rayleigh)
+   Flows with heat transfer (Rayleigh flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
@@ -455,8 +458,8 @@ a = 343.1 \, \text{m}/\text{s} \;.
 M = \frac{V}{a} \;,
 \]</div>
 <p>with different regimes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4313dd71-97e3-493c-b6a5-4aafba95bde5">
-<span class="eqno">(7)<a class="headerlink" href="#equation-4313dd71-97e3-493c-b6a5-4aafba95bde5" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2476df75-7035-49a0-a5aa-036acb6ab78b">
+<span class="eqno">(7)<a class="headerlink" href="#equation-2476df75-7035-49a0-a5aa-036acb6ab78b" title="Permalink to this equation">¶</a></span>\[\begin{align}
 M &amp;&lt; 1 : \text{ subsonic} \\
 M &amp;= 1 : \text{ sonic} \\
 M &amp;&gt; 1 : \text{ supersonic}
@@ -475,8 +478,8 @@ to ideal/perfect gases.</p>
 \dot{m} = p A M \sqrt{\frac{\gamma}{RT}} = \text{constant}
 \]</div>
 <p>Stagnation relationships:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5ef80d25-808b-4e80-917d-21a1a8cdf843">
-<span class="eqno">(8)<a class="headerlink" href="#equation-5ef80d25-808b-4e80-917d-21a1a8cdf843" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d13157bb-014a-4ca5-b546-713d1f15f5b2">
+<span class="eqno">(8)<a class="headerlink" href="#equation-d13157bb-014a-4ca5-b546-713d1f15f5b2" title="Permalink to this equation">¶</a></span>\[\begin{align}
 h_t &amp;= h \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
 T_t &amp;= T \left( 1 + \frac{\gamma - 1}{2} M^2 \right) \\
 p_t &amp;= p \left( 1 + \frac{\gamma - 1}{2} M^2 \right)^{\frac{\gamma}{\gamma - 1}} \;,
@@ -522,31 +525,22 @@ p_t &amp;= p \left( 1 + \frac{\gamma - 1}{2} M^2 \right)^{\frac{\gamma}{\gamma -
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="../intro/stagnation.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Stagnation properties</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../intro/stagnation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Stagnation properties</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="isentropic.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Isentropic, variable-area flows</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="isentropic.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Isentropic, variable-area flows</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -570,8 +564,7 @@ p_t &amp;= p \left( 1 + \frac{\gamma - 1}{2} M^2 \right)^{\frac{\gamma}{\gamma -
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

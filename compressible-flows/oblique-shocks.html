@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oblique shock waves &#8212; Gas Dynamics notes</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,8 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -56,7 +56,10 @@
     <link rel="next" title="Prandtl–Meyer flows" href="prandtl-meyer.html" />
     <link rel="prev" title="Normal shock waves" href="normal-shocks.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +120,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -160,7 +163,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heat-transfer.html">
-   Flows with heat transfer (Rayleigh)
+   Flows with heat transfer (Rayleigh flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
@@ -344,13 +347,14 @@
 <span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">200</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cm&#39;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>An <strong>oblique shock</strong> is a shock that the flow encounters at some angle. The shock deflects the flow away from its normal direction, and the final velocity may remain supersonic.</p>
 <div class="figure align-default" id="fig-oblique-shock">
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/oblique-shock.png"><img alt="Oblique shock diagram" class="bg-primary mb-1" src="../_images/oblique-shock.png" style="width: 400px;" /></a>
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/oblique-shock.png"><img alt="Oblique shock diagram" class="bg-white mb-1" src="../_images/oblique-shock.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Oblique shock showing initial and final velocity components.</span><a class="headerlink" href="#fig-oblique-shock" title="Permalink to this image">¶</a></p>
 </div>
 <p><a class="reference internal" href="#fig-oblique-shock"><span class="std std-numref">Figure 2</span></a> shows the flow velocity before and after an oblique shock. The shock slows down the normal component of velocity, such that <span class="math notranslate nohighlight">\(V_{2n} &lt; V_{1n}\)</span>, but the tangential component <span class="math notranslate nohighlight">\(V_t\)</span> is unaffected by the shock and remains constant.</p>
@@ -381,23 +385,19 @@ M_2 = \frac{M_{2n}}{\sin(\theta - \delta)} \;,
 <p>where <span class="math notranslate nohighlight">\(M_{2n} = f(M_{1n})\)</span> based on our <em>normal shock relations</em> given in the <a class="reference internal" href="normal-shocks.html"><span class="doc std std-doc">Normal Shocks</span></a> module.
 This means we also know how the stagnation pressure changes through an oblique shock: <span class="math notranslate nohighlight">\(p_{t2} / p_{t1} = f(M_{1n})\)</span>, where <span class="math notranslate nohighlight">\(p_{t1} = p_1 \cdot f(M_1)\)</span>.</p>
 <p>However, we need an additional relationship between <span class="math notranslate nohighlight">\(M_1\)</span>, <span class="math notranslate nohighlight">\(\theta\)</span>, and <span class="math notranslate nohighlight">\(\delta\)</span> to be able to solve any problems. Let’s use the continuity equation applied to motion through the shock wave to obtain this, keeping in mind that only the normal component of velocity contributes to mass crossing the shock:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \rho_1 V_{1n} = \rho_2 V_{2n} \\
 \frac{\rho_2}{\rho_1} = \frac{V_{1n}}{V_{2n}} \;,
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>but we can use the geometry to relate the normal and tangential components of velocity:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \tan \theta = \frac{V_{1n}}{V_{1t}} \\
 \tan (\theta - \delta) = \frac{V_{2n}}{V_{2t}} \\
 V_{1t} = V_{2t} = V_t \\
 \rightarrow \frac{\rho_2}{\rho_1} = \frac{V_t \tan \theta}{V_t \tan (\theta - \delta)} = \frac{\tan \theta}{\tan (\theta - \delta)} \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>But, from our normal shock relations, we know that <span class="math notranslate nohighlight">\(\rho_2 / \rho_1 = f(M_{1n})\)</span>, which we can combine with the last equation:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -491,7 +491,7 @@ Downstream Mach number =  1.681
 <p>Traditionally, since it was previously so challenging to solve the equation, and most applications focus on air where we can assume <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>, people used tabulated and charted solutions to this equation. Most gas dynamics/compressible flow textbooks contain versions of these charts, which were originally published by NACA, the precursor to NASA, in the famous Report 1135 <span id="id1">[<a class="reference internal" href="../zbibliography.html#id3">AmesRStaff53</a>]</span> (Neil Armstrong had a copy!).</p>
 <p>For example, <a class="reference internal" href="#fig-oblique-chart"><span class="std std-numref">Figure 3</span></a> shows how shock angle varies with deflection angle for <span class="math notranslate nohighlight">\(\delta =\)</span> 0° to 32°, for various upstream Mach numbers.</p>
 <div class="figure align-default" id="fig-oblique-chart">
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/oblique-chart.png"><img alt="Oblique shock charg" class="bg-primary mb-1" src="../_images/oblique-chart.png" style="width: 600px;" /></a>
+<a class="bg-white mb-1 reference internal image-reference" href="../_images/oblique-chart.png"><img alt="Oblique shock charg" class="bg-white mb-1" src="../_images/oblique-chart.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Chart for oblique shock showing how shock angle varies with deflection angle, for various upstream Mach numbers <span id="id2">[<a class="reference internal" href="../zbibliography.html#id3">AmesRStaff53</a>]</span>.</span><a class="headerlink" href="#fig-oblique-chart" title="Permalink to this image">¶</a></p>
 </div>
 <p>Using a chart like this is relatively fast, though not very precise, and limits you to gases where <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>.</p>
@@ -556,28 +556,24 @@ Downstream Mach number =  1.681
 f(x) = x^3 + C x^2 - A x + (B - A C) = 0 \;,
 \]</div>
 <p>where</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 x = \cot \theta \\
 A = M_1^2 - 1 \\
 B = \frac{\gamma + 1}{2} M_1^4 \tan \delta \\
 C = \left( 1 + \frac{\gamma + 1}{2} M_1^2 \right) \tan \delta \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Detailed proof:</p>
 <p>Obtaining Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(35)</a> requires a bit of work. First, recognize that we can use the trigonometric identity <span class="math notranslate nohighlight">\(\sin^2 \theta = \frac{1}{1 + \cot^2 \theta}\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \tan \delta = \cot \theta \frac{M_1^2 \sin^2 \theta - 1}{\frac{\gamma+1}{2} M_1^2 - (M_1^2 \sin^2 \theta - 1)} \\
 \tan \delta \left[ \frac{\gamma+1}{2} M_1^2 - \left(M_1^2 \frac{1}{1+x^2} - 1 \right) \right] = x \left( M_1^2 \frac{1}{1+x^2} - 1 \right) \\
 \tan \delta \left[ \frac{\gamma+1}{2} M_1^2 (1+x^2) - M_1^2 + 1 + x^2 \right] = x M_1^2 - x(1 + x^2) \\
 \tan \delta \frac{\gamma+1}{2} M_1^2 + \left( \tan \delta \frac{\gamma+1}{2} M_1^2 \right) x^2 + \tan \delta (1 - M_1^2) + x^2 \tan \delta = x M_1^2 - x - x^3 \\
 x^3 + x^2 \left( 1 + \frac{\gamma+1}{2} M_1^2 \right) \tan \delta - x (M_1^2 - 1) + \tan \delta \left[ \frac{\gamma+1}{2} M_1^2 + (1 - M_1^2) \right] = 0
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Now, we can recognize the coefficients of <span class="math notranslate nohighlight">\(x^2\)</span> and <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(A\)</span> from above.
 With some additional work, we can see that</p>
 <div class="math notranslate nohighlight">
@@ -623,15 +619,13 @@ Shock angle (strong) =  82.22°
 <p>This provides a robust method for finding the deflection angles given shock angle and upstream Mach number.</p>
 <p>Lastly, we may want to find the maximum deflection angle, for a given Mach number. To do this, we can take the derivative of the deflection angle equation and solve for zero.
 First, rearrange Equation <a class="reference internal" href="#equation-eq-oblique-cubic">(35)</a>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \cot \delta = \tan \delta \left[ \left(\frac{\gamma+1}{2}\right) + \frac{M_1^2}{M_1^2 \sin^2 \theta - 1} - 1 \right] \\
 \frac{d(\cot \delta)}{d\theta} = \sec^2 \theta \left[ \left( \frac{\gamma+1}{2} \right) + \frac{M_1^2}{M_1^2 \sin^2 \theta - 1} - 1 \right] + \tan \theta \left( \frac{\gamma+1}{2} \right) M_1^2 \left[ \frac{-2 M_1^2 \sin \theta \cos \theta}{(M_1^2 \sin^2 \theta - 1)^2} \right] \\
 \frac{d(\cot \delta)}{d\theta} = 0 \\
 \rightarrow (\gamma M_1^4) \sin^4 \theta + \left[ 2 M_1^2 - \left( \frac{\gamma+1}{2} \right) M_1^4 \right] \sin^2 \theta - \left( 1 + \frac{\gamma+1}{2} M_1^2 \right) = 0
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-delta-max">
 <span class="eqno">(36)<a class="headerlink" href="#equation-eq-delta-max" title="Permalink to this equation">¶</a></span>\[
 \sin^2 \theta_{\max} = \left( \frac{1}{\gamma M_1^2}\right) \left[ \frac{\gamma+1}{4} M_1^2 - 1 + \sqrt{ (\gamma+1) \left( \frac{\gamma+1}{16} M_1^4 + \frac{\gamma-1}{2} M_1^2 + 1 \right) } \right]
@@ -785,31 +779,22 @@ First, rearrange Equation <a class="reference internal" href="#equation-eq-obliq
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="normal-shocks.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Normal shock waves</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="normal-shocks.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Normal shock waves</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="prandtl-meyer.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Prandtl–Meyer flows</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="prandtl-meyer.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Prandtl–Meyer flows</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -833,8 +818,7 @@ First, rearrange Equation <a class="reference internal" href="#equation-eq-obliq
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

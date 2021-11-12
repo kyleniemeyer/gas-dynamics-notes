@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prandtl–Meyer flows &#8212; Gas Dynamics notes</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,8 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -56,7 +56,10 @@
     <link rel="next" title="Flows with friction (Fanno flows)" href="friction.html" />
     <link rel="prev" title="Oblique shock waves" href="oblique-shocks.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +120,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -160,7 +163,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heat-transfer.html">
-   Flows with heat transfer (Rayleigh)
+   Flows with heat transfer (Rayleigh flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
@@ -362,22 +365,18 @@
 <div class="section" id="analysis-of-weak-shocks">
 <h2>Analysis of weak shocks<a class="headerlink" href="#analysis-of-weak-shocks" title="Permalink to this headline">¶</a></h2>
 <p>We can express the pressure change through a normal shock using Equation <a class="reference internal" href="normal-shocks.html#equation-eq-normal-pressure">(31)</a>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \frac{p_2}{p_1} = \frac{2\gamma}{\gamma+1} M_1^2 - \frac{\gamma-1}{\gamma+1} \\
 \frac{p_2}{p_1} - 1 = \frac{\Delta p}{p_1} = \frac{2\gamma}{\gamma+1} (M_1^2 - 1) \;,
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>so therefore through a normal shock <span class="math notranslate nohighlight">\( \Delta p \propto (M_1^2 - 1) \)</span>.</p>
 <p>We can also examine the entropy change through a normal shock by using one of our thermodynamic state relationships:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \Delta s_{1-2} = c_p \log \frac{v_2}{v_1} + c_v \log \frac{p_2}{p_1} \\
 \frac{s_2 - s_1}{R} = \frac{\gamma}{\gamma-1} \log \frac{\rho_1}{\rho_2} + \frac{1}{\gamma-1} \log \frac{p_2}{p_1} \;,
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>which, after considerable effort, we can express as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -399,14 +398,12 @@
 <p>We will use the small-angle approximations again. Recall that for small angles <span class="math notranslate nohighlight">\(\theta\)</span> (in radians), we can approximate a right triangle with angle <span class="math notranslate nohighlight">\(\theta\)</span>, base adjacent leg <span class="math notranslate nohighlight">\(A\)</span>, opposite leg <span class="math notranslate nohighlight">\(O\)</span>, and hypotenuse <span class="math notranslate nohighlight">\(H\)</span> as the sector of a circle with radius <span class="math notranslate nohighlight">\(A\)</span> and arc length <span class="math notranslate nohighlight">\(s\)</span>.
 Then, <span class="math notranslate nohighlight">\(H \approx A\)</span>, <span class="math notranslate nohighlight">\(O \approx s\)</span>, and <span class="math notranslate nohighlight">\(s = A \theta\)</span>.</p>
 <p>Therefore, we can approximate:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \tan \theta = \frac{O}{A} \approx \frac{s}{A} = \frac{A \theta}{A} = \theta \;, \\
 \sin \theta = \frac{O}{H} \approx \frac{O}{A} = \theta \;, \\
 \cos \theta = \frac{A}{H} \approx 1 \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 </div>
 <p>For <em>very</em> weak oblique shocks, we can make specific approximations:</p>
 <ol class="simple">
@@ -414,30 +411,24 @@ Then, <span class="math notranslate nohighlight">\(H \approx A\)</span>, <span c
 <li><p>The shock angle <span class="math notranslate nohighlight">\(\theta\)</span> approaches the Mach angle <span class="math notranslate nohighlight">\(\mu\)</span>, where <span class="math notranslate nohighlight">\(\sin \mu = 1 / M\)</span>.</p></li>
 </ol>
 <p>Let’s apply these approximations to our oblique-shock relationship given by Equation <a class="reference internal" href="oblique-shocks.html#equation-eq-oblique">(34)</a>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \tan \delta = 2 \cot \theta \left[ \frac{M_1^2 \sin^2 \theta - 1}{M_1^2 (\gamma + \cos 2\theta) + 2} \right) \\
 \rightarrow \delta \approx (\text{constants}) \left( M_1^2 \sin^2 \theta - 1 \right) \\
 \delta \propto \left( M_1^2 \sin^2 \theta - 1 \right) \;,
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>since <span class="math notranslate nohighlight">\(\mu\)</span> is known for a given value of <span class="math notranslate nohighlight">\(M_1\)</span>. Therefore, we can express the changes in pressure and entropy using the deflection angle:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \frac{\Delta p}{p_1} \approx \frac{2\gamma}{\gamma+1} (\text{constants}) \; \delta \\
 \frac{\Delta s}{R} \approx \frac{2\gamma}{3 (\gamma+1)^2} \left[ (\text{constants}) \; \delta \right]^3
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Now, we can say that for any weak oblique shock, for any initial conditions, that</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \Delta p \propto \delta \phantom{\;.} \\
 \Delta s \propto \delta^3 \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 </div>
 <div class="section" id="isentropic-turns">
 <h2>Isentropic turns<a class="headerlink" href="#isentropic-turns" title="Permalink to this headline">¶</a></h2>
@@ -452,21 +443,17 @@ For a given <span class="math notranslate nohighlight">\(\delta_T\)</span>, incr
 Each segment is a very weak oblique shock, and for each
 <span class="math notranslate nohighlight">\( \Delta p^{\prime} \propto \delta \)</span> and <span class="math notranslate nohighlight">\( \Delta s^{\prime} \propto \delta^3 \)</span>.</p>
 <p>Then, if we look at the total change in pressure and entropy over the whole turn:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \Delta p = \sum^n \Delta p^{\prime} \propto n \, \delta \\
 \Delta s = \sum^n \Delta s^{\prime} \propto n \, \delta^3 \;,
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>but <span class="math notranslate nohighlight">\( \delta = \delta_T / n \)</span>, so</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \Delta p \propto \lim_{n \rightarrow \infty} n \left( \frac{\delta_T}{n} \right) = \delta_T \\
 \Delta s \propto \lim_{n \rightarrow \infty} n \left( \frac{\delta_T}{n} \right)^3 = 0 \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Therefore, as the number of segments increases and <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>,</p>
 <ol class="simple">
 <li><p>The wall makes a smooth turn through a finite angle <span class="math notranslate nohighlight">\(\delta_T\)</span>,</p></li>
@@ -487,31 +474,25 @@ To derive this relationship, we can examine a single Mach wave to see how the fl
 </div>
 <p>We start with a supersonic flow at Mach number <span class="math notranslate nohighlight">\(M\)</span>, encountering a expansion Mach wave at angle <span class="math notranslate nohighlight">\(\mu\)</span>. The flow turns through angle <span class="math notranslate nohighlight">\(d \nu\)</span> and accelerates to <span class="math notranslate nohighlight">\(M + dM\)</span>.
 Looking at the components of velocity, the tangential component <span class="math notranslate nohighlight">\(V_t\)</span> does not change through the expansion wave:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 V_t = V \cos \mu = (V + dV) \cos (\mu + d \nu) \\
 V \cos \mu =  (V + dV) \left( \cos \mu \cos d \nu - \sin \mu \sin d \nu \right)
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Since a single Mach wave will only turn the flow by an infinitesimal angle, we can apply the small-angle approximation: <span class="math notranslate nohighlight">\( d\nu \ll 1 \)</span>, so <span class="math notranslate nohighlight">\(\cos d \nu \approx 1\)</span> and <span class="math notranslate nohighlight">\(\sin d\nu \approx d\nu\)</span>.
 Therefore,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 V \cos \mu = (V + dV) \left( \cos \mu - d\nu \sin \mu \right) \\
 d \nu = \cot \mu \frac{dV}{V}
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>But, since we have that <span class="math notranslate nohighlight">\(\sin \mu = \frac{1}{M}\)</span>, we know that <span class="math notranslate nohighlight">\(\cos \mu = \sqrt{M^2 - 1}\)</span>.
-Then</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+Then,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 d \nu = \sqrt{M^2 - 1} \frac{dV}{V} \\
-\rightarrow d \nu = \frac{\sqrt{M^2 - 1}}{1 + \frac{\gamma-1}{2} M^2} \frac{dM}{M}
-\end{gather*}
-\end{split}\]</div>
+\rightarrow d \nu = \frac{\sqrt{M^2 - 1}}{1 + \frac{\gamma-1}{2} M^2} \frac{dM}{M} \;.
+\end{gather*}\]</div>
 <p>This gives us <span class="math notranslate nohighlight">\(d\nu = f(\gamma, M)\)</span>, which we can integrate to get <span class="math notranslate nohighlight">\(\nu + \text{const} = f(\gamma, M)\)</span>. If we specify the constraint that <span class="math notranslate nohighlight">\(\nu = 0\)</span> for <span class="math notranslate nohighlight">\( M = 1\)</span>, then the integration constant becomes zero, and the closed-form expression for <span class="math notranslate nohighlight">\(\nu\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-prandtl-meyer">
 <span class="eqno">(37)<a class="headerlink" href="#equation-eq-prandtl-meyer" title="Permalink to this equation">¶</a></span>\[
@@ -706,31 +687,22 @@ M2:  1.569
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="oblique-shocks.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Oblique shock waves</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="oblique-shocks.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Oblique shock waves</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="friction.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Flows with friction (Fanno flows)</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="friction.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Flows with friction (Fanno flows)</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -754,8 +726,7 @@ M2:  1.569
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

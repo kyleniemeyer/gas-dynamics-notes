@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flows with multiple effects &#8212; Gas Dynamics notes</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,8 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -54,9 +54,12 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Bibliography" href="../zbibliography.html" />
-    <link rel="prev" title="Flows with heat transfer (Rayleigh)" href="heat-transfer.html" />
+    <link rel="prev" title="Flows with heat transfer (Rayleigh flows)" href="heat-transfer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +120,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -160,7 +163,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heat-transfer.html">
-   Flows with heat transfer (Rayleigh)
+   Flows with heat transfer (Rayleigh flows)
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -169,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
@@ -287,8 +290,13 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#numerical-solution-of-isentropic-flow-in-converging-nozzle">
-   Numerical solution of isentropic flow in converging nozzle
+  <a class="reference internal nav-link" href="#flows-with-friction-and-area-change">
+   Flows with friction and area change
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#isentropic-flow-in-converging-nozzle">
+   Isentropic flow in converging nozzle
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -348,13 +356,16 @@
 </div>
 </div>
 </div>
+<div class="section" id="flows-with-friction-and-area-change">
+<h2>Flows with friction and area change<a class="headerlink" href="#flows-with-friction-and-area-change" title="Permalink to this headline">¶</a></h2>
 <p>This differential equation describes how Mach number changes in a compressible flow due to the effects of both area change (via <span class="math notranslate nohighlight">\(dA/dx\)</span>) and friction:</p>
 <div class="math notranslate nohighlight" id="equation-eq-friction-area">
-<span class="eqno">(44)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
 \frac{1}{2} \gamma M^2 \frac{f}{D} = \frac{1}{A} \frac{dA}{dx} + \frac{2 (1-M^2)}{M \left[ 2 + (\gamma-1) M^2 \right]} \frac{dM}{dx} 
 \]</div>
-<div class="section" id="numerical-solution-of-isentropic-flow-in-converging-nozzle">
-<h2>Numerical solution of isentropic flow in converging nozzle<a class="headerlink" href="#numerical-solution-of-isentropic-flow-in-converging-nozzle" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="isentropic-flow-in-converging-nozzle">
+<h2>Isentropic flow in converging nozzle<a class="headerlink" href="#isentropic-flow-in-converging-nozzle" title="Permalink to this headline">¶</a></h2>
 <p>Consider air flowing isentropically (and so <span class="math notranslate nohighlight">\(f = 0\)</span>) in a conically shaped converging nozzle,
 with length 10 cm, initial area of 50 cm<span class="math notranslate nohighlight">\(^2\)</span>,
 outlet area of 40 cm<span class="math notranslate nohighlight">\(^2\)</span>. The inflow temperature is 300 K and velocity is 100 m/s.</p>
@@ -370,7 +381,7 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = \frac{2 \frac{D_o - D_i}{L}}{D(x)} \;,
 \]</div>
 <p>where the diameter is expressed as <span class="math notranslate nohighlight">\( D(x) = D_i + (D_o - D_i) \frac{x}{L} \)</span>.</p>
-<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(44)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
+<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(69)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = - \left[ \frac{(D_o - D_i) / L}{D(x)} \right] \frac{2 + (\gamma-1)M^2}{1 - M^2} M \;,
@@ -490,7 +501,7 @@ Error:  1.206e-10 %
 <p>Next, consider air flow in a constant area duct with friction. (This is Fanno flow.)
 The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.6\)</span>, the duct length is 45 cm, the diameter is 3 cm, and the friction factor is 0.02.</p>
 <p>Find the outlet Mach number, and compare against the exact solution.</p>
-<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(44)</a> simplifies to</p>
+<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(69)</a> simplifies to</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = \frac{\gamma M^3 \left[ 2 + (\gamma-1) M^2 \right]}{4 (1-M^2)} \frac{f}{D} \;,
@@ -582,9 +593,9 @@ Error:  3.1377e-09 %
 </div>
 <div class="section" id="flows-with-area-change-and-friction">
 <h2>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h2>
-<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(44)</a>, rearranged for convenience:</p>
+<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(69)</a>, rearranged for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-eq-area-friction-func">
-<span class="eqno">(45)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = F(x,M) = \left\{ \frac{M \left[ 2 + (\gamma - 1)M^2 \right]}{2} \right\} \left\{ \frac{ -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D}}{1 - M^2} \right\}
 \]</div>
 <p>We can integrate this in theory, but if we want to analyze converging-diverging nozzles that are choked, as <span class="math notranslate nohighlight">\( M \rightarrow 1 \)</span> at some location, then <span class="math notranslate nohighlight">\( \frac{dM}{dx} \rightarrow \infty \)</span>. So, we need some special treatment to handle this singularity.</p>
@@ -780,7 +791,7 @@ Error:  3.1377e-09 %
 <h2>Flows with heat transfer and area change<a class="headerlink" href="#flows-with-heat-transfer-and-area-change" title="Permalink to this headline">¶</a></h2>
 <p>When the flow encounters both area change and heat transfer, we can use the ordinary differential equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-transfer-area">
-<span class="eqno">(46)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = \frac{M}{1 - M^2} \left[ \left(1 + \frac{\gamma-1}{2} M^2 \right) \frac{1}{A} \frac{dA}{dx} + \frac{1 + \gamma M^2}{2} \left( \frac{1}{c_p T} \frac{\delta q}{dx} \right) \right]
 \]</div>
 <p>To integrate <span class="math notranslate nohighlight">\(M(x)\)</span>, we need to know how the area changes with position and the rate that heat transfer occurs with distance.</p>
@@ -788,7 +799,7 @@ Error:  3.1377e-09 %
 The air enters the nozzle at a Mach number of 3 with a stagnation temperature of 300 K.
 Heat is added at a rate such that <span class="math notranslate nohighlight">\( \frac{dT_t}{dx} \)</span> = 30 K/m.
 Due to the pressure at the exit, there is a normal shock wave halfway down the nozzle.</p>
-<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(46)</a> for this problem:</p>
+<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(71)</a> for this problem:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = \frac{M \left[ 2 + (\gamma-1) M^2 \right]}{2 (1-M^2)} \left[ -\frac{1}{A} \frac{dA}{dx} + \frac{1+\gamma M^2}{2} \left( \frac{1}{T_t} \frac{dT_t}{dt} \right) \right] \;.
@@ -962,31 +973,22 @@ Exit Mach (adiabatic):  0.1931
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="heat-transfer.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Flows with heat transfer (Rayleigh)</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="heat-transfer.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Flows with heat transfer (Rayleigh flows)</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../zbibliography.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="../zbibliography.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Bibliography</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -1010,8 +1012,7 @@ Exit Mach (adiabatic):  0.1931
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

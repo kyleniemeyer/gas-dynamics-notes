@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nozzles (part I) &#8212; Gas Dynamics notes</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,8 +42,8 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"TeX": {"Macros": {"vector": ["\\vec{#1}", 1], "uvec": ["\\hat{#1}", 1], "mag": ["\\lVert#1\\rVert", 1], "cross": "\\times", "unit": ["#1~\\mathrm{#2}", 2]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -56,7 +56,10 @@
     <link rel="next" title="Normal shock waves" href="normal-shocks.html" />
     <link rel="prev" title="Isentropic, variable-area flows" href="isentropic.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Introduction and review
  </span>
@@ -117,7 +120,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Compressible flows
  </span>
@@ -160,7 +163,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="heat-transfer.html">
-   Flows with heat transfer (Rayleigh)
+   Flows with heat transfer (Rayleigh flows)
   </a>
  </li>
  <li class="toctree-l1">
@@ -169,7 +172,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
@@ -418,22 +421,18 @@
 </div>
 <p>Consider a converging-only nozzle, from a large supply of air at 300 K and 10 bar to a receiver with variable pressure <span class="math notranslate nohighlight">\(p_{\text{rec}}\)</span> that we can control.</p>
 <p>Since the supply tank has such a large cross-sectional area compared to the nozzle, we can assume that the velocity is approximately zero, and so that is the stagnation state:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 T_1 = T_{t1} \\
 p_1 = p_{t1} \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>From the energy equation, stagnation enthalpy and temperature are constant:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 h_{t1} + q = h_{t2} + w_s \\
 h_{t1} = h_{t2} \\
 \rightarrow T_{t1} = T_{t2} \;.
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Clearly, the receiver pressure <span class="math notranslate nohighlight">\(p_{\text{rec}}\)</span> controls the flow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -475,13 +474,11 @@ h_{t1} = h_{t2} \\
 <p>If <span class="math notranslate nohighlight">\(p_{\text{rec}} &lt; 10\)</span> bar, then the gas will accelerate through the nozzle as it expands isentropically and the pressure drops until <span class="math notranslate nohighlight">\(p = p_{\text{rec}}\)</span> at the exit.
 We can use the pressure ratio to find the exit Mach number and temperature.</p>
 <p>For example, if <span class="math notranslate nohighlight">\(p_{\text{rec}} = 8.02\)</span> bar:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 \frac{p_2}{p_{t2}} &amp;= \frac{p_2}{p_{t1}} \frac{p_{t1}}{p_{t2}} = f(\gamma, M_2) \\
 &amp;= \frac{8.02}{10} \left( 1 \right) = 0.802 \;,
-\end{align*}
-\end{split}\]</div>
+\end{align*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\frac{p_{t1}}{p_{t2}} = 1\)</span> since the flow is isentropic.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -517,13 +514,11 @@ V2 = 191.9 meter / second
 <div class="section" id="critical-pressure">
 <h3>3. Critical pressure<a class="headerlink" href="#critical-pressure" title="Permalink to this headline">¶</a></h3>
 <p>Let’s examine when we lower the receiver pressure to <span class="math notranslate nohighlight">\(p_{\text{rec}} = 5.283\)</span> bar:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 \frac{p_2}{p_{t2}} &amp;= \frac{p_2}{p_{t1}} \frac{p_{t1}}{p_{t2}} = f(\gamma, M_2) \\
 &amp;= \frac{5.283}{10} \left( 1 \right) = 0.5283 \;.
-\end{align*}
-\end{split}\]</div>
+\end{align*}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">5.283</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
@@ -589,13 +584,11 @@ Exit temperature = 333.33 kelvin
 </div>
 </div>
 <p>We can find the mass flow rate with</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 \dot{m} &amp;= \rho_e A_e V_e \\
 &amp;= \left(\frac{p_e}{R T_e} \right) A_e \left( M_e \sqrt{\gamma R T_e} \right) \;.
-\end{align*}
-\end{split}\]</div>
+\end{align*}\]</div>
 <p>For back pressures that are higher than the critical pressure, we can use the stagnation pressure ratio to find the corresponding exit Mach number, and then the other properties.</p>
 <p>For back pressures that are lower than the critical pressure, the exit conditions are locked at the critical conditions and the Mach number is one.</p>
 <div class="cell docutils container">
@@ -702,13 +695,11 @@ The <strong>area ratio</strong>, or the ratio of the exit area to the throat are
 <h3>Design operation: third critical<a class="headerlink" href="#design-operation-third-critical" title="Permalink to this headline">¶</a></h3>
 <p>The design operation of a converging-diverging nozzle is supersonic flow at the exit, and fully isentropic throughout.</p>
 <p>We can use the sonic reference area to find the supersonic Mach number associated with this condition:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
 \frac{A_3}{A_3^*} &amp;= \frac{A_3}{A_2} \frac{A_2}{A_2^*} \frac{A_2^*}{A_3^*} \\
 &amp;= (2.494) \left(1 \right) \left( 1 \right) = 2.494 \;,
-\end{align*}
-\end{split}\]</div>
+\end{align*}\]</div>
 <p>which is a function of <span class="math notranslate nohighlight">\(M_3\)</span>. <span class="math notranslate nohighlight">\(\frac{A_2}{A_2^*} = 1\)</span> because the velocity is sonic at the throat, and <span class="math notranslate nohighlight">\(\frac{A_2^*}{A_3^*} = 1\)</span> because the flow is isentropic in the diverging section.</p>
 <p>With <span class="math notranslate nohighlight">\(M_3\)</span> we can obtain the stagnation pressure ratio at the exit:</p>
 <div class="math notranslate nohighlight">
@@ -784,13 +775,13 @@ p3 = 9.607 bar
 <span class="n">area_ratios_diverging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">A3_A2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">pressures_converging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios_converging</span><span class="p">)</span>
-<span class="n">machs_converging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios</span><span class="p">)</span>
+<span class="n">machs_converging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios_converging</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">area_ratio</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">area_ratios_converging</span><span class="p">):</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
         <span class="n">find_mach_area</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">area_ratio</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
         <span class="p">)</span>
     <span class="n">machs_converging</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
-    <span class="n">pressures_converging</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">stagnation_pressure</span><span class="p">(</span><span class="n">machs_first</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="n">pressures_converging</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">stagnation_pressure</span><span class="p">(</span><span class="n">machs_converging</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
 
 <span class="n">pressures_first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios_diverging</span><span class="p">)</span>
 <span class="n">pressures_third</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios_diverging</span><span class="p">)</span>
@@ -821,18 +812,7 @@ p3 = 9.607 bar
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2809</span><span class="o">/</span><span class="mf">615604042.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">pressures_converging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios_converging</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">machs_converging</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">area_ratios</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">area_ratio</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">area_ratios_converging</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
-
-<span class="ne">NameError</span>: name &#39;area_ratios&#39; is not defined
-</pre></div>
-</div>
+<img alt="../_images/nozzles-part1_27_0.png" src="../_images/nozzles-part1_27_0.png" />
 </div>
 </div>
 </div>
@@ -845,15 +825,13 @@ p3 = 9.607 bar
 \eta_n \equiv \frac{\text{actual } \Delta \text{KE}}{\text{ideal } \Delta \text{KE}} \;.
 \]</div>
 <p>We can express this using more convenient quantities by examining the energy equation:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{gather*}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 h_{t1} + q = h_{t2} + w_s \\
 h_{t1} = h_{t2} \\
 h_1 + \frac{V_1^2}{2} = h_2 + \frac{V_2^2}{2} \\
 h_1 - h_2 = \frac{V_2^2 - V_1^2}{2} = \Delta \text{KE}
-\end{gather*}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>so</p>
 <div class="math notranslate nohighlight">
 \[
@@ -911,31 +889,22 @@ The purpose of a diffuser is to convert kinetic energy into pressure energy.</p>
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="isentropic.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Isentropic, variable-area flows</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="isentropic.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Isentropic, variable-area flows</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="normal-shocks.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Normal shock waves</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="normal-shocks.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Normal shock waves</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -959,8 +928,7 @@ The purpose of a diffuser is to convert kinetic energy into pressure energy.</p>
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
