@@ -380,8 +380,9 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these lines are only for helping improve the display</span>
 <span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
 <span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">150</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">300</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cm&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -459,16 +460,16 @@ equilibrium with a third system C, then systems A and C are in thermal equilibri
 \]</div>
 <p>or the heat transfer into the system equals the work transfered from (i.e., done by) the system.
 So, for a process of a closed system:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 Q = W + \Delta E \\
 q = w + \Delta e \;,
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>where <em>E</em> is total energy and <em>e</em> is the total energy per unit mass, defined as</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-e \equiv u + \frac{V^2}{2} + gz + \text{others} \\
-\end{split}\]</div>
+\[
+e \equiv u + \frac{V^2}{2} + gz + \text{others} \;,
+\]</div>
 <p>where <em>u</em> is internal energy associated with molecular motion, <span class="math notranslate nohighlight">\(\frac{V^2}{2}\)</span> is the kinetic energy, <span class="math notranslate nohighlight">\(gz\)</span> is potential energy, and then other forms of energy may be considered.</p>
 <p>For an infinitesimal process, conservation of energy is</p>
 <div class="math notranslate nohighlight">
@@ -491,11 +492,11 @@ e \equiv u + \frac{V^2}{2} + gz + \text{others} \\
 dh = du + d(pv) = du + p dv + v dp
 \]</div>
 <p>Internal energy and enthalpy also lead to the definitions of the specific heats:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 c_p \equiv \left( \frac{\partial h}{\partial T} \right)_p \\
 c_v \equiv \left( \frac{\partial u}{\partial T} \right)_v \;.
-\end{split}\]</div>
+\end{gather*}\]</div>
 </div>
 </div>
 <div class="section" id="second-law-of-thermodynamics">
@@ -511,11 +512,11 @@ In other words, phenomena encountered in most realistic applications!</p>
 (However, in reality all processes are somewhat irreversible.)</p>
 <p>It was observed that the integral of <span class="math notranslate nohighlight">\(\frac{\delta Q}{T}\)</span> for a reversible process involving heat transfer is <em>independent</em> of the path taken during that process.
 If the change in some system quantity is independent of path, that means that this represents a change in a system <em>property</em>. Thus,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \Delta S \equiv \int \frac{\delta Q_R}{T} \\
 ds \equiv \frac{\delta q_R}{T} \;,
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>where the subscript <em>R</em> means that the heat transfer must be reversible, and <em>S</em> / <em>s</em> represents the property of <strong>entropy</strong>.
 We can use an exact differential with entropy (<em>ds</em>) because entropy is a system property, and changes in entropy depend only on the state of the system.</p>
 </div>
@@ -523,19 +524,19 @@ We can use an exact differential with entropy (<em>ds</em>) because entropy is a
 <h2>Property relations<a class="headerlink" href="#property-relations" title="Permalink to this headline">¶</a></h2>
 <p>We can combine the 1st and 2nd laws to come up with relationships between entropy and other properties.</p>
 <p>Assuming a reversible process involving pressure-volume work, we can combine:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \delta q = \delta w + du \\
 \delta w = p dv \\
 \delta q = T ds \\
 \rightarrow T ds = du + p dv \;.
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Similarly, we can take the differential of enthalpy and do a similar combination:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 dh = du + p dv + v dp \\
 \rightarrow T ds = dh - v dp = dh - \frac{dp}{\rho} \;.
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>These thermodynamic relationships come from Gibbs identities.</p>
 <p><strong>Important</strong>: we assumed we were dealing with a reversible process (involving pressure-volume work) to get these expressions.
 However, these relations contain <em>only properties</em> — they are not path dependent! This means that they are valid for <em>any</em> end states
@@ -544,69 +545,69 @@ of a system.</p>
 <div class="section" id="perfect-gases">
 <h2>Perfect gases<a class="headerlink" href="#perfect-gases" title="Permalink to this headline">¶</a></h2>
 <p>If we are dealing with a perfect/ideal gas, we can simplify our expressions further. For an ideal gas, we know that</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 p = \rho R T \\
 u = u (T) \\
 c_v = \left( \frac{\partial u}{\partial T} \right)_v = \frac{du}{dT} \\
 du = c_v dT \\
 \rightarrow \Delta u = c_v \Delta T
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Similarly,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 h = h(T) \\
 c_p = \left( \frac{\partial h}{\partial T} \right)_p \\
 \rightarrow \Delta h = c_p \Delta T
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>If we assume or define as a reference state that internal energy and enthalpy are zero at absolute zero, i.e., <span class="math notranslate nohighlight">\(u(T=0) = 0\)</span> and <span class="math notranslate nohighlight">\(h(T=0) = 0\)</span>,
 then we have that <span class="math notranslate nohighlight">\(u = c_v T\)</span> and <span class="math notranslate nohighlight">\(h = c_p T\)</span>.</p>
 <p>We can also define the <strong>specific heat ratio</strong>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \gamma \equiv \frac{c_p}{c_v} \approx 
 \begin{cases} 1.4 , \text{ diatomic gases (N$_2$, O$_2$, air)} \\
 1.7 , \text{ monotomic gases (He, Ar)}
 \end{cases}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>We also have relationships between the specific heats and the gas constant:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 c_p - c_v = R \\
 c_p = \frac{\gamma}{\gamma - 1} R \\
 c_v = \frac{R}{\gamma - 1} \;.
-\end{split}\]</div>
+\end{gather*}\]</div>
 <div class="section" id="entropy-changes">
 <h3>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">¶</a></h3>
 <p>By integrating the property relations for perfect gases, and taking advantage of our equation of state (<span class="math notranslate nohighlight">\(p = \rho R T\)</span>),
 we can get explicit equations for entropy change between two points in a process:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 T ds = du + p dv \\
 T ds = c_v dT + p dv \\
 ds = c_v \frac{dT}{T} + \frac{p dv}{T} \;.
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Then, use the ideal gas equation of state:</p>
 <div class="math notranslate nohighlight">
 \[
 p = \rho R T \rightarrow p v = R T \rightarrow \frac{p}{T} = \frac{R}{v} \;.
 \]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 ds = c_v \frac{dT}{T} + R \frac{dv}{v} \\
 \Delta s_{1-2} = \int_{T_1}^{T_2} c_v (T) \frac{dT}{T} + R \int_{v_1}^{v_2} \frac{dv}{v} \;.
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>Then, if we assume that specific heat is constant, <span class="math notranslate nohighlight">\(c_v(T) = c_v\)</span>, we can simplify further:</p>
 <div class="math notranslate nohighlight">
 \[
 \therefore \Delta s_{1-2} = c_v \ln \frac{T_2}{T_1} + R \ln \frac{v_2}{v_1}
 \]</div>
 <p>Similarly, we can take that expression and obtain</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 \Delta s_{1-2} = c_p \ln \frac{v_2}{v_1} + c_v \ln \frac{p_2}{p_1} \\
 \Delta s_{1-2} = c_p \ln \frac{T_2}{T_1} - R \ln \frac{p_2}{p_1}
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>We can write functions to calculate the entropy change given initial and final values of temperature, volume, and pressure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -647,11 +648,11 @@ ds = c_v \frac{dT}{T} + R \frac{dv}{v} \\
 p v^n = \text{const} = C_1 \;,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the polytropic constant that depends on the specific process. With the ideal gas equation of state, we can also get relations with temperature:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
 T v^{n-1} = C_2 \\
 T p^{\frac{1-n}{n}} = C_3 \;,
-\end{split}\]</div>
+\end{gather*}\]</div>
 <p>where <span class="math notranslate nohighlight">\(C_1\)</span>, <span class="math notranslate nohighlight">\(C_2\)</span>, and <span class="math notranslate nohighlight">\(C_3\)</span> are different constants.</p>
 <p>Different values of <span class="math notranslate nohighlight">\(n\)</span> correspond to different (polytropic) processes:</p>
 <ul class="simple">
@@ -703,6 +704,7 @@ T p^{\frac{1-n}{n}} = C_3 \;,
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;volume&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -766,6 +768,7 @@ T p^{\frac{1-n}{n}} = C_3 \;,
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;entropy&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;temperature&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">1800</span><span class="p">,</span> <span class="mi">2400</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
