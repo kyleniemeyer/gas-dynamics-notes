@@ -293,25 +293,30 @@
   <a class="reference internal nav-link" href="#flows-with-friction-and-area-change">
    Flows with friction and area change
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#isentropic-flow-in-converging-nozzle">
-   Isentropic flow in converging nozzle
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#subsonic-flow-with-friction-in-constant-area-duct">
-   Subsonic flow with friction in constant area duct
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#flows-with-area-change-and-friction">
-   Flows with area change and friction
-  </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#isentropic-flow-in-converging-nozzle">
+     Isentropic flow in converging nozzle
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subsonic-flow-with-friction-in-constant-area-duct">
+     Subsonic flow with friction in constant area duct
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flows-with-area-change-and-friction">
+     Flows with area change and friction
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sonic-location">
      Sonic location
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-other-properties">
+     Computing other properties
     </a>
    </li>
   </ul>
@@ -324,6 +329,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-heat-transfer-in-coverging-nozzle-with-shock">
      Example: heat transfer in coverging nozzle with shock
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Computing other properties
     </a>
    </li>
   </ul>
@@ -436,9 +446,8 @@ Eliminating <span class="math notranslate nohighlight">\( dT / T \)</span> and <
 <p>Unfortunately, this is not something we can usually integrate analytically to get an exact solution (except for the specific cases of isentropic flow and constant-area Fanno flow).
 Instead, we’ll need to use integration methods to obtain numerical solutions.</p>
 <p>First, let’s consider the cases where we <em>do</em> have exact solutions, so we can compare our numerical results, and then we will look at the general case of combined friction and varying-area effects.</p>
-</div>
 <div class="section" id="isentropic-flow-in-converging-nozzle">
-<h2>Isentropic flow in converging nozzle<a class="headerlink" href="#isentropic-flow-in-converging-nozzle" title="Permalink to this headline">¶</a></h2>
+<h3>Isentropic flow in converging nozzle<a class="headerlink" href="#isentropic-flow-in-converging-nozzle" title="Permalink to this headline">¶</a></h3>
 <p>First, consider air flowing isentropically (and so <span class="math notranslate nohighlight">\(f = 0\)</span>) in a conically shaped converging nozzle,
 with length 10 cm, initial area of 50 cm<span class="math notranslate nohighlight">\(^2\)</span>,
 outlet area of 40 cm<span class="math notranslate nohighlight">\(^2\)</span>. The inflow temperature is 300 K and velocity is 100 m/s.</p>
@@ -575,7 +584,7 @@ Error:  1.206e-10 %
 </div>
 </div>
 <div class="section" id="subsonic-flow-with-friction-in-constant-area-duct">
-<h2>Subsonic flow with friction in constant area duct<a class="headerlink" href="#subsonic-flow-with-friction-in-constant-area-duct" title="Permalink to this headline">¶</a></h2>
+<h3>Subsonic flow with friction in constant area duct<a class="headerlink" href="#subsonic-flow-with-friction-in-constant-area-duct" title="Permalink to this headline">¶</a></h3>
 <p>Next, consider air flow in a constant area duct with friction. (This is Fanno flow.)
 The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.6\)</span>, the duct length is 45 cm, the diameter is 3 cm, and the friction factor is 0.02.</p>
 <p>Find the outlet Mach number, and compare against the exact solution.</p>
@@ -674,7 +683,7 @@ Error:  3.1377e-09 %
 </div>
 </div>
 <div class="section" id="flows-with-area-change-and-friction">
-<h2>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h2>
+<h3>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h3>
 <p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a>, rearranged for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-eq-area-friction-func">
 <span class="eqno">(71)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
@@ -704,6 +713,7 @@ It has two roots at the sonic point, one negative and one positive:</p>
 <li><p><span class="math notranslate nohighlight">\( \frac{dM}{dx} &gt; 0 \)</span> for accelerating flow, where <span class="math notranslate nohighlight">\( \frac{dA}{dx} &lt; 0 \)</span> for subsonic flow and <span class="math notranslate nohighlight">\( \frac{dA}{dx} &gt; 0 \)</span> for supersonic flow; and</p></li>
 <li><p><span class="math notranslate nohighlight">\( \frac{dM}{dx} &lt; 0 \)</span> for decelerating flow, where <span class="math notranslate nohighlight">\( \frac{dA}{dx} &gt; 0 \)</span> for subsonic flow and <span class="math notranslate nohighlight">\( \frac{dA}{dx} &lt; 0 \)</span> for supersonic flow</p></li>
 </ul>
+</div>
 <div class="section" id="sonic-location">
 <h3>Sonic location<a class="headerlink" href="#sonic-location" title="Permalink to this headline">¶</a></h3>
 <p>To apply the appropriate solution, we need to find the location of the sonic point,
@@ -893,6 +903,49 @@ For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A}
 </div>
 <p>We can see that the presence of friction starts to significantly alter the flow in the supersonic region, decelerating the flow from the isentropic solution and even causing the Mach number to begin decreasing near the exit. This is an extreme case, due to the high friction factor.</p>
 </div>
+<div class="section" id="computing-other-properties">
+<h3>Computing other properties<a class="headerlink" href="#computing-other-properties" title="Permalink to this headline">¶</a></h3>
+<p>Once we’ve solved for the distribution of Mach number in a flow system, we may want to obtain other properties such as pressure, temperature, and density.
+Since we cannot use the isentropic or Fanno flow relations, we need to derive new ones that apply under the current conditions where both area change and friction affect the flow.</p>
+<p>For a more-general one-dimensional flow, conservation of mass applies, and we can use ideal-gas relationships:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\dot{m} = \rho A V = \text{constant} \\
+V = M a = M \sqrt{\gamma R T} \\
+p = \rho R T
+\end{gather*}\]</div>
+<p>For an adiabatic flow, we also have that stagnation temperature is constant, and we can relate that to the static temperature using the appropriate stagnation relationship:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = T \left( 1 + \frac{\gamma+1}{2} M^2 \right) \;.
+\]</div>
+<p>Between two points <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> in the flow system (at locations <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>),
+we can then write that <span class="math notranslate nohighlight">\( (T_t)_i = (T_t)_j \)</span>, and if we know <span class="math notranslate nohighlight">\(M(x)\)</span>, then</p>
+<div class="math notranslate nohighlight" id="equation-eq-temperature-area-friction">
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-temperature-area-friction" title="Permalink to this equation">¶</a></span>\[
+\frac{T_j}{T_i} = \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \;.
+\]</div>
+<p>Then, applying conservation of mass between those same two points:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\left( \rho A V \right)_i = \left( \rho A V \right)_j \\
+\left( \frac{p}{RT} A M \sqrt{\gamma R T} \right)_i = \left( \frac{p}{RT} A M \sqrt{\gamma R T} \right)_j
+\end{gather*}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-general">
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-pressure-general" title="Permalink to this equation">¶</a></span>\[
+\frac{p_j}{p_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \sqrt{ \frac{T_j}{T_i} } \;,
+\]</div>
+<p>and if we incorporate the temperature relationship from Equation <a class="reference internal" href="#equation-eq-temperature-area-friction">(75)</a> we can get</p>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-area-friction">
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-pressure-area-friction" title="Permalink to this equation">¶</a></span>\[
+\frac{p_j}{p_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left[ \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \right]^{1/2} \;.
+\]</div>
+<p>Similarly, for density we can arrive at a similar expression:</p>
+<div class="math notranslate nohighlight" id="equation-eq-density-area-friction">
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-density-area-friction" title="Permalink to this equation">¶</a></span>\[
+\frac{\rho_j}{\rho_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \sqrt{\frac{T_i}{T_j}} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left[ \frac{2 + (\gamma-1) M_j^2}{2 + (\gamma-1) M_i^2} \right]^{1/2} \;.
+\]</div>
+</div>
 </div>
 <div class="section" id="flows-with-heat-transfer-and-area-change">
 <h2>Flows with heat transfer and area change<a class="headerlink" href="#flows-with-heat-transfer-and-area-change" title="Permalink to this headline">¶</a></h2>
@@ -903,15 +956,15 @@ For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A}
 <p><a class="reference internal" href="#fig-cv-heat-area"><span class="std std-numref">Figure 10</span></a> shows a control volume in a varying-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>. The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span>, the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>, and the flow experiences heat transfer <span class="math notranslate nohighlight">\( \delta q \)</span>.</p>
 <p>Applying conservation of mass, momentum, and energy to the control volume, we get</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-continuity">
-<span class="eqno">(75)<a class="headerlink" href="#equation-eq-heat-area-continuity" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-heat-area-continuity" title="Permalink to this equation">¶</a></span>\[
 \frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0
 \]</div>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-momentum">
-<span class="eqno">(76)<a class="headerlink" href="#equation-eq-heat-area-momentum" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-heat-area-momentum" title="Permalink to this equation">¶</a></span>\[
 dp + \rho V dV = 0
 \]</div>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-energy">
-<span class="eqno">(77)<a class="headerlink" href="#equation-eq-heat-area-energy" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-heat-area-energy" title="Permalink to this equation">¶</a></span>\[
 \delta q = c_p d T_t \;,
 \]</div>
 <p>and we also can express a differential form of the ideal gas law:</p>
@@ -919,13 +972,13 @@ dp + \rho V dV = 0
 \[
 \frac{dp}{p} = \frac{d\rho}{\rho} + \frac{dT}{T}
 \]</div>
-<p>We can eliminate <span class="math notranslate nohighlight">\( \frac{dp}{p} \)</span> by taking Equation <a class="reference internal" href="#equation-eq-heat-area-momentum">(76)</a> and dividing by <span class="math notranslate nohighlight">\(p\)</span>, where we get</p>
+<p>We can eliminate <span class="math notranslate nohighlight">\( \frac{dp}{p} \)</span> by taking Equation <a class="reference internal" href="#equation-eq-heat-area-momentum">(80)</a> and dividing by <span class="math notranslate nohighlight">\(p\)</span>, where we get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{gather*}
 \frac{dp}{p} + \frac{\rho}{p} V dV = 0 \\
 \rightarrow \frac{d\rho}{\rho} + \frac{dT}{T} + \frac{\rho}{p} V dV = 0 \;.
 \end{gather*}\]</div>
-<p>Next, incorporate Equation <a class="reference internal" href="#equation-eq-heat-area-continuity">(75)</a> to eliminate <span class="math notranslate nohighlight">\( \frac{d\rho}{\rho} \)</span> and use the ideal gas law expression</p>
+<p>Next, incorporate Equation <a class="reference internal" href="#equation-eq-heat-area-continuity">(79)</a> to eliminate <span class="math notranslate nohighlight">\( \frac{d\rho}{\rho} \)</span> and use the ideal gas law expression</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\rho}{p} V dV = \frac{\rho}{p} V^2 \frac{dV}{V} = \frac{1}{RT} M^2 \gamma R T \frac{dV}{V} = \gamma M^2 \frac{dV}{V}
@@ -954,7 +1007,7 @@ T_t = T \left( 1 + \frac{\gamma-1}{2} M^2 \right) \\
 dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
 \frac{dT_t}{T} = \left( 1 + \frac{\gamma-1}{2} M^2 \right) \frac{dT}{T} + (\gamma-1) M^2 \frac{dM}{M} \;,
 \end{gather*}\]</div>
-<p>but we have from Equation <a class="reference internal" href="#equation-eq-heat-area-energy">(77)</a> that <span class="math notranslate nohighlight">\( dT_t = \delta q / c_p \)</span>, so</p>
+<p>but we have from Equation <a class="reference internal" href="#equation-eq-heat-area-energy">(81)</a> that <span class="math notranslate nohighlight">\( dT_t = \delta q / c_p \)</span>, so</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dT}{T} = \left( 1 + \frac{\gamma-1}{2} M^2 \right)^{-1} \left[ \frac{\delta q}{c_p T} - M^2 (\gamma-1) \frac{dM}{M} \right] \;,
@@ -966,7 +1019,7 @@ dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
 \]</div>
 <p>Rearranging and dividing by <span class="math notranslate nohighlight">\(dx\)</span>, we can get an ordinary differential equation for solving for Mach number:</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-transfer-area">
-<span class="eqno">(78)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(82)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = \frac{M}{1 - M^2} \left[ -\left(1 + \frac{\gamma-1}{2} M^2 \right) \frac{1}{A} \frac{dA}{dx} + \frac{1 + \gamma M^2}{2} \left( \frac{1}{c_p T} \frac{\delta q}{dx} \right) \right]
 \]</div>
 <p>To integrate <span class="math notranslate nohighlight">\(M(x)\)</span>, we need to know how the area changes with position and the rate that heat transfer occurs with distance.</p>
@@ -976,7 +1029,7 @@ dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
 The air enters the nozzle at a Mach number of 3 with a stagnation temperature of 300 K.
 Heat is added at a rate such that <span class="math notranslate nohighlight">\( \frac{dT_t}{dx} \)</span> = 100 K/m.
 Due to the pressure at the exit, there is a normal shock wave halfway down the nozzle.</p>
-<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(78)</a> for this problem:</p>
+<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(82)</a> for this problem:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = \frac{M \left[ 2 + (\gamma-1) M^2 \right]}{2 (1-M^2)} \left[ -\frac{1}{A} \frac{dA}{dx} + \frac{1+\gamma M^2}{2} \left( \frac{1}{T_t} \frac{dT_t}{dt} \right) \right] \;.
@@ -1117,7 +1170,7 @@ The shock is a discontinuity at <span class="math notranslate nohighlight">\(x =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/multiple-effects_35_0.png" src="../_images/multiple-effects_35_0.png" />
+<img alt="../_images/multiple-effects_36_0.png" src="../_images/multiple-effects_36_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exit Mach:  0.1966
 Exit Mach (adiabatic):  0.1931
 </pre></div>
@@ -1125,6 +1178,31 @@ Exit Mach (adiabatic):  0.1931
 </div>
 </div>
 <p>We can see that in the supersonic region of the nozzle, the heat addition slightly decelerates the flow from isentropic, as we would expect in a supersonic Rayleigh flow, but the area change plays a much bigger role. Following the normal shock, the full solution tracks the adiabatic solution closely, but with a slightly higher exit Mach number.</p>
+</div>
+<div class="section" id="id2">
+<h3>Computing other properties<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Similarly to flows with friction and area change, we can also apply our ideal gas relationsips and conservation of mass to get other properties such as pressure, temperature, and density.
+However, in this case, since the flow is not adiabatic, we have to consider how stagnation temperature changes.
+We can take the ratio of stagnation temperature between two locations <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, and rearrange to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-temperature-area-heat">
+<span class="eqno">(83)<a class="headerlink" href="#equation-eq-temperature-area-heat" title="Permalink to this equation">¶</a></span>\[
+\frac{T_j}{T_i} = \left( \frac{T_{t,j}}{T_{t,i}} \right) \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \;,
+\]</div>
+<p>where we would need information about heat transfer to determine how stagnation temperature changes:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dT_t}{dx} = \frac{1}{c_p} \frac{\delta q}{dx} \;.
+\]</div>
+<p>Then, since conservation of mass applies the same to this system as one where area change and friction apply, we can incorproate this into the relationship for pressure given by Equation <a class="reference internal" href="#equation-eq-pressure-general">(76)</a> to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-pressure-area-heat">
+<span class="eqno">(84)<a class="headerlink" href="#equation-eq-pressure-area-heat" title="Permalink to this equation">¶</a></span>\[
+\frac{p_j}{p_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left( \frac{T_{t,j}}{T_{t,i}} \right)^{1/2} \left[ \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \right]^{1/2} \;.
+\]</div>
+<p>Density follows similarly:</p>
+<div class="math notranslate nohighlight" id="equation-eq-density-area-heat">
+<span class="eqno">(85)<a class="headerlink" href="#equation-eq-density-area-heat" title="Permalink to this equation">¶</a></span>\[
+\frac{\rho_j}{\rho_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \sqrt{\frac{T_i}{T_j}} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left( \frac{T_{t,i}}{T_{t,j}} \right)^{1/2} \left[ \frac{2 + (\gamma-1) M_j^2}{2 + (\gamma-1) M_i^2} \right]^{1/2} \;.
+\]</div>
 </div>
 </div>
 </div>
