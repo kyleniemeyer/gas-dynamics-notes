@@ -404,10 +404,26 @@
 \sum F_x = \dot{m} \left( V_{\text{out}, x} - V_{\text{in}, x} \right) \\
 p A + \left( p + \frac{dp}{2} \right) dA - (p + dp) (A + dA) - \tau_f A_s = (\rho A V)(V + dV - V) \\
 -A dp - \frac{1}{2} \rho V^2 \frac{f A_s}{4} = \rho A V dV \\
-dp + \frac{1}{2} V^2 \frac{f dx}{D} + p V dV = 0 \;,
+dp + \frac{1}{2} \rho V^2 \frac{f dx}{D} + \rho V dV = 0 \;,
 \end{gather*}\]</div>
-<p>where <span class="math notranslate nohighlight">\( f \equiv 4 \tau_f / \left( \frac{1}{2} \rho V^2 \right) \)</span> is the Darcy friction factor, and for a circular duct <span class="math notranslate nohighlight">\( A_s = \pi D dx = 4 A dx / D \)</span>.
-We can then obtain</p>
+<p>where <span class="math notranslate nohighlight">\( f \equiv 4 \tau_f / \left( \frac{1}{2} \rho V^2 \right) \)</span> is the Darcy friction factor, and for a circular duct <span class="math notranslate nohighlight">\( A_s = \pi D dx = 4 A dx / D \)</span>.</p>
+<p>We can divide the entire expression by the ideal gas law <span class="math notranslate nohighlight">\( p = \rho R T \)</span> (using <span class="math notranslate nohighlight">\(p\)</span>p on the left-hand side and <span class="math notranslate nohighlight">\( \rho R T \)</span> on the right-hand side),
+and incorporate the Mach number expression <span class="math notranslate nohighlight">\( V^2 = M^2 \gamma R T \)</span>, or, expressed differently, <span class="math notranslate nohighlight">\( R T = V^2 / \left( M^2 \gamma \right) \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dp}{p} + \frac{1}{\rho R T} \frac{1}{2} \rho V^2 \frac{f dx}{D} + \frac{1}{\rho R T} \rho V dV = 0
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-momentum-before-ideal">
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq-momentum-before-ideal" title="Permalink to this equation">¶</a></span>\[
+\frac{dp}{p} + \frac{1}{2} \gamma M^2 \frac{f dx}{D} + \gamma M^2 \frac{dV}{V} = 0 \;.
+\]</div>
+<p>Then, take the differential of the ideal gas law and divide that result by the ideal gas equation:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+dp = R T d\rho + \rho R dT \\
+\frac{dp}{p} = \frac{d\rho}{\rho} + \frac{dT}{T} \;,
+\end{gather*}\]</div>
+<p>and insert that into Eq. <a class="reference internal" href="#equation-eq-momentum-before-ideal">(70)</a> to get</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{d\rho}{\rho} + \frac{dT}{T} + \gamma M^2 \frac{dV}{V} + \frac{1}{2} \gamma M^2 \frac{f dx}{D} = 0 \;.
@@ -417,7 +433,7 @@ We can then obtain</p>
 \[
 - \left( \frac{dV}{V} + \frac{dA}{A} \right) + \frac{dT}{T} + \gamma M^2 \frac{dV}{V} + \frac{1}{2} \gamma M^2 \frac{f dx}{D} = 0 \;.
 \]</div>
-<p>Next, let’s introduce the definition of Mach number:</p>
+<p>Next, let’s differentiate the Mach number expression for ideal gases:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{gather*}
 V = M a = M \sqrt{\gamma R T} \\
@@ -440,7 +456,7 @@ Eliminating <span class="math notranslate nohighlight">\( dT / T \)</span> and <
 \]</div>
 <p>Finally, we can divide by <span class="math notranslate nohighlight">\(dx\)</span>, and obtain a differential equation that describes how Mach number changes in a compressible flow due to the effects of both area change (via <span class="math notranslate nohighlight">\(dA/dx\)</span>) and friction:</p>
 <div class="math notranslate nohighlight" id="equation-eq-friction-area">
-<span class="eqno">(70)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq-friction-area" title="Permalink to this equation">¶</a></span>\[
 \frac{1}{2} \gamma M^2 \frac{f}{D} = \frac{1}{A} \frac{dA}{dx} + \frac{2 (1-M^2)}{M \left[ 2 + (\gamma-1) M^2 \right]} \frac{dM}{dx} \;.
 \]</div>
 <p>Unfortunately, this is not something we can usually integrate analytically to get an exact solution (except for the specific cases of isentropic flow and constant-area Fanno flow).
@@ -463,7 +479,7 @@ A(x) = \frac{\pi}{4} D(x)^2 = \frac{\pi}{4} \left( D_i + \frac{D_o - D_i}{L} \ri
 \frac{1}{A(x)} \frac{dA}{dx} = \frac{2}{D(x)} \frac{dD}{dx} = \frac{2 \frac{D_o - D_i}{L}}{D(x)} \;,
 \]</div>
 <p>where the diameter is expressed as <span class="math notranslate nohighlight">\( D(x) = D_i + (D_o - D_i) \frac{x}{L} \)</span>.</p>
-<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
+<p>Substituting this into Equation <a class="reference internal" href="#equation-eq-friction-area">(71)</a>, since <span class="math notranslate nohighlight">\(f = 0\)</span>, we get</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = - \left[ \frac{(D_o - D_i) / L}{D(x)} \right] \frac{2 + (\gamma-1)M^2}{1 - M^2} M \;,
@@ -588,7 +604,7 @@ Error:  1.206e-10 %
 <p>Next, consider air flow in a constant area duct with friction. (This is Fanno flow.)
 The initial Mach number is <span class="math notranslate nohighlight">\(M_i = 0.6\)</span>, the duct length is 45 cm, the diameter is 3 cm, and the friction factor is 0.02.</p>
 <p>Find the outlet Mach number, and compare against the exact solution.</p>
-<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a> simplifies to</p>
+<p>Since the area is constant, <span class="math notranslate nohighlight">\( \frac{dA}{dx} = 0\)</span>, and Equation <a class="reference internal" href="#equation-eq-friction-area">(71)</a> simplifies to</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = F(x,M) = \frac{\gamma M^3 \left[ 2 + (\gamma-1) M^2 \right]}{4 (1-M^2)} \frac{f}{D} \;,
@@ -684,9 +700,9 @@ Error:  3.1377e-09 %
 </div>
 <div class="section" id="flows-with-area-change-and-friction">
 <h3>Flows with area change and friction<a class="headerlink" href="#flows-with-area-change-and-friction" title="Permalink to this headline">¶</a></h3>
-<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(70)</a>, rearranged for convenience:</p>
+<p>When the flow encounters both area change and friction, we need to solve the full version of Equation <a class="reference internal" href="#equation-eq-friction-area">(71)</a>, rearranged for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-eq-area-friction-func">
-<span class="eqno">(71)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(72)<a class="headerlink" href="#equation-eq-area-friction-func" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = F(x,M) = \left\{ \frac{M \left[ 2 + (\gamma - 1)M^2 \right]}{2} \right\} \left\{ \frac{ -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D}}{1 - M^2} \right\}
 \]</div>
 <p>We can integrate this in theory, but if we want to analyze converging-diverging nozzles that are choked, as <span class="math notranslate nohighlight">\( M \rightarrow 1 \)</span> at some location, then <span class="math notranslate nohighlight">\( \frac{dM}{dx} \rightarrow \infty \)</span>. So, we need some special treatment to handle this singularity.</p>
@@ -704,7 +720,7 @@ To evaluate the derivative at this limit, we can take the derivative of the nume
 \]</div>
 <p>which we can rearrange to get</p>
 <div class="math notranslate nohighlight" id="equation-eq-quadratic-dmdx">
-<span class="eqno">(72)<a class="headerlink" href="#equation-eq-quadratic-dmdx" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(73)<a class="headerlink" href="#equation-eq-quadratic-dmdx" title="Permalink to this equation">¶</a></span>\[
 \frac{4}{\gamma+1} \left( \frac{dM}{dx} \right)_{M \rightarrow 1}^2 + \gamma \left( \frac{f}{D} \right)_{M \rightarrow 1} \left( \frac{dM}{dx} \right)_{M \rightarrow 1} - \frac{d}{dx} \left( \frac{1}{A} \frac{dA}{dx} \right)_{M \rightarrow 1} + \frac{\gamma}{2}\frac{d}{dx} \left( \frac{f}{D} \right)_{M \rightarrow 1} = 0 \;.
 \]</div>
 <p>This is a quadratic equation for the derivative <span class="math notranslate nohighlight">\( dM/dx \)</span> as the Mach number approaches one.
@@ -719,18 +735,18 @@ It has two roots at the sonic point, one negative and one positive:</p>
 <p>To apply the appropriate solution, we need to find the location of the sonic point,
 found with</p>
 <div class="math notranslate nohighlight" id="equation-eq-sonic-point">
-<span class="eqno">(73)<a class="headerlink" href="#equation-eq-sonic-point" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-sonic-point" title="Permalink to this equation">¶</a></span>\[
 \left( -\frac{1}{A} \frac{dA}{dx} + \frac{1}{2} \gamma M^2 \frac{f}{D} \right)_{M \rightarrow 1} \rightarrow 0 \;.
 \]</div>
 <p>To find the specific location, we need to consider a specific nozzle shape;
 let’s focus on a symmetrical nozzle with circular cross section, following the formula</p>
 <div class="math notranslate nohighlight" id="equation-eq-diameter-symmetric">
-<span class="eqno">(74)<a class="headerlink" href="#equation-eq-diameter-symmetric" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-diameter-symmetric" title="Permalink to this equation">¶</a></span>\[
 D(x) = 2 \left[ 1 + \frac{1}{2} \cos \left( \pi \frac{x}{L} \right) \right] D_t \;,
 \]</div>
 <p>where the diameter is <span class="math notranslate nohighlight">\(3 D_t\)</span> at <span class="math notranslate nohighlight">\( x = 0 \)</span>, <span class="math notranslate nohighlight">\(D_t\)</span> at <span class="math notranslate nohighlight">\(x=L\)</span>, and <span class="math notranslate nohighlight">\(3 D_t\)</span> at <span class="math notranslate nohighlight">\(x = 2L\)</span>.
 For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A} \frac{dA}{dx} = \frac{2}{D} \frac{dD}{dx} \)</span>.</p>
-<p>Applying the specifics of this nozzle to Equation <a class="reference internal" href="#equation-eq-sonic-point">(73)</a>:</p>
+<p>Applying the specifics of this nozzle to Equation <a class="reference internal" href="#equation-eq-sonic-point">(74)</a>:</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{gather*}
 \left( \frac{2}{D} \frac{dD}{dx} \right)_{M \rightarrow 1} = \left( \frac{\gamma}{2} \frac{f}{D} \right)_{M \rightarrow 1} \\
@@ -758,8 +774,8 @@ For a circular nozzle, <span class="math notranslate nohighlight">\( \frac{1}{A}
 </div>
 </div>
 <p>(This does require some careful calculation to get the right value.)</p>
-<p>Now, with the sonic location identified, calculating the Mach number distribution throughout the nozzle requires solving <strong>two</strong> initial value problems: from the sonic point backwards to the inlet, and from the sonic point forwards to the outlet. For points at/near the sonic point, we can use Equation <a class="reference internal" href="#equation-eq-quadratic-dmdx">(72)</a> to find <span class="math notranslate nohighlight">\(dM/dx\)</span>.</p>
-<p>Let’s continue the case from before: air flowing through a symmetrical converging-diverging nozzle with a circular cross section, with the diameter given by Equation <a class="reference internal" href="#equation-eq-diameter-symmetric">(74)</a>. The nozzle length is <span class="math notranslate nohighlight">\( L = 2 D_t \)</span> and friction factor is <span class="math notranslate nohighlight">\( f = 0.4 \)</span> (this is very large).</p>
+<p>Now, with the sonic location identified, calculating the Mach number distribution throughout the nozzle requires solving <strong>two</strong> initial value problems: from the sonic point backwards to the inlet, and from the sonic point forwards to the outlet. For points at/near the sonic point, we can use Equation <a class="reference internal" href="#equation-eq-quadratic-dmdx">(73)</a> to find <span class="math notranslate nohighlight">\(dM/dx\)</span>.</p>
+<p>Let’s continue the case from before: air flowing through a symmetrical converging-diverging nozzle with a circular cross section, with the diameter given by Equation <a class="reference internal" href="#equation-eq-diameter-symmetric">(75)</a>. The nozzle length is <span class="math notranslate nohighlight">\( L = 2 D_t \)</span> and friction factor is <span class="math notranslate nohighlight">\( f = 0.4 \)</span> (this is very large).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for solving quadratic equation at M = 1</span>
@@ -922,7 +938,7 @@ T_t = T \left( 1 + \frac{\gamma-1}{2} M^2 \right) \;.
 <p>Between two points <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> in the flow system (at locations <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>),
 we can then write that <span class="math notranslate nohighlight">\( (T_t)_i = (T_t)_j \)</span>, and if we know <span class="math notranslate nohighlight">\(M(x)\)</span>, then</p>
 <div class="math notranslate nohighlight" id="equation-eq-temperature-area-friction">
-<span class="eqno">(75)<a class="headerlink" href="#equation-eq-temperature-area-friction" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-temperature-area-friction" title="Permalink to this equation">¶</a></span>\[
 \frac{T_j}{T_i} = \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \;.
 \]</div>
 <p>Then, applying conservation of mass between those same two points:</p>
@@ -932,17 +948,17 @@ we can then write that <span class="math notranslate nohighlight">\( (T_t)_i = (
 \left( \frac{p}{RT} A M \sqrt{\gamma R T} \right)_i = \left( \frac{p}{RT} A M \sqrt{\gamma R T} \right)_j
 \end{gather*}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq-pressure-general">
-<span class="eqno">(76)<a class="headerlink" href="#equation-eq-pressure-general" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-pressure-general" title="Permalink to this equation">¶</a></span>\[
 \frac{p_j}{p_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \sqrt{ \frac{T_j}{T_i} } \;,
 \]</div>
-<p>and if we incorporate the temperature relationship from Equation <a class="reference internal" href="#equation-eq-temperature-area-friction">(75)</a> we can get</p>
+<p>and if we incorporate the temperature relationship from Equation <a class="reference internal" href="#equation-eq-temperature-area-friction">(76)</a> we can get</p>
 <div class="math notranslate nohighlight" id="equation-eq-pressure-area-friction">
-<span class="eqno">(77)<a class="headerlink" href="#equation-eq-pressure-area-friction" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(78)<a class="headerlink" href="#equation-eq-pressure-area-friction" title="Permalink to this equation">¶</a></span>\[
 \frac{p_j}{p_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left[ \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \right]^{1/2} \;.
 \]</div>
 <p>Similarly, for density we can arrive at a similar expression:</p>
 <div class="math notranslate nohighlight" id="equation-eq-density-area-friction">
-<span class="eqno">(78)<a class="headerlink" href="#equation-eq-density-area-friction" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(79)<a class="headerlink" href="#equation-eq-density-area-friction" title="Permalink to this equation">¶</a></span>\[
 \frac{\rho_j}{\rho_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \sqrt{\frac{T_i}{T_j}} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left[ \frac{2 + (\gamma-1) M_j^2}{2 + (\gamma-1) M_i^2} \right]^{1/2} \;.
 \]</div>
 </div>
@@ -956,15 +972,15 @@ we can then write that <span class="math notranslate nohighlight">\( (T_t)_i = (
 <p><a class="reference internal" href="#fig-cv-heat-area"><span class="std std-numref">Figure 10</span></a> shows a control volume in a varying-area duct, where the flow starts out with velocity <span class="math notranslate nohighlight">\(V\)</span>, density <span class="math notranslate nohighlight">\(\rho\)</span>, and pressure <span class="math notranslate nohighlight">\(p\)</span>. The width of the differential control volume is <span class="math notranslate nohighlight">\(dx\)</span>, the cross-sectional area of the duct is <span class="math notranslate nohighlight">\(A\)</span>, and the flow experiences heat transfer <span class="math notranslate nohighlight">\( \delta q \)</span>.</p>
 <p>Applying conservation of mass, momentum, and energy to the control volume, we get</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-continuity">
-<span class="eqno">(79)<a class="headerlink" href="#equation-eq-heat-area-continuity" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(80)<a class="headerlink" href="#equation-eq-heat-area-continuity" title="Permalink to this equation">¶</a></span>\[
 \frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0
 \]</div>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-momentum">
-<span class="eqno">(80)<a class="headerlink" href="#equation-eq-heat-area-momentum" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(81)<a class="headerlink" href="#equation-eq-heat-area-momentum" title="Permalink to this equation">¶</a></span>\[
 dp + \rho V dV = 0
 \]</div>
 <div class="math notranslate nohighlight" id="equation-eq-heat-area-energy">
-<span class="eqno">(81)<a class="headerlink" href="#equation-eq-heat-area-energy" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(82)<a class="headerlink" href="#equation-eq-heat-area-energy" title="Permalink to this equation">¶</a></span>\[
 \delta q = c_p d T_t \;,
 \]</div>
 <p>and we also can express a differential form of the ideal gas law:</p>
@@ -972,13 +988,13 @@ dp + \rho V dV = 0
 \[
 \frac{dp}{p} = \frac{d\rho}{\rho} + \frac{dT}{T}
 \]</div>
-<p>We can eliminate <span class="math notranslate nohighlight">\( \frac{dp}{p} \)</span> by taking Equation <a class="reference internal" href="#equation-eq-heat-area-momentum">(80)</a> and dividing by <span class="math notranslate nohighlight">\(p\)</span>, where we get</p>
+<p>We can eliminate <span class="math notranslate nohighlight">\( \frac{dp}{p} \)</span> by taking Equation <a class="reference internal" href="#equation-eq-heat-area-momentum">(81)</a> and dividing by <span class="math notranslate nohighlight">\(p\)</span>, where we get</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{gather*}
 \frac{dp}{p} + \frac{\rho}{p} V dV = 0 \\
 \rightarrow \frac{d\rho}{\rho} + \frac{dT}{T} + \frac{\rho}{p} V dV = 0 \;.
 \end{gather*}\]</div>
-<p>Next, incorporate Equation <a class="reference internal" href="#equation-eq-heat-area-continuity">(79)</a> to eliminate <span class="math notranslate nohighlight">\( \frac{d\rho}{\rho} \)</span> and use the ideal gas law expression</p>
+<p>Next, incorporate Equation <a class="reference internal" href="#equation-eq-heat-area-continuity">(80)</a> to eliminate <span class="math notranslate nohighlight">\( \frac{d\rho}{\rho} \)</span> and use the ideal gas law expression</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{\rho}{p} V dV = \frac{\rho}{p} V^2 \frac{dV}{V} = \frac{1}{RT} M^2 \gamma R T \frac{dV}{V} = \gamma M^2 \frac{dV}{V}
@@ -1007,7 +1023,7 @@ T_t = T \left( 1 + \frac{\gamma-1}{2} M^2 \right) \\
 dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
 \frac{dT_t}{T} = \left( 1 + \frac{\gamma-1}{2} M^2 \right) \frac{dT}{T} + (\gamma-1) M^2 \frac{dM}{M} \;,
 \end{gather*}\]</div>
-<p>but we have from Equation <a class="reference internal" href="#equation-eq-heat-area-energy">(81)</a> that <span class="math notranslate nohighlight">\( dT_t = \delta q / c_p \)</span>, so</p>
+<p>but we have from Equation <a class="reference internal" href="#equation-eq-heat-area-energy">(82)</a> that <span class="math notranslate nohighlight">\( dT_t = \delta q / c_p \)</span>, so</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dT}{T} = \left( 1 + \frac{\gamma-1}{2} M^2 \right)^{-1} \left[ \frac{\delta q}{c_p T} - M^2 (\gamma-1) \frac{dM}{M} \right] \;,
@@ -1019,7 +1035,7 @@ dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
 \]</div>
 <p>Rearranging and dividing by <span class="math notranslate nohighlight">\(dx\)</span>, we can get an ordinary differential equation for solving for Mach number:</p>
 <div class="math notranslate nohighlight" id="equation-eq-heat-transfer-area">
-<span class="eqno">(82)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(83)<a class="headerlink" href="#equation-eq-heat-transfer-area" title="Permalink to this equation">¶</a></span>\[
 \frac{dM}{dx} = \frac{M}{1 - M^2} \left[ -\left(1 + \frac{\gamma-1}{2} M^2 \right) \frac{1}{A} \frac{dA}{dx} + \frac{1 + \gamma M^2}{2} \left( \frac{1}{c_p T} \frac{\delta q}{dx} \right) \right]
 \]</div>
 <p>To integrate <span class="math notranslate nohighlight">\(M(x)\)</span>, we need to know how the area changes with position and the rate that heat transfer occurs with distance.</p>
@@ -1029,7 +1045,7 @@ dT_t = dT \left( 1 + \frac{\gamma-1}{2} M^2 \right) + T (\gamma-1) M dM \\
 The air enters the nozzle at a Mach number of 3 with a stagnation temperature of 300 K.
 Heat is added at a rate such that <span class="math notranslate nohighlight">\( \frac{dT_t}{dx} \)</span> = 100 K/m.
 Due to the pressure at the exit, there is a normal shock wave halfway down the nozzle.</p>
-<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(82)</a> for this problem:</p>
+<p>Thanks to our relationship between heat transfer and stagnation temperature, <span class="math notranslate nohighlight">\(\delta q = c_p d T_t\)</span>, and our prior stagnation relationship for temperature, we can rewrite Equation <a class="reference internal" href="#equation-eq-heat-transfer-area">(83)</a> for this problem:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{dM}{dx} = \frac{M \left[ 2 + (\gamma-1) M^2 \right]}{2 (1-M^2)} \left[ -\frac{1}{A} \frac{dA}{dx} + \frac{1+\gamma M^2}{2} \left( \frac{1}{T_t} \frac{dT_t}{dt} \right) \right] \;.
@@ -1185,7 +1201,7 @@ Exit Mach (adiabatic):  0.1931
 However, in this case, since the flow is not adiabatic, we have to consider how stagnation temperature changes.
 We can take the ratio of stagnation temperature between two locations <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, and rearrange to get</p>
 <div class="math notranslate nohighlight" id="equation-eq-temperature-area-heat">
-<span class="eqno">(83)<a class="headerlink" href="#equation-eq-temperature-area-heat" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(84)<a class="headerlink" href="#equation-eq-temperature-area-heat" title="Permalink to this equation">¶</a></span>\[
 \frac{T_j}{T_i} = \left( \frac{T_{t,j}}{T_{t,i}} \right) \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \;,
 \]</div>
 <p>where we would need information about heat transfer to determine how stagnation temperature changes:</p>
@@ -1193,14 +1209,14 @@ We can take the ratio of stagnation temperature between two locations <span clas
 \[
 \frac{dT_t}{dx} = \frac{1}{c_p} \frac{\delta q}{dx} \;.
 \]</div>
-<p>Then, since conservation of mass applies the same to this system as one where area change and friction apply, we can incorproate this into the relationship for pressure given by Equation <a class="reference internal" href="#equation-eq-pressure-general">(76)</a> to get</p>
+<p>Then, since conservation of mass applies the same to this system as one where area change and friction apply, we can incorproate this into the relationship for pressure given by Equation <a class="reference internal" href="#equation-eq-pressure-general">(77)</a> to get</p>
 <div class="math notranslate nohighlight" id="equation-eq-pressure-area-heat">
-<span class="eqno">(84)<a class="headerlink" href="#equation-eq-pressure-area-heat" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(85)<a class="headerlink" href="#equation-eq-pressure-area-heat" title="Permalink to this equation">¶</a></span>\[
 \frac{p_j}{p_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left( \frac{T_{t,j}}{T_{t,i}} \right)^{1/2} \left[ \frac{2 + (\gamma-1) M_i^2}{2 + (\gamma-1) M_j^2} \right]^{1/2} \;.
 \]</div>
 <p>Density follows similarly:</p>
 <div class="math notranslate nohighlight" id="equation-eq-density-area-heat">
-<span class="eqno">(85)<a class="headerlink" href="#equation-eq-density-area-heat" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(86)<a class="headerlink" href="#equation-eq-density-area-heat" title="Permalink to this equation">¶</a></span>\[
 \frac{\rho_j}{\rho_i} = \frac{A_i}{A_j} \frac{M_i}{M_j} \sqrt{\frac{T_i}{T_j}} = \frac{A_i}{A_j} \frac{M_i}{M_j} \left( \frac{T_{t,i}}{T_{t,j}} \right)^{1/2} \left[ \frac{2 + (\gamma-1) M_j^2}{2 + (\gamma-1) M_i^2} \right]^{1/2} \;.
 \]</div>
 </div>
