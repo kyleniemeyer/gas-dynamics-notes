@@ -1,4 +1,4 @@
-jupyter-book>=0.8.1
+jupyter-book>=0.12.0
 matplotlib
 numpy
 scipy
