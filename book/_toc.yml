@@ -17,6 +17,7 @@ parts:
   - file: compressible-flows/friction
   - file: compressible-flows/heat-transfer
   - file: compressible-flows/multiple-effects
+  - file: compressible-flows/method-characteristics
 - caption: Reference
   chapters:
   - file: zbibliography
