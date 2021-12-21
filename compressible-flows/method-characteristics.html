@@ -1,0 +1,1152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Method of characteristics &#8212; Gas Dynamics notes</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bibliography" href="../zbibliography.html" />
+    <link rel="prev" title="Flows with multiple effects" href="multiple-effects.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Gas Dynamics notes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Gas Dynamics notes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Introduction and review
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/review-thermo.html">
+   Review of thermodynamics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/control-volume-analysis.html">
+   Control volume analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro/stagnation.html">
+   Stagnation properties
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Compressible flows
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro-compressible-flow.html">
+   Introduction to compressible flow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="isentropic.html">
+   Isentropic, variable-area flows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nozzles-part1.html">
+   Nozzles (part I)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="normal-shocks.html">
+   Normal shock waves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="oblique-shocks.html">
+   Oblique shock waves
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prandtl-meyer.html">
+   Prandtl–Meyer flows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="friction.html">
+   Flows with friction (Fanno flows)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="heat-transfer.html">
+   Flows with heat transfer (Rayleigh flows)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="multiple-effects.html">
+   Flows with multiple effects
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Method of characteristics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../zbibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/compressible-flows/method-characteristics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/kyleniemeyer/gas-dynamics-notes"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/kyleniemeyer/gas-dynamics-notes/issues/new?title=Issue%20on%20page%20%2Fcompressible-flows/method-characteristics.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/kyleniemeyer/gas-dynamics-notes/edit/main/compressible-flows/method-characteristics.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/kyleniemeyer/gas-dynamics-notes/main?urlpath=tree/compressible-flows/method-characteristics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#characteristic-lines">
+   Characteristic lines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compatibility-equations">
+   Compatibility equations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unit-processes">
+   Unit processes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#internal-flow">
+     Internal flow
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example">
+       Example
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wall-point">
+     Wall point
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Example
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-diverging-channel">
+     Example: diverging channel
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="method-of-characteristics">
+<h1>Method of characteristics<a class="headerlink" href="#method-of-characteristics" title="Permalink to this headline">¶</a></h1>
+<p>The method of characteristics is a numerical approach to modeling two-dimensional supersonic flow. (It can also be extended to axisymmetric and three-dimensional flows.)</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root_scalar</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># these lines are only for helping improve the display</span>
+<span class="kn">import</span> <span class="nn">matplotlib_inline.backend_inline</span>
+<span class="n">matplotlib_inline</span><span class="o">.</span><span class="n">backend_inline</span><span class="o">.</span><span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">400</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cm&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We start with the two-dimensional, steady, velocity potential equation, which applies to irrotational and adiabatic flows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-velocity-potential">
+<span class="eqno">(87)<a class="headerlink" href="#equation-eq-velocity-potential" title="Permalink to this equation">¶</a></span>\[
+\left( 1 - \frac{\Phi_x^2}{a^2} \right) \Phi_{xx} + \left( 1 - \frac{\Phi_y^2}{a^2} \right) \Phi_{yy} - \frac{2 \Phi_x \Phi_y}{a^2} \Phi_{xy} = 0 \;,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi = f(x,y)\)</span> is the velocity potential function, subscripts of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> represent partial derivatives, and <span class="math notranslate nohighlight">\(a\)</span> is the local speed of sound.
+The velocity potential is related to velocity via</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_x = \frac{\partial \Phi}{\partial x} = u \;, \quad \Phi_y = \frac{\partial \Phi}{\partial y} = v \;,
+\]</div>
+<p>where the velocity vector is <span class="math notranslate nohighlight">\( \mathbf{V} (x,y) = u \mathbf{\hat{i}} + v \mathbf{\hat{j}} \)</span>.</p>
+<p>Since the partial derivatives of the velocity potential are also functions of position—in other words, <span class="math notranslate nohighlight">\(\Phi_x = f(x,y)\)</span> and <span class="math notranslate nohighlight">\(\Phi_y = g(x,y)\)</span>—we can take exact differentials of them:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+d \Phi_x = \frac{\partial \Phi_x}{\partial x} dx + \frac{\partial \Phi_x}{\partial y} dy \\
+d \Phi_y = \frac{\partial \Phi_y}{\partial x} dx + \frac{\partial \Phi_y}{\partial y} dy \;.
+\end{gather*}\]</div>
+<p>Expressing these using velocity components, we can simplify to</p>
+<div class="math notranslate nohighlight" id="equation-eq-differential-u">
+<span class="eqno">(88)<a class="headerlink" href="#equation-eq-differential-u" title="Permalink to this equation">¶</a></span>\[
+\Phi_{xx} dx + \Phi_{xy} dy = du
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-differential-v">
+<span class="eqno">(89)<a class="headerlink" href="#equation-eq-differential-v" title="Permalink to this equation">¶</a></span>\[
+\Phi_{xy} dx + \Phi_{yy} dy = dv
+\]</div>
+<p>If we then rewrite Equation <a class="reference internal" href="#equation-eq-velocity-potential">(87)</a> using the velocity components:</p>
+<div class="math notranslate nohighlight" id="equation-eq-potential-components">
+<span class="eqno">(90)<a class="headerlink" href="#equation-eq-potential-components" title="Permalink to this equation">¶</a></span>\[
+\left( 1 - \frac{u^2}{a^2} \right) \Phi_{xx} + \left( 1 - \frac{v^2}{a^2} \right) \Phi_{yy} - \frac{2 u v}{a^2} \Phi_{xy} = 0 \;,
+\]</div>
+<p>Now, with Equations <a class="reference internal" href="#equation-eq-differential-u">(88)</a>, <a class="reference internal" href="#equation-eq-differential-v">(89)</a>, and <a class="reference internal" href="#equation-eq-potential-components">(90)</a>, we have a complete linear system of equations
+for solving <span class="math notranslate nohighlight">\( \mathbf{\Phi} = \left[ \Phi_{xx}, \Phi_{xy}, \Phi_{yy} \right] \)</span>.</p>
+<p>These unknowns are solveable using Cramer’s rule!
+For example, we can solve for <span class="math notranslate nohighlight">\(\Phi_{xy}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi_{xy} = \frac{\begin{vmatrix}
+1 - \frac{u^2}{a^2} &amp; 0 &amp; 1 - \frac{v^2}{a^2} \\
+dx &amp; du &amp; 0 \\
+0 &amp; dy &amp; dy 
+\end{vmatrix}}{\begin{vmatrix}
+1 - \frac{u^2}{a^2} &amp; -\frac{2uv}{a^2} &amp; 1 - \frac{v^2}{a^2} \\
+dx &amp; dy &amp; 0 \\
+0 &amp; dx &amp; dy 
+\end{vmatrix}} = \frac{N}{D}
+\end{split}\]</div>
+<p>At a particular location in space, <span class="math notranslate nohighlight">\(\Phi_{xy}\)</span> has a specific value,
+and general choices of <span class="math notranslate nohighlight">\(dx\)</span> and <span class="math notranslate nohighlight">\(dy\)</span> point away from this location.
+Along the line formed by <span class="math notranslate nohighlight">\(dx\)</span> and <span class="math notranslate nohighlight">\(dy\)</span>, the velocity changes
+with particular <span class="math notranslate nohighlight">\(du\)</span> and <span class="math notranslate nohighlight">\(dv\)</span>. Regardless of the choice of this line,
+the associated values of change in velocity will ensure that <span class="math notranslate nohighlight">\(\Phi_{xy}\)</span> remains constant.</p>
+<div class="figure align-default" id="fig-streamline">
+<a class="bg-white mb-1 reference internal image-reference" href="images/streamline.*"><img alt="Streamline geometry" class="bg-white mb-1" src="images/streamline.*" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Geometry of a streamline.</span><a class="headerlink" href="#fig-streamline" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-streamline"><span class="std std-numref">Figure 11</span></a> shows the geometry of a streamline, with <span class="math notranslate nohighlight">\(dx\)</span> and <span class="math notranslate nohighlight">\(dy\)</span> directed away from point A, as well as the initial velocity <span class="math notranslate nohighlight">\(V\)</span> and components <span class="math notranslate nohighlight">\(du\)</span> and <span class="math notranslate nohighlight">\(dv\)</span>.</p>
+<div class="section" id="characteristic-lines">
+<h2>Characteristic lines<a class="headerlink" href="#characteristic-lines" title="Permalink to this headline">¶</a></h2>
+<p>However, a particular line in space, given by particular values of
+<span class="math notranslate nohighlight">\(dx\)</span> and <span class="math notranslate nohighlight">\(dy\)</span>, leads to <span class="math notranslate nohighlight">\(D = 0\)</span>. Since we know that <span class="math notranslate nohighlight">\(\Phi_{xy}\)</span> cannot physically
+be infinite at this location, then <span class="math notranslate nohighlight">\(N = 0\)</span> to keep <span class="math notranslate nohighlight">\(\Phi_{xy}\)</span> finite:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_{xy} = \frac{\partial u}{\partial y} = \frac{\partial v}{\partial x} = \frac{N}{D} = \frac{0}{0} \;.
+\]</div>
+<p>Or, the velocity derivatives are indeterminate in the directions created by <span class="math notranslate nohighlight">\(dx\)</span> and <span class="math notranslate nohighlight">\(dy\)</span>.
+These lines in space are the <strong>characteristic lines</strong>, where the derivatives of velocity are indeterminate.
+We now have equations we can use to create these lines.</p>
+<p>Setting <span class="math notranslate nohighlight">\(D = 0\)</span> leads to</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\left(1 - \frac{u^2}{a^2} \right) (dy)^2 + \frac{2uv}{a^2} dx dy + \left(1 - \frac{v^2}{a^2} \right) (dx)^2 = 0 \\
+\left(1 - \frac{u^2}{a^2} \right) \left(\frac{dy}{dx} \right)_{\text{char}}^2 + \frac{2uv}{a^2} \left(\frac{dy}{dx} \right)_{\text{char}} + \left(1 - \frac{v^2}{a^2} \right) = 0 \;,
+\end{gather*}\]</div>
+<p>where <span class="math notranslate nohighlight">\( \left( \frac{dy}{dx} \right)_{\text{char}}\)</span> gives the slope of the characteristic line.
+We can solve this quadratic equation to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-characteristic-line-full">
+<span class="eqno">(91)<a class="headerlink" href="#equation-eq-characteristic-line-full" title="Permalink to this equation">¶</a></span>\[
+\left( \frac{dy}{dx} \right)_{\text{char}} = \frac{-\frac{uv}{a^2} \pm \sqrt{ \frac{u^2+v^2}{a^2} - 1}}{1 - \frac{u^2}{a^2}} \;.
+\]</div>
+<p>Equation <a class="reference internal" href="#equation-eq-characteristic-line-full">(91)</a> describes the slope of the characteristic line in space; if we focus on supersonic flows (where <span class="math notranslate nohighlight">\( \frac{u^2 + v^2}{a^2} = M^2 &gt; 1 \)</span>),
+there are two real solutions to this equation.</p>
+<p>Since <span class="math notranslate nohighlight">\( u = V \cos \theta \)</span> and <span class="math notranslate nohighlight">\( v = V \sin \theta \)</span>, we can simplify the slope to</p>
+<div class="math notranslate nohighlight" id="equation-eq-characteristic-line">
+<span class="eqno">(92)<a class="headerlink" href="#equation-eq-characteristic-line" title="Permalink to this equation">¶</a></span>\[
+\left( \frac{dy}{dx} \right)_{\text{char}} = \tan \left( \theta \mp \mu \right) \;.
+\]</div>
+<p>In other words, there are <strong>two characteristic lines</strong> passing through any point, which are also Mach lines. The left-running <span class="math notranslate nohighlight">\( \theta + \mu \)</span> line is the <span class="math notranslate nohighlight">\(C_{+}\)</span> characteristic,
+while the right-running <span class="math notranslate nohighlight">\( \theta - \mu \)</span> line is the <span class="math notranslate nohighlight">\(C_{-}\)</span> characteristic.</p>
+</div>
+<div class="section" id="compatibility-equations">
+<h2>Compatibility equations<a class="headerlink" href="#compatibility-equations" title="Permalink to this headline">¶</a></h2>
+<p>We now can get compatibility equations for finding how the flow velocity magnitude and direction relate along the characteristic lines.</p>
+<p>Along a characteristic line, where <span class="math notranslate nohighlight">\(D = 0\)</span>, we can set <span class="math notranslate nohighlight">\(N = 0\)</span>, to get</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\left(1 - \frac{u^2}{a^2} \right) du dy + \left(1 - \frac{v^2}{a^2} \right) dx dv = 0 \\
+\frac{dv}{du} = \frac{-\left( 1 - \frac{u^2}{a^2}\right)}{1 - \frac{v^2}{a^2}} \frac{dy}{dx} \;.
+\end{gather*}\]</div>
+<p>By recognizing that <span class="math notranslate nohighlight">\(\frac{dy}{dx} = \left(\frac{dy}{dx}\right)_{\text{char}}\)</span>, and incorporating Equation <a class="reference internal" href="#equation-eq-characteristic-line">(92)</a>, we can get</p>
+<div class="math notranslate nohighlight" id="equation-eq-compatibility">
+<span class="eqno">(93)<a class="headerlink" href="#equation-eq-compatibility" title="Permalink to this equation">¶</a></span>\[
+d\theta = \mp \sqrt{M^2 - 1} \frac{dV}{V} \;.
+\]</div>
+<p>Equation <a class="reference internal" href="#equation-eq-compatibility">(93)</a> describes how the flow changes along characteristic lines, relating changes in direction (<span class="math notranslate nohighlight">\(\theta\)</span>) to changes in magnitude (<span class="math notranslate nohighlight">\(V\)</span>).
+Integrating this equation actually gives the Prandtl–Meyer function <span class="math notranslate nohighlight">\(\nu(M)\)</span>,
+and we can obtain algebraic compatibility equations:</p>
+<div class="math notranslate nohighlight" id="equation-eq-compatibility-minus">
+<span class="eqno">(94)<a class="headerlink" href="#equation-eq-compatibility-minus" title="Permalink to this equation">¶</a></span>\[ \theta + \nu(M) = \text{const} = K_{-} \quad \text{(along } C_{-} \text{ line)} \]</div>
+<div class="math notranslate nohighlight" id="equation-eq-compatibility-plus">
+<span class="eqno">(95)<a class="headerlink" href="#equation-eq-compatibility-plus" title="Permalink to this equation">¶</a></span>\[ \theta - \nu(M) = \text{const} = K_{+} \quad \text{(along } C_{+} \text{ line)} \;, \]</div>
+<p>where <span class="math notranslate nohighlight">\(K_{-}\)</span> and <span class="math notranslate nohighlight">\(K_{+}\)</span> are constants along the <span class="math notranslate nohighlight">\(C_{-}\)</span> and <span class="math notranslate nohighlight">\(C_{+}\)</span> characteristic lines, respectively, and the Prandtl–Meyer function is</p>
+<div class="math notranslate nohighlight" id="equation-eq-prandtl-meyer">
+<span class="eqno">(96)<a class="headerlink" href="#equation-eq-prandtl-meyer" title="Permalink to this equation">¶</a></span>\[
+\nu = \left( \frac{\gamma+1}{\gamma-1} \right)^{1/2} \tan^{-1} \left[ \frac{\gamma-1}{\gamma+1} \left( M^2 - 1 \right) \right]^{1/2} - \tan^{-1} \left( M^2 - 1\right)^{1/2} \;.
+\]</div>
+</div>
+<div class="section" id="unit-processes">
+<h2>Unit processes<a class="headerlink" href="#unit-processes" title="Permalink to this headline">¶</a></h2>
+<p>We now have the tools to apply the method of characteristics to calculate how supersonic flow varies in a particular domain. The ways we apply these equations in specific situations are called <strong>unit processes</strong>.</p>
+<div class="section" id="internal-flow">
+<h3>Internal flow<a class="headerlink" href="#internal-flow" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="fig-internal">
+<a class="bg-white mb-1 reference internal image-reference" href="images/characteristics-internal.*"><img alt="Internal flow unit process" class="bg-white mb-1" src="images/characteristics-internal.*" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Internal flow unit process, with two characteristic lines intersecting to form a third point.</span><a class="headerlink" href="#fig-internal" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-internal"><span class="std std-numref">Figure 12</span></a> shows two characteristic lines, passing through points 1 and 2 where we know the flow conditions, intersecting at point 3.</p>
+<p>Since we know the conditions at point 1, we know <span class="math notranslate nohighlight">\(\nu_1\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span>, and so we know the constant that holds along the entire <span class="math notranslate nohighlight">\(C_{-}\)</span> line:</p>
+<div class="math notranslate nohighlight">
+\[ \theta_1 + \nu_1 = (K_{-})_1 \;, \]</div>
+<p>and similarly since we know the conditions at point 2, we know the constant that holds along the <span class="math notranslate nohighlight">\(C_{+}\)</span> line:</p>
+<div class="math notranslate nohighlight">
+\[ \theta_2 - \nu_2 = (K_{+})_2 \;. \]</div>
+<p>The constants associated with both characteristic lines apply at point 3, and so from Equations <a class="reference internal" href="#equation-eq-compatibility-minus">(94)</a> and <a class="reference internal" href="#equation-eq-compatibility-plus">(95)</a> we have</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\theta_3 + \nu_3 = (K_{-})_3 = (K_{-})_1 \\
+\theta_3 - \nu_3 = (K_{+})_3 = (K_{+})_2 \;,
+\end{gather*}\]</div>
+<p>which we can solve for the unknown values at point 3:</p>
+<div class="math notranslate nohighlight" id="equation-eq-theta-3">
+<span class="eqno">(97)<a class="headerlink" href="#equation-eq-theta-3" title="Permalink to this equation">¶</a></span>\[ \theta_3 = \frac{1}{2} \left[ (K_{-})_1 + (K_{+})_2 \right] \]</div>
+<div class="math notranslate nohighlight" id="equation-eq-nu-3">
+<span class="eqno">(98)<a class="headerlink" href="#equation-eq-nu-3" title="Permalink to this equation">¶</a></span>\[ \nu_3 = \frac{1}{2} \left[ (K_{-})_1 - (K_{+})_2 \right] \;. \]</div>
+<p>Once we have <span class="math notranslate nohighlight">\(\nu_3\)</span>, we can solve for <span class="math notranslate nohighlight">\(M_3\)</span> using the Prandtl–Meyer function,
+and from that determine other properties such as pressure, temperature, and density via
+isentropic flow relations.</p>
+<p>To actually determine the location of point 3, we can approximate that the characteristic lines are straight lines between the two points, and use the average slope based on the angles at the points.
+In other words, the <span class="math notranslate nohighlight">\(C_{-}\)</span> characteristic line connecting points 1 and 3 has the average slope</p>
+<div class="math notranslate nohighlight">
+\[ \frac{1}{2} \left( \theta_1 + \theta_3 \right) - \frac{1}{2} \left( \mu_1 + \mu_3 \right) \]</div>
+<p>and the <span class="math notranslate nohighlight">\(C_{+}\)</span> characteristic line connecting points 2 and 3 has the average slope</p>
+<div class="math notranslate nohighlight">
+\[ \frac{1}{2} \left( \theta_2 + \theta_3 \right) + \frac{1}{2} \left( \mu_2 + \mu_3 \right) \;. \]</div>
+<p>Using the known coordinates of points 1 and 2, we can use the intersection of the two characteristic lines to find the location of point 3:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{gather*}
+\left(\frac{dy}{dx}\right)_{-} = \frac{y_3 - y_1}{x_3 - x_1} \\
+\left(\frac{dy}{dx}\right)_{+} = \frac{y_3 - y_2}{x_3 - x_2} \;,
+\end{gather*}\]</div>
+<p>which we can solve to get</p>
+<div class="math notranslate nohighlight" id="equation-eq-x3">
+<span class="eqno">(99)<a class="headerlink" href="#equation-eq-x3" title="Permalink to this equation">¶</a></span>\[ x_3 = \left[ y_2 - y_1 - x_2 \left(\frac{dy}{dx}\right)_{+} + x_1 \left(\frac{dy}{dx}\right)_{-} \right] \left[\left(\frac{dy}{dx}\right)_{-} - \left(\frac{dy}{dx}\right)_{+} \right]^{-1} \]</div>
+<div class="math notranslate nohighlight" id="equation-eq-y3">
+<span class="eqno">(100)<a class="headerlink" href="#equation-eq-y3" title="Permalink to this equation">¶</a></span>\[ y_3 = y_1 + (x_3 - x_1) \left(\frac{dy}{dx}\right)_{-} \]</div>
+<div class="section" id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<p>Consider two points in a supersonic flow of air, both with Mach number of 2 and right above each other (i.e., <span class="math notranslate nohighlight">\(\Delta x = 0\)</span> between the points). Point 2 is along a line of symmetry and so the flow direction is horizontal. Point 1 is 0.25 above, and <span class="math notranslate nohighlight">\(\theta_1 = 4°\)</span>. Find the properties at and location of point 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_mach_angle</span><span class="p">(</span><span class="n">mach</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Returns Mach angle&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">mach</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_prandtl_meyer</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Evaluate Prandtl-Meyer function at given Mach number.</span>
+<span class="sd">    </span>
+<span class="sd">    Defined as the angle from the flow direction where Mach = 1 through which the </span>
+<span class="sd">    flow turned isentropically reaches the specified Mach number.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">-</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_prandtl_meyer</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Solve for unknown Mach number, given Prandtl-Meyer function (in radians).&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">nu</span> <span class="o">-</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">get_reference_area</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate reference area ratio&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mf">1.0</span><span class="o">/</span><span class="n">mach</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mach</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> 
+            <span class="p">((</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">((</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_mach_area</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">area_ratio</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.4</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Used to find Mach number for given reference area ratio and gamma&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">area_ratio</span> <span class="o">-</span> <span class="n">get_reference_area</span><span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">M_1</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">theta_1</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="mf">0.25</span>
+
+<span class="n">M_2</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">theta_2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">nu_1</span> <span class="o">=</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">M_1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+<span class="n">nu_2</span> <span class="o">=</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">M_2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="n">K_minus</span> <span class="o">=</span> <span class="n">theta_1</span> <span class="o">+</span> <span class="n">nu_1</span>
+<span class="n">K_plus</span> <span class="o">=</span> <span class="n">theta_2</span> <span class="o">-</span> <span class="n">nu_2</span>
+
+<span class="n">theta_3</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">K_minus</span> <span class="o">+</span> <span class="n">K_plus</span><span class="p">)</span>
+<span class="n">nu_3</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">K_minus</span> <span class="o">-</span> <span class="n">K_plus</span><span class="p">)</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nu_3</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+<span class="n">M_3</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_3 = </span><span class="si">{</span><span class="n">M_3</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;θ_3 = </span><span class="si">{</span><span class="n">theta_3</span> <span class="o">*</span> <span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">°&#39;</span><span class="p">)</span>
+
+<span class="n">dydx_minus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span>
+    <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">theta_1</span><span class="o">+</span><span class="n">theta_3</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">get_mach_angle</span><span class="p">(</span><span class="n">M_1</span><span class="p">)</span> <span class="o">+</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">M_3</span><span class="p">))</span>
+    <span class="p">)</span>
+<span class="n">dydx_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span>
+    <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">theta_2</span><span class="o">+</span><span class="n">theta_3</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">get_mach_angle</span><span class="p">(</span><span class="n">M_2</span><span class="p">)</span> <span class="o">+</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">M_3</span><span class="p">))</span>
+    <span class="p">)</span>
+
+<span class="n">x3</span> <span class="o">=</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">x2</span><span class="o">*</span><span class="n">dydx_plus</span> <span class="o">+</span> <span class="n">x1</span><span class="o">*</span><span class="n">dydx_minus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dydx_minus</span> <span class="o">-</span> <span class="n">dydx_plus</span><span class="p">)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x3</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dydx_minus</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x3</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y3</span><span class="p">],</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">],</span> <span class="p">[</span><span class="n">y2</span><span class="p">,</span> <span class="n">y3</span><span class="p">],</span> <span class="s1">&#39;-or&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.29</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_3 =  2.073
+θ_3 =  2.000°
+</pre></div>
+</div>
+<img alt="../_images/method-characteristics_7_1.png" src="../_images/method-characteristics_7_1.png" />
+</div>
+</div>
+<p>We can see the characteristic lines and grid points where we have the flow properties.</p>
+<p>In general, the characteristic lines will be curved, but we can approximate the lines as straight between grid points.</p>
+</div>
+</div>
+<div class="section" id="wall-point">
+<h3>Wall point<a class="headerlink" href="#wall-point" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="fig-wall-point">
+<a class="bg-white mb-1 reference internal image-reference" href="images/characteristics-wall.*"><img alt="Wall point unit process" class="bg-white mb-1" src="images/characteristics-wall.*" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Wall point unit process, with one characteristic line intersecting with a point on a solid wall.</span><a class="headerlink" href="#fig-wall-point" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-wall-point"><span class="std std-numref">Figure 13</span></a> shows a characteristic line, passing through point 4 and intersecting with a solid wall at point 5.</p>
+<p>Since the flow properties are known at point 4, we know <span class="math notranslate nohighlight">\(K_{-}\)</span> for the <span class="math notranslate nohighlight">\(C_{-}\)</span> characteristic line, which is the same at point 5:</p>
+<div class="math notranslate nohighlight">
+\[ (K_{-})_4 = \theta_4 + \nu_4 = (K_{-})_5 = \theta_5 + \nu_5 \;. \]</div>
+<p>Since we know the shape of the wall, and the flow must be tangent to the wall,
+we know <span class="math notranslate nohighlight">\(\theta_5\)</span>, and so we can solve for <span class="math notranslate nohighlight">\(\nu_5\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \nu_5 = \nu_4 + \theta_4 - \theta_5 \]</div>
+<div class="section" id="id1">
+<h4>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Below a diverging-channel wall inclined at 10°, the Mach number of a horizontal flow of air is 2.0. This grid point (1) is located 0.2 below the wall, as <a class="reference internal" href="#fig-characteristics-wall-example"><span class="std std-numref">Figure 14</span></a> shows.
+Find the conditions at the wall, at grid point 2.</p>
+<div class="figure align-default" id="fig-characteristics-wall-example">
+<a class="bg-white mb-1 reference internal image-reference" href="images/characteristics-wall-example.*"><img alt="Characteristic grid near a wall" class="bg-white mb-1" src="images/characteristics-wall-example.*" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Grid point and characteristic line intersecting a wall.</span><a class="headerlink" href="#fig-characteristics-wall-example" title="Permalink to this image">¶</a></p>
+</div>
+<p>We know <span class="math notranslate nohighlight">\(M_1 = 2\)</span> and <span class="math notranslate nohighlight">\(\theta_1 = 0°\)</span>, and <span class="math notranslate nohighlight">\(\theta_2 = 10°\)</span>. Since the grid point is located below the wall, points 1 and 2 are connected by a <span class="math notranslate nohighlight">\(C_{+}\)</span> characteristic line, where</p>
+<div class="math notranslate nohighlight">
+\[ (K_{+})_1 = \theta_1 - \nu_1 = (K_{+})_2 = \theta_2 - \nu_2 \;, \]</div>
+<p>so we can solve for <span class="math notranslate nohighlight">\(\nu_2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \nu_2 = \nu_1 + \theta_2 - \theta_1 \;. \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">M_1</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">theta_1</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">nu_1</span> <span class="o">=</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">M_1</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="n">theta_2</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+<span class="n">nu_2</span> <span class="o">=</span> <span class="n">nu_1</span> <span class="o">+</span> <span class="n">theta_2</span> <span class="o">-</span> <span class="n">theta_1</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span><span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nu_2</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
+<span class="n">M_2</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_2 = </span><span class="si">{</span><span class="n">M_2</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_2 =  2.385
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find the location of wall grid point 2 relative to flow grid point 1, we can consider that there is a point 0 located directly above point 1. We know the slope of the wall, and therefore we can use geometry to determine the location of the new point:</p>
+<div class="math notranslate nohighlight">
+\[ \left(\frac{dy}{dx}\right)_{0-2} = \tan \theta_2 = \frac{y_2 - y_0}{x_2 - x_0} \]</div>
+<div class="math notranslate nohighlight">
+\[ \left(\frac{dy}{dx}\right)_{C_{+}} = \tan (\theta_1 + \mu_1) = \frac{y_2 - y_1}{x_2 - x_1} \]</div>
+<p>These equations can be solved similarly to how we got Equations <a class="reference internal" href="#equation-eq-x3">(99)</a> and <a class="reference internal" href="#equation-eq-y3">(100)</a> before:</p>
+<div class="math notranslate nohighlight">
+\[ x_2 = \left[ y_0 - y_1 - x_0 \left(\frac{dy}{dx}\right)_{0-2} + x_1 \left(\frac{dy}{dx}\right)_{+} \right] \left[\left(\frac{dy}{dx}\right)_{+} - \left(\frac{dy}{dx}\right)_{0-2} \right]^{-1} \]</div>
+<div class="math notranslate nohighlight">
+\[ y_2 = y_0 + (x_2 - x_0) \left(\frac{dy}{dx}\right)_{0-2} = y_0 + (x_2 - x_0) \tan \theta_2 \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dydx_02</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">theta_2</span><span class="p">)</span>
+<span class="n">dydx_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">theta_1</span> <span class="o">+</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">M_1</span><span class="p">))</span>
+
+<span class="n">y0</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">x0</span><span class="o">*</span><span class="n">dydx_02</span> <span class="o">+</span> <span class="n">x1</span><span class="o">*</span><span class="n">dydx_plus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dydx_plus</span> <span class="o">-</span> <span class="n">dydx_02</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="n">dydx_02</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># construct line for wall</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">theta_2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/method-characteristics_12_0.png" src="../_images/method-characteristics_12_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-diverging-channel">
+<h3>Example: diverging channel<a class="headerlink" href="#example-diverging-channel" title="Permalink to this headline">¶</a></h3>
+<p>Consider a situation where uniform radial flow at Mach 2.0 enters a two-dimensional diverging channel with straight walls. Compute the variation of Mach number in this radial flow field, assuming isentropic, steady flow. The walls are inclined at a total angle of 12° and <span class="math notranslate nohighlight">\(\gamma = 1.4\)</span>.</p>
+<p><strong>Solution:</strong> We can take advantage of the symmetry of this problem and only solve for half the flow field, with the line of symmetry being treated as a horizontal wall. Then, the physical wall moves upward at an angle of 6°.</p>
+<p>We choose a number of initial data points where the Mach number is 2.0. Since the flow is radial, the flow direction varies smoothly from 0° to 6°.
+Once we have this initial data line, we can proceed using the unit processes given above,
+treating the line of symmetry as a horizontal wall.</p>
+<p>To find the coordinates of these initial points, we consider that the initial data line is an arc with length <span class="math notranslate nohighlight">\(R \Delta \theta\)</span>, where <span class="math notranslate nohighlight">\(\Delta \theta\)</span> is the 6° angle of the half-channel.
+The upper wall is given by a line following</p>
+<div class="math notranslate nohighlight">
+\[ y = x \tan \theta \;, \]</div>
+<p>and we can fix the initial point (on the wall) with coordinate <span class="math notranslate nohighlight">\(y_0 = 1\)</span>.
+Then, <span class="math notranslate nohighlight">\(x_0 = 1 / \tan \Delta \theta\)</span>, and the radius of this arc is given by</p>
+<div class="math notranslate nohighlight">
+\[ R = \sqrt{ x_0^2 + y_0^2 } \;. \]</div>
+<p>The remaining points on the initial data line can be found with
+<span class="math notranslate nohighlight">\( x = R \cos \theta \)</span> and <span class="math notranslate nohighlight">\( y = R \sin \theta \)</span>, and the remaining grid points
+throughout the flow field can be found using the equations given above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.4</span>
+<span class="n">wall_angle</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
+
+<span class="c1"># initial data line</span>
+<span class="n">M_initial</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">num_initial</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">num_columns</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">num_points</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">num_initial</span> <span class="o">*</span> <span class="n">num_columns</span> <span class="o">+</span>
+    <span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">num_columns</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">machs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">nus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+
+<span class="n">kplus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">kminus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># initial line</span>
+<span class="n">delta_theta</span> <span class="o">=</span> <span class="n">wall_angle</span> <span class="o">/</span> <span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">thetas</span><span class="p">[:</span><span class="n">num_initial</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">wall_angle</span> <span class="o">-</span> <span class="n">delta_theta</span> <span class="o">*</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_initial</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="n">machs</span><span class="p">[:</span><span class="n">num_initial</span><span class="p">]</span> <span class="o">=</span> <span class="n">M_initial</span>
+<span class="n">nus</span><span class="p">[:</span><span class="n">num_initial</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">machs</span><span class="p">[:</span><span class="n">num_initial</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="c1"># initial data line (arc)</span>
+<span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">wall_angle</span><span class="p">)</span>
+<span class="n">radius_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">num_initial</span><span class="p">]</span> <span class="o">=</span> <span class="n">radius_initial</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">thetas</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">num_initial</span><span class="p">])</span>
+<span class="n">ys</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">num_initial</span><span class="p">]</span> <span class="o">=</span> <span class="n">radius_initial</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetas</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">num_initial</span><span class="p">])</span>
+
+<span class="c1"># calculate characteristic</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">thetas</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">thetas</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">get_prandtl_meyer</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="c1"># next column</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">thetas</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">nus</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+        <span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> 
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nus</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">machs</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">])</span>
+    
+    <span class="n">dydx_minus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+        <span class="n">thetas</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">thetas</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> 
+        <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="o">-</span> <span class="n">mu</span>
+        <span class="p">))</span>
+    <span class="n">dydx_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+        <span class="n">thetas</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">thetas</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">+</span> 
+        <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">mu</span>
+        <span class="p">))</span>
+    
+    <span class="n">xs</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ys</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ys</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> 
+        <span class="n">xs</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">dydx_plus</span> <span class="o">+</span> 
+        <span class="n">xs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">dydx_minus</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dydx_minus</span> <span class="o">-</span> <span class="n">dydx_plus</span><span class="p">)</span>
+    <span class="n">ys</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ys</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> 
+        <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span><span class="o">*</span><span class="n">dydx_minus</span>
+        <span class="p">)</span>
+    
+<span class="c1"># remaining </span>
+<span class="k">for</span> <span class="n">icol</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_columns</span><span class="p">):</span>
+    <span class="n">idx_start</span> <span class="o">=</span> <span class="n">icol</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_initial</span><span class="p">):</span>
+        <span class="c1"># wall point</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">wall_angle</span>
+            <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">wall_angle</span> <span class="o">-</span> <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+                <span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> 
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">])</span>
+            
+            <span class="n">dydx_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">mu</span>
+                <span class="p">))</span>
+            
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">x1</span>
+            <span class="n">y0</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x0</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">wall_angle</span><span class="p">)</span>
+
+            <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">y0</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">x0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">wall_angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">x1</span><span class="o">*</span><span class="n">dydx_plus</span>
+                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dydx_plus</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">wall_angle</span><span class="p">))</span>
+            <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">y0</span> <span class="o">+</span> <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">wall_angle</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="c1"># point on line of symmetry</span>
+        <span class="k">elif</span> <span class="n">idx</span> <span class="o">==</span> <span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+                <span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> 
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">])</span>
+            
+            <span class="n">dydx_minus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">+</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span>
+                <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">])</span> <span class="o">-</span> <span class="n">mu</span>
+                <span class="p">))</span>
+            
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span>
+            <span class="n">y1</span> <span class="o">=</span> <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span>
+            
+            <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">x1</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">/</span> <span class="n">dydx_minus</span>
+                <span class="p">)</span>
+            <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># interior point</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+                <span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> 
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">])</span>
+            
+            <span class="n">dydx_minus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> 
+                <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">])</span> <span class="o">-</span> <span class="n">mu</span>
+                <span class="p">))</span>
+            <span class="n">dydx_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">mu</span>
+                <span class="p">))</span>
+
+            <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> 
+                <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">-</span> 
+                <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">dydx_plus</span> <span class="o">+</span> 
+                <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span><span class="o">*</span><span class="n">dydx_minus</span>
+                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dydx_minus</span> <span class="o">-</span> <span class="n">dydx_plus</span><span class="p">)</span>
+            <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">])</span><span class="o">*</span><span class="n">dydx_minus</span>
+                <span class="p">)</span>
+
+    <span class="c1"># new characteristic constants</span>
+    <span class="n">kminus</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">kminus</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">kminus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span><span class="p">]</span> <span class="o">+</span> <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span><span class="p">]</span>
+    <span class="n">kplus</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">kplus</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">kplus</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> 
+        <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+    
+    <span class="n">idx_start</span> <span class="o">+=</span> <span class="n">num_initial</span>
+    <span class="k">if</span> <span class="n">icol</span> <span class="o">&lt;</span> <span class="n">num_columns</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_initial</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">kminus</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">kplus</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+                <span class="n">solve_prandtl_meyer</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> 
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">nus</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">])</span>
+            
+            <span class="n">dydx_minus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">thetas</span><span class="p">[</span><span class="n">num_initial</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">-</span> 
+                <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">])</span> <span class="o">-</span> <span class="n">mu</span>
+                <span class="p">))</span>
+            <span class="n">dydx_plus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span>
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">thetas</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="n">get_mach_angle</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">mu</span>
+                <span class="p">))</span>
+
+            <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> 
+                <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">-</span> 
+                <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">dydx_plus</span> <span class="o">+</span> 
+                <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span><span class="o">*</span><span class="n">dydx_minus</span>
+                <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dydx_minus</span> <span class="o">-</span> <span class="n">dydx_plus</span><span class="p">)</span>
+            <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">ys</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">]</span> <span class="o">+</span> 
+                <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span><span class="o">+</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx_start</span> <span class="o">+</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">num_initial</span><span class="p">])</span><span class="o">*</span><span class="n">dydx_minus</span>
+                <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can examine the flow properties at each location, and visualize the characteristic grid network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">xs</span><span class="p">[</span><span class="n">num_initial</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> 
+    <span class="p">[</span><span class="n">ys</span><span class="p">[</span><span class="n">num_initial</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;-.k&#39;</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="n">num_initial</span><span class="p">]],</span> <span class="p">[</span><span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ys</span><span class="p">[</span><span class="o">-</span><span class="n">num_initial</span><span class="p">]],</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span> 
+    <span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">idx</span><span class="si">:</span><span class="s1"> d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
+        <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+        <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/method-characteristics_16_0.png" src="../_images/method-characteristics_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;id   Mach     angle (°)&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">mach</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">machs</span><span class="p">,</span> <span class="n">thetas</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">idx</span><span class="si">:</span><span class="s1"> d</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">mach</span><span class="si">:</span><span class="s1"> .4f</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">theta</span><span class="o">*</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="si">:</span><span class="s1"> .3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id   Mach     angle (°)
+ 0   2.0000   6.000
+ 1   2.0000   4.000
+ 2   2.0000   2.000
+ 3   2.0000  -0.000
+ 4   2.0365   5.000
+ 5   2.0365   3.000
+ 6   2.0365   1.000
+ 7   2.0733   6.000
+ 8   2.0733   4.000
+ 9   2.0733   2.000
+ 10   2.0733   0.000
+ 11   2.1106   5.000
+ 12   2.1106   3.000
+ 13   2.1106   1.000
+ 14   2.1483   6.000
+ 15   2.1483   4.000
+ 16   2.1483   2.000
+ 17   2.1483   0.000
+ 18   2.1864   5.000
+ 19   2.1864   3.000
+ 20   2.1864   1.000
+ 21   2.2251   6.000
+ 22   2.2251   4.000
+ 23   2.2251   2.000
+ 24   2.2251   0.000
+ 25   2.2642   5.000
+ 26   2.2642   3.000
+ 27   2.2642   1.000
+ 28   2.3039   6.000
+ 29   2.3039   4.000
+ 30   2.3039   2.000
+ 31   2.3039   0.000
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can compare the results of the two-dimensional method of characteristics solution against  the exact solution determined using our one-dimensional methods, using the reference area ratio.</p>
+<p>Based on the known Mach and gas property at the entrance, we can calculate</p>
+<div class="math notranslate nohighlight">
+\[ \frac{A_{\text{in}, y=0}}{A^*} = f(M_{\text{in}}, \gamma) \]</div>
+<p>and then use area ratios at the exit:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{A_{\text{out}, y=0}}{A^*} = \frac{A_{\text{out}, y=0}}{A_{\text{in}, y=0}} \frac{A_{\text{in}, y=0}}{A^*} = \frac{R_{\text{out}, y=0} \Delta \theta}{R_{\text{in}, y=0} \Delta \theta} \frac{A_{\text{in}, y=0}}{A^*} = \frac{x_{\text{out}, y=0} \Delta \theta}{x_{\text{in}, y=0} \Delta \theta} \frac{A_{\text{in}, y=0}}{A^*} = f(M_{\text{out}}, \gamma) \;,
+\]</div>
+<p>where we are exploiting the radial flow condition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area_ratio_in</span> <span class="o">=</span> <span class="n">get_reference_area</span><span class="p">(</span><span class="n">machs</span><span class="p">[</span><span class="n">num_initial</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span><span class="p">)</span>
+
+<span class="c1"># find Mach number from one-dimensional exact solution</span>
+<span class="n">area_ratio_exit</span> <span class="o">=</span> <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">xs</span><span class="p">[</span><span class="n">num_initial</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">area_ratio_in</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">root_scalar</span><span class="p">(</span>
+    <span class="n">solve_mach_area</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">area_ratio_exit</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">M_exact</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">root</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_exit (exact) = </span><span class="si">{</span><span class="n">M_exact</span><span class="si">:</span><span class="s1"> .5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M_exit (exact) = </span><span class="si">{</span><span class="n">machs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1"> .5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error: </span><span class="si">{</span><span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">M_exact</span> <span class="o">-</span> <span class="n">machs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">M_exact</span><span class="si">:</span><span class="s1"> .3e</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M_exit (exact) =  2.30388
+M_exit (exact) =  2.30387
+Error:  4.018e-04 %
+</pre></div>
+</div>
+</div>
+</div>
+<p>The method of characteristics solution matches the exact solution quite closely, even though we used a fairly course mesh.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./compressible-flows"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="multiple-effects.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Flows with multiple effects</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../zbibliography.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Kyle Niemeyer<br/>
+        
+          <div class="extra_footer">
+            <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text"><a rel="cc:attributionURL" property="dct:title" href="https://github.com/kyleniemeyer/gas-dynamics-notes">Gas Dynamics notes</a> by <span property="cc:attributionName">Kyle Niemeyer</span> is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" /><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" /></a></p>
+
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
